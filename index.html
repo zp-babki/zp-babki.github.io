@@ -52,9 +52,9 @@
 				</div>	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Норма раб. дней:</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Норма раб. часов:</span>
 					</div>		
-					<input type="number" id="rab_d" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="22" placeholder="">
+					<input type="number" id="rab_chas" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="22" placeholder="">
 				</div>	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
@@ -70,7 +70,7 @@
 				</div>					
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;text-align:center;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Факт. дней:</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Факт. часы:</span>
 					</div>		
 					<input id="do15" type="text" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" value="до 15" readonly>
 					<input id="posle15" type="text" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" value="после 15" readonly>
@@ -104,7 +104,7 @@
 					</div>
 					<input id="erase" type="submit" class="btn btn-primary" value="Очистить" onclick="erase(); buttonPressed(this.id);" style="margin-left:1px;width:30%;font-weight:bold;">
 					<input id="save" type="submit" class="btn btn-primary" value="Сохранить" onclick="save(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
-					<input id="getzp" type="submit" class="btn btn-primary" value="Расчет ЗП" onclick="getZp(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
+					<input id="getzp" type="submit" class="btn btn-primary" value="Расчет ЗП" onclick="getZp(); save(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
 				</div>
 				<div id="debugButtons" class="btn-group btn-group-sm" style="width:100%;margin-top:1px;" hidden>
 					<input id="clearlocal" type="submit" class="btn btn-primary" value="CLEAR" onclick="if (confirm('Удалить базу?')){clearlocalData();buttonPressed(this.id);}" style="width:30%;font-weight:bold;">
@@ -113,12 +113,12 @@
 				</div>	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / день:</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / час:</span>
 					</div>		
-					<input type="number" id="rvd" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>			
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
-					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Отраб. дней:</span>
+					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Отраб. часов:</span>
 				</div>
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<div class="input-group">
@@ -131,44 +131,59 @@
 						<input type="number" id="day_of" class="form-control input-sm border-top-0" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 						<input type="number" id="day_raz" class="form-control input-sm border-top-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>					
 					</div>			
-				</div>		
-				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
-					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:63px;">Оклад:</span>
+				</div>	
+
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Оклад:</span>
+					</div>		
+					<input type="number" id="okl" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+				</div>
+				
+<!-- 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
+					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Оклад:</span>
 				</div>
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<div class="input-group">
 						<input type="text" id="oklad28_text" class="form-control input-sm border-left-0 border-bottom-0" value="28 --" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>
 						<input type="text" id="oklad13_text" class="form-control input-sm border-bottom-0" value="13 --" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>		
 					</div>	
+					<div class="input-group" tooltip_mess="Значение без учета 1.25 в праздничные дни" hidden>
+					<input type="number" id="t10" class="form-control input-sm border-left-0 border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="t11" class="form-control input-sm border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>			
+					</div>	
 					<div class="input-group">
 						<input type="number" id="oklad28" class="form-control input-sm border-left-0 border-top-0 border-bottom-0" style="border-radius:0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-						<input type="number" id="oklad13" class="form-control input-sm border-top-0 border-bottom-0" style="border-radius:0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>				
+						<input type="number" id="oklad13" class="form-control input-sm border-top-0 border-bottom-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>				
 					</div>			
-					<div class="input-group" tooltip_mess="Значение без учета 1.25 в праздничные дни">
-					<input type="number" id="t10" class="form-control input-sm border-left-0 border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>
-					<input type="number" id="t11" class="form-control input-sm border-top-0"  style="border-radius:0 0 4px 0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>			
-					</div>	
-				</div>
+				</div> -->
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span id="nadbv" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Надбавка:</span>
+					</div>		
+					<input type="number" id="nadbavka" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+				</div>	
+				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span id="premia_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия: --</span>
 					</div>		
 					<input type="number" id="premia_tek" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	
-				<div class="input-group">
+<!-- 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span id="premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия: --</span>
 					</div>		
 					<input type="number" id="premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-				</div>	
+				</div>	 -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Чистыми в карман:</span>
 					</div>		
 					<input type="number" id="chist_28" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
-					<input type="number" id="chist_13" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
+					<input hidden type="number" id="chist_13" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	
-				<div class="input-group">
+				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Буржуям (Профсоюз):</span>
 					</div>		
@@ -199,8 +214,9 @@
 	let eventType = 0;	
     let chk = (document.getElementById("debug").checked)?1:0; 	
 	let jsonData = {
+		"selIndex": 5,
 	    "oklad": 1000,
-		"calendar":[15, 19, 22, 22, 14, 21, 21, 22, 22, 20, 20, 22],
+		"calendar":[120, 151, 176, 175, 143, 167, 167, 176, 176, 160, 159, 176],
 		"ofis_115_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		"ofis_1530_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		"razyezd_115_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -212,29 +228,16 @@
 		"prof_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	};
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
-	let now = new Date();
-	let now_month = now.getMonth();
-	select_m.selectedIndex = now.getMonth();
 	let passChecked = (sessionStorage.getItem('passen') !== null) ? sessionStorage.getItem('passen') : 0;
 	//console.log("passChecked: " + passChecked);
-	if (passChecked == 0) {
-		document.getElementById('all').hidden=true;
-		document.getElementById('ps').hidden=false;
-	} else {
-		document.getElementById('all').hidden=false;
-		document.getElementById('ps').hidden=true;
-	}		
-	function deleteSessionData() {
-		sessionStorage.clear();
-	}
-	if (localStorage.getItem('jsonData') !== null) {console.log("Загружен local JSON");} else {console.log("Загружен default JSON");}
-	loadJson(now.getMonth());
+	if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 
+					 else {document.getElementById('all').hidden=false;document.getElementById('ps').hidden=true;}		
+	function deleteSessionData() {sessionStorage.clear();}
+	if (localStorage.getItem('jsonData') !== null) {console.log("Загружен local JSON");json_val = JSON.parse(localStorage.getItem("jsonData"));} 
+											  else {console.log("Загружен default JSON");json_val = JSON.parse(JSON.stringify(jsonData));}
+	loadJson(json_val.selIndex);		
 	function loadJson(sel) {
-		if (localStorage.getItem('jsonData') !== null) { 
-			json_val = JSON.parse(localStorage.getItem("jsonData"));
-		} else { 
-			json_val = JSON.parse(JSON.stringify(jsonData));
-		}
+		select_m.selectedIndex = sel;	
 		oklad_ar = json_val.oklad;
 		calendar = json_val.calendar;	
 		ofis_115_ar = json_val.ofis_115_ar;
@@ -252,7 +255,7 @@
 		let selected2         = sel + 1;
 		selected              = (parseInt(selected) < 0) ? 11 : selected;
 		selected2             = (parseInt(selected2) > 11) ? 0 : selected2;
-		rab_d.value           = calendar[sel];
+		rab_chas.value        = calendar[sel];
 		oklad.value           = oklad_ar;
 		ofis_115.value        = ofis_115_ar[sel];
 		ofis_1530.value       = ofis_1530_ar[sel];
@@ -261,15 +264,16 @@
 		vyh_115.value         = vyh_115_ar[sel];
 		vyh_1530.value        = vyh_1530_ar[sel];
 		premia.value          = premia_ar[sel];
-		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;
+		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;	
         //console.log("loadJson( " + sel + " )");		
-		premia_pred.value     = premia_pred_ar[selected];
-		premia_pred_text.innerHTML = "Премия: " + select_m.options[selected].value;
+		//premia_pred.value     = premia_pred_ar[selected];
+		//premia_pred_text.innerHTML = "Премия: " + select_m.options[selected].value;
 		prof.value         = prof_ar[sel];
 		do15.value         = 'до 15.' + add_zero(sel + 1);
 		posle15.value      = 'после 15.' + add_zero(sel + 1);
-		oklad28_text.value = '28 ' + months[sel];
-		oklad13_text.value = '13 ' + months[selected2]; 
+		//oklad28_text.value = '28 ' + months[sel];
+		//oklad13_text.value = '13 ' + months[selected2]; 
+		document.getElementById("rab_chas").style = (parseInt(rab_chas.value) % 8 != 0) ? "text-align:center;padding:0;height:21px;font-size:14px;color:red" : "text-align:center;padding:0;height:21px;font-size:14px;color:green"; 
 		getZp();
 		//console.log("loadJson( " + sel + " )");
 	}	
@@ -285,8 +289,9 @@
 		if (localStorage.getItem('jsonData') == null) localStorage.setItem("jsonData", JSON.stringify(jsonData));
 		json_val = JSON.parse(localStorage.getItem ("jsonData"));		
 		let selIndex = document.getElementById("select_m").options.selectedIndex;	
-		json_val.calendar[selIndex] = parseInt(rab_d.value);
-		//json_val.select_m = select_m.value;		
+		json_val.calendar[selIndex] = parseInt(rab_chas.value);
+		//json_val.select_m = select_m.value;	
+		json_val.selIndex = selIndex;	
 		json_val.oklad = parseInt(oklad.value);
 		json_val.ofis_115_ar[selIndex] = parseInt(ofis_115.value);		
 		json_val.ofis_1530_ar[selIndex] = parseInt(ofis_1530.value);	
@@ -310,7 +315,7 @@
 	}
 	function getZp() {
 		if (oklad.value === '' && oklad.value.length == 0) oklad.value = 0;
-		if (rab_d.value === '' && rab_d.value.length == 0) rab_d.value = 0;
+		if (rab_chas.value === '' && rab_chas.value.length == 0) rab_chas.value = 0;
 		if (ofis_115.value === '' && ofis_115.value.length == 0) ofis_115.value = 0;
 		if (razyezd_115.value === '' && razyezd_115.value.length == 0) razyezd_115.value = 0;
 		if (vyh_115.value === '' && vyh_115.value.length == 0) vyh_115.value = 0;
@@ -319,55 +324,24 @@
 		if (vyh_1530.value === '' && vyh_1530.value.length == 0) vyh_1530.value = 0;
 		if (prof.value === '' && prof.value.length == 0) prof.value = 0;
 		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
-		let oklad_val = parseInt(oklad.value);
-		let rab_d_val = parseInt(rab_d.value);
-		let rub_v_den  = parseInt(oklad_val / rab_d_val * 10) / 10;
-		let prof_val = parseInt(prof.value);
-		let premia_val = parseInt(premia.value * 1000) / 1000;
-		let ofis_115_val = parseInt(ofis_115.value);
-		let ofis_1530_val = parseInt(ofis_1530.value);
-		let vyh_115_val = parseInt(vyh_115.value);
-		let vyh_1530_val = parseInt(vyh_1530.value);
-		let razyezd_115_val = parseInt(razyezd_115.value);
-		let razyezd_1530_val = parseInt(razyezd_1530.value);
- 		let ofis_115_ = rub_v_den * ofis_115_val * 1.15 / 1.13;
-		let ofis_115_prof = ofis_115_ - percent(rub_v_den * ofis_115_val * 1.15, prof_val);
-		let razyezd_115_ = rub_v_den * 1.25 * razyezd_115_val * 1.15 / 1.13;
-		let razyezd_115_prof = razyezd_115_ - percent(rub_v_den * 1.25 * razyezd_115_val * 1.15, prof_val);
-		let vyh_115_ = rub_v_den * 1.25 * vyh_115_val * 1.15 / 1.13;
-		let vyh_115_prof = vyh_115_ - percent(rub_v_den * 1.25 * vyh_115_val * 1.15, prof_val);
-		let ofis_1530_ = rub_v_den * ofis_1530_val * 1.15 / 1.13;
-		let ofis_1530_prof = ofis_1530_ - percent(rub_v_den * ofis_1530_val * 1.15, prof_val);
-		let razyezd_1530_ = rub_v_den * 1.25 * razyezd_1530_val * 1.15 / 1.13;
-		let razyezd_1530_prof = razyezd_1530_ - percent(rub_v_den * 1.25 * razyezd_1530_val * 1.15, prof_val);
-		let vyh_1530_ = rub_v_den * 1.25 * vyh_1530_val * 1.15 / 1.13;
-		let vyh_1530_prof = vyh_1530_ - percent(rub_v_den * 1.25 * vyh_1530_val * 1.15, prof_val);
-
-		let vyh_115_bez = rub_v_den * vyh_115_val * 1.15 / 1.13;
-		let vyh_115_prof_bez = vyh_115_bez - percent(rub_v_den * vyh_115_val * 1.15, prof_val);
-		let vyh_1530_bez = rub_v_den * vyh_1530_val * 1.15 / 1.13;
-		let vyh_1530_prof_bez = vyh_1530_bez - percent(rub_v_den * vyh_1530_val * 1.15, prof_val);
 		
-		let summ_d = ofis_115_val + ofis_1530_val + razyezd_115_val + razyezd_1530_val;
-		let summ_o = ofis_115_val + ofis_1530_val;
-		let summ_r = razyezd_115_val + razyezd_1530_val;
-		let premia_ = rub_v_den * summ_d * premia_val * 1.15 / 1.13;
-		let premia_prof = premia_ - percent(rub_v_den * summ_d * premia_val * 1.15, prof_val);
-		let prof_prof = percent(rub_v_den * ofis_115_val * 1.15, prof_val) + percent(rub_v_den * 1.25 * razyezd_1530_val * 1.15, prof_val) + percent(rub_v_den * 1.25 * vyh_1530_val * 1.15, prof_val) + percent(rub_v_den * summ_d * premia_val * 1.15, prof_val);
-		rvd.value = rub_v_den;
+		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
+		let summ_o = parseInt(ofis_115.value) + parseInt(ofis_1530.value);
+		let summ_r = parseInt(razyezd_115.value) + parseInt(razyezd_1530.value);	
+		let summ_d = summ_o + summ_r;
+	
+ 		let ofis_115_v = parseInt(rub_v_сhas * ofis_115.value);
+		let ofis_1530_v = parseInt(rub_v_сhas * ofis_1530.value);
+		okl.value =  parseInt(summ_d * rub_v_сhas * 100) / 100;
+        nadbavka.value = parseInt(summ_r * rub_v_сhas * 0.25 * 100) / 100;
+		premia_tek.value = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 0.7) / 100;
+		let rk = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 1.15) / 100;
+        chist_28.value = parseInt(100 * (rk + parseInt(premia_tek.value)) / 1.13) / 100; 	
+		rvc.value = rub_v_сhas;
 		day_all.value = summ_d;
 		day_of.value = summ_o;
 		day_raz.value = summ_r;
-		oklad28.value = parseInt(ofis_115_prof + razyezd_115_prof + vyh_115_prof);
-		oklad13.value = parseInt(ofis_1530_prof + razyezd_1530_prof + vyh_1530_prof);
-		premia_tek.value = parseInt(premia_prof);
-		//premia_pred.value = 1; //parseInt(ofis_115_prof + razyezd_115_prof + vyh_115_prof);
-		chist_28.value = parseInt(oklad28.value);
-		chist_13.value = parseInt(oklad13.value) + parseInt(premia_pred.value);
-		document.getElementById("t10").value = parseInt(ofis_115_prof + razyezd_115_prof + vyh_115_prof_bez);
-		document.getElementById("t11").value = parseInt(ofis_1530_prof + razyezd_1530_prof + vyh_1530_prof_bez);
-		profsoyuz.value = parseInt(prof_prof);	
-		save();
+		//save();
 	}
 	let password = '2021';
 	function getpass() {
@@ -393,6 +367,61 @@
 	let xDown = null;let yDown = null;let xDiff = null;let yDiff = null;let timeDown = null;let startEl = null;
 	function handleTouchEnd(e) {if (startEl !== e.target) return;let swipeThreshold = 200;let swipeTimeout = 1000;let timeDiff = Date.now() - timeDown;if (Math.abs(xDiff) > Math.abs(yDiff)) {if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {if (xDiff > 0) {eventType ++;if (eventType > 11) eventType = 0;}else {eventType --;if (eventType < 0) eventType = 11;}}select_m.selectedIndex = eventType;loadJson(eventType);}if (eventType !== '') {startEl.dispatchEvent(new CustomEvent(eventType, { bubbles: true, cancelable: true }));}xDown = null;yDown = null;timeDown = null;};function handleTouchStart(e){if (e.target.getAttribute('data-swipe-ignore') === 'true') return;startEl = e.target;timeDown = Date.now();xDown = e.touches[0].clientX;yDown = e.touches[0].clientY;xDiff = 0;yDiff = 0;}
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
+
+/*
+		//let oklad_val = parseInt(oklad.value);
+		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
+		//let rub_v_den  = rub_v_сhas * 8;
+		let prof_val = parseInt(prof.value);
+		let premia_val = parseInt(premia.value * 1000) / 1000;
+		let ofis_115_val = parseInt(ofis_115.value);
+		let ofis_1530_val = parseInt(ofis_1530.value);
+		let vyh_115_val = parseInt(vyh_115.value);
+		let vyh_1530_val = parseInt(vyh_1530.value);
+		let razyezd_115_val = parseInt(razyezd_115.value);
+		let razyezd_1530_val = parseInt(razyezd_1530.value);
+		
+		
+ 		let ofis_115_ = rub_v_сhas * ofis_115_val * 1.15 / 1.13;
+		let ofis_115_prof = ofis_115_ - percent(rub_v_сhas * ofis_115_val * 1.15, prof_val);
+		let razyezd_115_ = rub_v_сhas * 1.25 * razyezd_115_val * 1.15 / 1.13;
+		let razyezd_115_prof = razyezd_115_ - percent(rub_v_сhas * 1.25 * razyezd_115_val * 1.15, prof_val);
+		let vyh_115_ = rub_v_сhas * 1.25 * vyh_115_val * 1.15 / 1.13;
+		let vyh_115_prof = vyh_115_ - percent(rub_v_сhas * 1.25 * vyh_115_val * 1.15, prof_val);
+
+		let ofis_1530_ = rub_v_сhas * ofis_1530_val * 1.15 / 1.13;
+		let ofis_1530_prof = ofis_1530_ - percent(rub_v_сhas * ofis_1530_val * 1.15, prof_val);
+		let razyezd_1530_ = rub_v_сhas * 1.2 * razyezd_1530_val * 1.15 / 1.13;
+
+		let razyezd_1530_prof = razyezd_1530_ - percent(rub_v_сhas * 1.25 * razyezd_1530_val * 1.15, prof_val);
+		let vyh_1530_ = rub_v_сhas * 1.25 * vyh_1530_val * 1.15 / 1.13;
+		let vyh_1530_prof = vyh_1530_ - percent(rub_v_сhas * 1.25 * vyh_1530_val * 1.15, prof_val);
+
+		let vyh_115_bez = rub_v_сhas * vyh_115_val * 1.15 / 1.13;
+		let vyh_115_prof_bez = vyh_115_bez - percent(rub_v_сhas * vyh_115_val * 1.15, prof_val);
+		let vyh_1530_bez = rub_v_сhas * vyh_1530_val * 1.15 / 1.13;
+		let vyh_1530_prof_bez = vyh_1530_bez - percent(rub_v_сhas * vyh_1530_val * 1.15, prof_val);
+		
+		let summ_d = ofis_115_val + ofis_1530_val + razyezd_115_val + razyezd_1530_val;
+		let summ_o = ofis_115_val + ofis_1530_val;
+		let summ_r = razyezd_115_val + razyezd_1530_val;
+		let premia_ = rub_v_сhas * summ_d * premia_val * 1.15 / 1.13;
+		let premia_prof = premia_ - percent(rub_v_сhas * summ_d * premia_val * 1.15, prof_val);
+		let prof_prof = percent(rub_v_сhas * ofis_115_val * 1.15, prof_val) + percent(rub_v_сhas * 1.25 * razyezd_1530_val * 1.15, prof_val) + percent(rub_v_сhas * 1.25 * vyh_1530_val * 1.15, prof_val) + percent(rub_v_сhas * summ_d * premia_val * 1.15, prof_val);
+		rvc.value = rub_v_сhas;
+		day_all.value = summ_d;premia_prof
+		day_of.value = summ_o;
+		day_raz.value = summ_r;
+		oklad28.value = parseInt(ofis_115_prof + razyezd_115_prof + vyh_115_prof);
+		oklad13.value = parseInt(ofis_1530_prof + razyezd_1530_prof + vyh_1530_prof);
+		premia_tek.value = parseInt();
+		//premia_pred.value = 1; //parseInt(ofis_115_prof + razyezd_115_prof + vyh_115_prof);
+		chist_28.value = parseInt(oklad28.value);
+		chist_13.value = parseInt(oklad13.value) + parseInt(premia_pred.value);
+		document.getElementById("t10").value = parseInt(ofis_115_prof + razyezd_115_prof + vyh_115_prof_bez);
+		document.getElementById("t11").value = parseInt(ofis_1530_prof + razyezd_1530_prof + vyh_1530_prof_bez);
+		profsoyuz.value = parseInt(prof_prof);	
+*/
 </script>
 </html>
 

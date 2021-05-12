@@ -248,8 +248,8 @@
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
 	let passChecked = (localStorage.getItem('passen') !== null) ? localStorage.getItem('passen') : 0;
 	//console.log("passChecked: " + passChecked);
-	if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 
-					 else {document.getElementById('all').hidden=false;document.getElementById('ps').hidden=true;}		
+	//if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 
+	//				 else {document.getElementById('all').hidden=false;document.getElementById('ps').hidden=true;}		
 	function deleteSessionData() {localStorage.clear();}
 	if (localStorage.getItem('jsonData') !== null) {console.log("Загружен local JSON");json_val = JSON.parse(localStorage.getItem("jsonData"));} 
 											  else {console.log("Загружен default JSON");json_val = JSON.parse(JSON.stringify(jsonData));}

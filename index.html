@@ -379,6 +379,7 @@
 		//save();
 	}
 	let password = '2021';
+/*
 	function getpass() {
 		if (document.getElementById("password").value == password) {
 			localStorage.setItem('passen', 1);
@@ -397,6 +398,7 @@
 			}, 800);			
 		}
 	}
+*/
 	document.getElementById("password").addEventListener("keyup", function(event) {event.preventDefault();if (event.keyCode === 13) {document.getElementById("enter_pass").click();}});	
 	document.addEventListener('touchstart', handleTouchStart, false);document.addEventListener('touchmove', handleTouchMove, false);document.addEventListener('touchend', handleTouchEnd, false);
 	let xDown = null;let yDown = null;let xDiff = null;let yDiff = null;let timeDown = null;let startEl = null;

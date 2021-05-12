@@ -61,7 +61,7 @@
 					</div>		
 					<input type="number" id="premia" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 				</div>					
-				<div class="input-group">
+				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Профсоюз %:</span>
 					</div>		
@@ -138,33 +138,15 @@
 					</div>		
 					<input type="number" id="okl" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>
-				
-<!-- 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
-					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Оклад:</span>
-				</div>
-				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
-					<div class="input-group">
-						<input type="text" id="oklad28_text" class="form-control input-sm border-left-0 border-bottom-0" value="28 --" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>
-						<input type="text" id="oklad13_text" class="form-control input-sm border-bottom-0" value="13 --" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>		
-					</div>	
-					<div class="input-group" tooltip_mess="Значение без учета 1.25 в праздничные дни" hidden>
-					<input type="number" id="t10" class="form-control input-sm border-left-0 border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>
-					<input type="number" id="t11" class="form-control input-sm border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>			
-					</div>	
-					<div class="input-group">
-						<input type="number" id="oklad28" class="form-control input-sm border-left-0 border-top-0 border-bottom-0" style="border-radius:0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-						<input type="number" id="oklad13" class="form-control input-sm border-top-0 border-bottom-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>				
-					</div>			
-				</div> -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span id="nadbv" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Надбавка:</span>
+						<span id="nadbv" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Надбавка (x1.25):</span>
 					</div>		
 					<input type="number" id="nadbavka" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span id="nadbv" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Двойная:</span>
+						<span id="nadbv" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Двойная (x2):</span>
 					</div>		
 					<input type="number" id="dvoynaya" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>					
@@ -180,13 +162,45 @@
 					</div>		
 					<input type="number" id="premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	 -->
+
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Чистыми в карман:</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РК / НДФЛ:</span>
+					</div>		
+					<input type="number" id="rk_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="ndfl_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+				</div>	
+				
+
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Чистыми (без премии):</span>
 					</div>		
 					<input type="number" id="chist_28" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
 					<input hidden type="number" id="chist_13" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	
+				
+				
+				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
+					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Оклад:</span>
+				</div>
+				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
+					<div class="input-group">
+						<input type="text" id="oklad28_text" class="form-control input-sm border-left-0 border-bottom-0" value="28 --" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>
+						<input type="text" id="oklad13_text" class="form-control input-sm border-bottom-0" value="13 --" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>		
+					</div>	
+					<div class="input-group" tooltip_mess="Значение без учета 1.25 в праздничные дни" hidden>
+					<input type="number" id="t10" class="form-control input-sm border-left-0 border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="t11" class="form-control input-sm border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>			
+					</div>	
+					<div class="input-group">
+						<input type="number" id="oklad28" class="form-control input-sm border-left-0 border-top-0" style="border-radius:0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+						<input type="number" id="oklad13" class="form-control input-sm border-top-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>				
+					</div>			
+				</div>				
+				
+				
+				
 				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Буржуям (Профсоюз):</span>
@@ -229,7 +243,7 @@
 		"vyh_1530_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		"prof_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	};
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
 	let passChecked = (localStorage.getItem('passen') !== null) ? localStorage.getItem('passen') : 0;
@@ -275,8 +289,8 @@
 		prof.value         = prof_ar[sel];
 		do15.value         = 'до 15.' + add_zero(sel + 1);
 		posle15.value      = 'после 15.' + add_zero(sel + 1);
-		//oklad28_text.value = '28 ' + months[sel];
-		//oklad13_text.value = '13 ' + months[selected2]; 
+		oklad28_text.value = '28 ' + months[sel];
+		oklad13_text.value = '13 ' + months[selected2]; 
 		document.getElementById("rab_chas").style = (parseInt(rab_chas.value) % 8 != 0) ? "text-align:center;padding:0;height:21px;font-size:14px;color:red" : "text-align:center;padding:0;height:21px;font-size:14px;color:green"; 
 		getZp();
 	}	
@@ -334,17 +348,34 @@
 		let summ_d = summ_o + summ_r;
 	
  		let ofis_115_v = parseInt(rub_v_сhas * ofis_115.value);
-		let ofis_1530_v = parseInt(rub_v_сhas * ofis_1530.value);
+ 		let razyezd_115_v = parseInt(rub_v_сhas * razyezd_115.value * 1.25);
+		let vyh_115_v = parseInt(rub_v_сhas * vyh_115.value * 2);
+		
+		//let ofis_1530_v = parseInt(rub_v_сhas * ofis_1530.value);
+		//let razyezd_1530_v = parseInt(rub_v_сhas * razyezd_1530.value * 1.25);		
+		//let vyh_1530_v = parseInt(rub_v_сhas * vyh_1530.value * 2);
+
+		
 		okl.value =  parseInt((summ_d-summ_v) * rub_v_сhas * 100) / 100;
         nadbavka.value = parseInt((summ_r - summ_v)* rub_v_сhas * 0.25 * 100) / 100;
 		dvoynaya.value = parseInt(2 * summ_v * rub_v_сhas * 100) / 100;
 		premia_tek.value = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 0.7) / 100;
 		let rk = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 1.15) / 100;
-        chist_28.value = parseInt(100 * (parseInt(dvoynaya.value) + rk + parseInt(premia_tek.value)) / 1.13) / 100; 	
+		rk_only.value = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 0.15) / 100;
+		ndfl_only.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(rk_only.value) + parseInt(dvoynaya.value)) * 0.13);		
+		
+		//chist_28.value = parseInt(100 * (parseInt(dvoynaya.value) + rk + parseInt(premia_tek.value)) / 1.13) / 100; 	
+		chist_28.value = parseInt((parseInt(dvoynaya.value) + rk - parseInt(ndfl_only.value))); 	
+
+		oklad28.value = ofis_115_v + razyezd_115_v + vyh_115_v;
+		oklad13.value = parseInt(parseInt(chist_28.value) - parseInt(oklad28.value));
+		
 		rvc.value = rub_v_сhas;
 		day_all.value = summ_d;
 		day_of.value = summ_o;
 		day_raz.value = summ_r;
+		//console.log("Выплата 28: " + );
+		//console.log("Выплата 13: " + );
 		//save();
 	}
 	let password = '2021';

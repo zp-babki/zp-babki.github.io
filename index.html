@@ -20,7 +20,7 @@
 				<input autofocus type="password" id="password" class="form-control input-sm" style="text-align:center;height:38px;font-size:14px;">
 				<input id="enter_pass" type="submit" class="btn btn-primary" value="ВВОД" onclick="getpass();" style="width:100%; margin: 1px 0 10px 0;">	
 			</div>			                                                        
-			<div id="all" class="row">                                       
+			<div id="all" class="row" hidden>                                       
 				<!-- <select class="custom-select">                                 
 				  <option selected>Open this select menu</option>                   
 				  <option value="1">One</option>                                    
@@ -230,10 +230,10 @@
 	let premia_pred_ar = 0;	
 	let prof_ar = 0;	
 	let eventType = 0;	
-        let chk = (document.getElementById("debug").checked)?1:0; 	
+    let chk = (document.getElementById("debug").checked)?1:0; 	
 	let jsonData = {
 		"selIndex": 5,
-	        "oklad": 1000,
+	    "oklad": 1000,
 		"calendar":[120, 151, 176, 175, 143, 167, 167, 176, 176, 160, 159, 176],
 		"ofis_115_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		"ofis_1530_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -248,8 +248,8 @@
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
 	let passChecked = (localStorage.getItem('passen') !== null) ? localStorage.getItem('passen') : 0;
 	//console.log("passChecked: " + passChecked);
-	//if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 
-	//				 else {document.getElementById('all').hidden=false;document.getElementById('ps').hidden=true;}		
+	if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 
+					 else {document.getElementById('all').hidden=false;document.getElementById('ps').hidden=true;}		
 	function deleteSessionData() {localStorage.clear();}
 	if (localStorage.getItem('jsonData') !== null) {console.log("Загружен local JSON");json_val = JSON.parse(localStorage.getItem("jsonData"));} 
 											  else {console.log("Загружен default JSON");json_val = JSON.parse(JSON.stringify(jsonData));}
@@ -268,7 +268,7 @@
 		premia_pred_ar = json_val.premia_pred_ar;	
 		prof_ar = json_val.prof_ar;		
 		//console.log(json_val);	
-	        eventType             = sel;
+	    eventType             = sel;
 		let selected          = sel - 1;
 		let selected2         = sel + 1;
 		selected              = (parseInt(selected) < 0) ? 11 : selected;
@@ -283,7 +283,7 @@
 		vyh_1530.value        = vyh_1530_ar[sel];
 		premia.value          = premia_ar[sel];
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;	
-                //console.log("loadJson( " + sel + " )");		
+        //console.log("loadJson( " + sel + " )");		
 		//premia_pred.value     = premia_pred_ar[selected];
 		//premia_pred_text.innerHTML = "Премия: " + select_m.options[selected].value;
 		prof.value         = prof_ar[sel];
@@ -302,11 +302,11 @@
 	function percent(number, perc) {let result = number * perc / 100;return result;}
 	function debugCheck() {document.getElementById("debugButtons").hidden = (document.getElementById('debug').checked) ? false : true;}	
 	function save() {
+		if (localStorage.getItem('passen') !== null) {localStorage.setItem("passen", 1);}
 		if (localStorage.getItem('jsonData') == null) localStorage.setItem("jsonData", JSON.stringify(jsonData));
 		json_val = JSON.parse(localStorage.getItem ("jsonData"));		
 		let selIndex = document.getElementById("select_m").options.selectedIndex;	
 		json_val.calendar[selIndex] = parseInt(rab_chas.value);
-		//json_val.select_m = select_m.value;	
 		json_val.selIndex = selIndex;	
 		json_val.oklad = parseInt(oklad.value);
 		json_val.ofis_115_ar[selIndex] = parseInt(ofis_115.value);		
@@ -350,21 +350,16 @@
  		let ofis_115_v = parseInt(rub_v_сhas * ofis_115.value);
  		let razyezd_115_v = parseInt(rub_v_сhas * razyezd_115.value * 1.25);
 		let vyh_115_v = parseInt(rub_v_сhas * vyh_115.value * 2);
-		
-		//let ofis_1530_v = parseInt(rub_v_сhas * ofis_1530.value);
-		//let razyezd_1530_v = parseInt(rub_v_сhas * razyezd_1530.value * 1.25);		
-		//let vyh_1530_v = parseInt(rub_v_сhas * vyh_1530.value * 2);
-
-		
+	
 		okl.value =  parseInt(summ_d * rub_v_сhas * 100) / 100;
-                nadbavka.value = parseInt((summ_r - summ_v)* rub_v_сhas * 0.25 * 100) / 100;
+        nadbavka.value = parseInt((summ_r - summ_v)* rub_v_сhas * 0.25 * 100) / 100;
 		dvoynaya.value = parseInt(2 * summ_v * rub_v_сhas * 100) / 100;
+        //nadbavka.value = parseInt(summ_r * rub_v_сhas * 0.25 * 100) / 100;
+		//dvoynaya.value = parseInt(summ_v * rub_v_сhas * 100) / 100;
 		premia_tek.value = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 0.7) / 100;
 		let rk = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 1.15) / 100;
 		rk_only.value = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 0.15) / 100;
 		ndfl_only.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(rk_only.value) + parseInt(dvoynaya.value)) * 0.13);		
-		
-		//chist_28.value = parseInt(100 * (parseInt(dvoynaya.value) + rk + parseInt(premia_tek.value)) / 1.13) / 100; 	
 		chist_28.value = parseInt((parseInt(dvoynaya.value) + rk - parseInt(ndfl_only.value))); 	
 
 		oklad28.value = ofis_115_v + razyezd_115_v + vyh_115_v;
@@ -379,7 +374,6 @@
 		//save();
 	}
 	let password = '2021';
-/*
 	function getpass() {
 		if (document.getElementById("password").value == password) {
 			localStorage.setItem('passen', 1);
@@ -392,13 +386,12 @@
 			document.getElementById("enter_pass").setAttribute("class", "btn btn-danger");	
 			document.getElementById("enter_pass").value = "НЕ ВЕРНЫЙ ПАРОЛЬ";
 			document.getElementById("password").value = "";
-		        setTimeout(() => {
+		    setTimeout(() => {
 				document.getElementById("enter_pass").setAttribute("class", "btn btn-primary");
 				document.getElementById("enter_pass").value = "ВВОД";
 			}, 800);			
 		}
 	}
-*/
 	document.getElementById("password").addEventListener("keyup", function(event) {event.preventDefault();if (event.keyCode === 13) {document.getElementById("enter_pass").click();}});	
 	document.addEventListener('touchstart', handleTouchStart, false);document.addEventListener('touchmove', handleTouchMove, false);document.addEventListener('touchend', handleTouchEnd, false);
 	let xDown = null;let yDown = null;let xDiff = null;let yDiff = null;let timeDown = null;let startEl = null;
@@ -406,5 +399,3 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-
-

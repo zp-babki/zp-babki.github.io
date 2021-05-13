@@ -230,10 +230,10 @@
 	let premia_pred_ar = 0;	
 	let prof_ar = 0;	
 	let eventType = 0;	
-    let chk = (document.getElementById("debug").checked)?1:0; 	
+        let chk = (document.getElementById("debug").checked)?1:0; 	
 	let jsonData = {
 		"selIndex": 5,
-	    "oklad": 1000,
+	        "oklad": 1000,
 		"calendar":[120, 151, 176, 175, 143, 167, 167, 176, 176, 160, 159, 176],
 		"ofis_115_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		"ofis_1530_ar":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -268,7 +268,7 @@
 		premia_pred_ar = json_val.premia_pred_ar;	
 		prof_ar = json_val.prof_ar;		
 		//console.log(json_val);	
-	    eventType             = sel;
+	        eventType             = sel;
 		let selected          = sel - 1;
 		let selected2         = sel + 1;
 		selected              = (parseInt(selected) < 0) ? 11 : selected;
@@ -283,7 +283,7 @@
 		vyh_1530.value        = vyh_1530_ar[sel];
 		premia.value          = premia_ar[sel];
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;	
-        //console.log("loadJson( " + sel + " )");		
+                //console.log("loadJson( " + sel + " )");		
 		//premia_pred.value     = premia_pred_ar[selected];
 		//premia_pred_text.innerHTML = "Премия: " + select_m.options[selected].value;
 		prof.value         = prof_ar[sel];
@@ -357,7 +357,7 @@
 
 		
 		okl.value =  parseInt(summ_d * rub_v_сhas * 100) / 100;
-        nadbavka.value = parseInt((summ_r - summ_v)* rub_v_сhas * 0.25 * 100) / 100;
+                nadbavka.value = parseInt((summ_r - summ_v)* rub_v_сhas * 0.25 * 100) / 100;
 		dvoynaya.value = parseInt(2 * summ_v * rub_v_сhas * 100) / 100;
 		premia_tek.value = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 0.7) / 100;
 		let rk = parseInt(100 * (parseInt(okl.value) + parseInt(nadbavka.value)) * 1.15) / 100;
@@ -392,7 +392,7 @@
 			document.getElementById("enter_pass").setAttribute("class", "btn btn-danger");	
 			document.getElementById("enter_pass").value = "НЕ ВЕРНЫЙ ПАРОЛЬ";
 			document.getElementById("password").value = "";
-		    setTimeout(() => {
+		        setTimeout(() => {
 				document.getElementById("enter_pass").setAttribute("class", "btn btn-primary");
 				document.getElementById("enter_pass").value = "ВВОД";
 			}, 800);			

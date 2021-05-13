@@ -19,6 +19,7 @@
 				<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Перед вводом пароля, хорошенько подумай:</span>
 				<input autofocus type="password" id="password" class="form-control input-sm" style="text-align:center;height:38px;font-size:14px;">
 				<input id="enter_pass" type="submit" class="btn btn-primary" value="ВВОД" onclick="getpass();" style="width:100%; margin: 1px 0 10px 0;">	
+				<input id="create_pass" type="submit" class="btn btn-primary" value="СБРОС" onclick="createpass();" style="width:100%; margin: 1px 0 10px 0;">	
 			</div>			                                                        
 			<div id="all" class="row" hidden>                                       
 				<!-- <select class="custom-select">                                 
@@ -302,7 +303,7 @@
 	function percent(number, perc) {let result = number * perc / 100;return result;}
 	function debugCheck() {document.getElementById("debugButtons").hidden = (document.getElementById('debug').checked) ? false : true;}	
 	function save() {
-		if (localStorage.getItem('passen') !== null) {localStorage.setItem("passen", 1);}
+		//if (localStorage.getItem('passen') !== null) {localStorage.setItem("passen", 1);}
 		if (localStorage.getItem('jsonData') == null) localStorage.setItem("jsonData", JSON.stringify(jsonData));
 		json_val = JSON.parse(localStorage.getItem ("jsonData"));		
 		let selIndex = document.getElementById("select_m").options.selectedIndex;	
@@ -392,6 +393,8 @@
 			}, 800);			
 		}
 	}
+	function createpass() {localStorage.setItem('passen', 0);}
+	
 	document.getElementById("password").addEventListener("keyup", function(event) {event.preventDefault();if (event.keyCode === 13) {document.getElementById("enter_pass").click();}});	
 	document.addEventListener('touchstart', handleTouchStart, false);document.addEventListener('touchmove', handleTouchMove, false);document.addEventListener('touchend', handleTouchEnd, false);
 	let xDown = null;let yDown = null;let xDiff = null;let yDiff = null;let timeDown = null;let startEl = null;

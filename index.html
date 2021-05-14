@@ -122,14 +122,18 @@
 				</div>
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<div class="input-group">
-						<input type="text" class="form-control input-sm border-left-0 border-bottom-0" value="всего" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>
-						<input type="text" class="form-control input-sm border-bottom-0" value="офис" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>
-						<input type="text" class="form-control input-sm border-bottom-0" value="разъезд" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
+						<input type="text" class="form-control input-sm border-left-0 border-bottom-0" value="ВСЕГО" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>
+						<input type="text" class="form-control input-sm border-bottom-0" value="ОФ" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>
+						<input type="text" class="form-control input-sm border-bottom-0" value="РАЗ" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
+						<input type="text" class="form-control input-sm border-bottom-0" value="ВЫХ" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
+
 					</div>	
 					<div class="input-group">
 						<input type="number" id="day_all" class="form-control input-sm border-left-0 border-top-0" style="border-radius:0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 						<input type="number" id="day_of" class="form-control input-sm border-top-0" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-						<input type="number" id="day_raz" class="form-control input-sm border-top-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>					
+						<input type="number" id="day_raz" class="form-control input-sm border-top-0" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>					
+						<input type="number" id="day_vyh" class="form-control input-sm border-top-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>					
+
 					</div>			
 				</div>	
 
@@ -355,8 +359,8 @@
 		let vyh_115_v = parseInt(rub_v_сhas * vyh_115.value * 2);
 	
 		okl.value =  parseInt(summ_d * rub_v_сhas * 100) / 100;
-        nadbavka.value = parseInt(summ_r * rub_v_сhas * 0.25 * 100) / 100; // +
-		dvoynaya.value = parseInt(2 * summ_v * rub_v_сhas * 100) / 100;               // +
+        nadbavka.value = parseInt(summ_r * rub_v_сhas * 0.25 * 100) / 100;
+		dvoynaya.value = parseInt(2 * summ_v * rub_v_сhas * 100) / 100;
 
         //nadbavka.value = parseInt(summ_r * rub_v_сhas * 0.25 * 100) / 100;
 		//dvoynaya.value = parseInt(summ_v * rub_v_сhas * 100) / 100;
@@ -366,13 +370,14 @@
 		ndfl_only.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(rk_only.value) + parseInt(dvoynaya.value)) * 0.13);		
 		chist_28.value = parseInt((parseInt(dvoynaya.value) + parseInt(rk_only.value) + parseInt(okl.value) + parseInt(nadbavka.value) - parseInt(ndfl_only.value))); 	
 
-		oklad28.value = ofis_115_v + razyezd_115_v + vyh_115_v;                                                         // + 
+		oklad28.value = ofis_115_v + razyezd_115_v + vyh_115_v;
 		oklad13.value = parseInt(parseInt(chist_28.value) - parseInt(oklad28.value) + parseInt(premia_pred.value));
 		
 		rvc.value = rub_v_сhas;
 		day_all.value = summ_d + summ_v;
 		day_of.value = summ_o;
 		day_raz.value = summ_r;
+		day_vyh.value = summ_v;		
 		//save();
 	}
 	let password = '2021';

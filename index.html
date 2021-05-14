@@ -247,7 +247,7 @@
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	};
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
-	//if (localStorage.getItem('passen') !== null) {localStorage.setItem('passen', 0);}
+	if (localStorage.getItem('passen') == null) {localStorage.setItem('passen', 0);}
 	let passChecked = (localStorage.getItem('passen') !== null) ? localStorage.getItem('passen') : 0;
 	//console.log("passChecked: " + passChecked);
 	if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 

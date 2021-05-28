@@ -395,8 +395,6 @@
 			Poln1530 = Okl1530 - Prazd1530 - Sokr1530;
 			All115 = Poln115 * 8 + Sokr115 * 7;	
 			All1530 = Poln1530 * 8 + Sokr1530 * 7;
-			//console.log("All115: " + All115 + " | Poln115: " + Poln115 + " | Okl115: " + Okl115 + " | Prazd115: " + Prazd115 +  " | Vyh115: " + Vyh115 + " | Sokr115: " + Sokr115);
-			//console.log("All1530: " + All1530 + " | Poln1530: " + Poln1530 + " | Okl1530: " + Okl1530 + " | Prazd1530: " + Prazd1530 +  " | Vyh1530: " + Vyh1530 + " | Sokr1530: " + Sokr1530);
 			$('#' + mesto).datepick('setDate', dates);
 		} 
 		if (attr_mess == 'dor_mess') {
@@ -465,7 +463,6 @@
 		prof.value         = prof_ar[sel];
 		oklad28_text.value = '28 ' + months[sel];
 		oklad13_text.value = '13 ' + months[selected2]; 
-		document.getElementById("rab_chas").style = (parseInt(rab_chas.value) % 8 != 0) ? "text-align:center;padding:0;height:21px;font-size:14px;color:red" : "text-align:center;padding:0;height:21px;font-size:14px;color:green"; 
 		getZp();
 	}	
 	function getZp() {
@@ -503,10 +500,6 @@
 		chist_28.value = parseInt(summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value)); 	
 		
 		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87);
-		console.log("returnOfis.All115: " + returnOfis.All115);
-		console.log("returnRaz.All115: " + returnRaz.All115);
-		console.log("returnDor.All115: " + returnDor.All115);
-		
 		oklad13.value = parseInt(parseInt(chist_28.value) - parseInt(oklad28.value) + parseInt(premia_pred.value));
 
 		rvc.value = rub_v_сhas;

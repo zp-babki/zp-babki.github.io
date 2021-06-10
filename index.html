@@ -397,13 +397,8 @@
 			All1530 = Poln1530 * 8 + Sokr1530 * 7;
 			$('#' + mesto).datepick('setDate', dates);
 		} 
-		if (attr_mess == 'dor_mess') {
-		 ttip = "Период: 1-15" + "\nПолн: " + parseInt(Poln115 + Prazd115 + Vyh115) + "     Сокр: " + Sokr115 + "\nВсего дор час: " + All115 + 
-					"\n\nПериод: 15-30" + "\nПолн: " + parseInt(Poln1530 + Prazd1530 + Vyh1530) + "     Сокр: " + Sokr1530 + "\nВсего дор час: " + All1530;
-		} else {
-		 ttip = "Период: 1-15" + "\nПолн: " + Poln115 + "     Сокр: " + Sokr115 + "\nПразд: " + Prazd115 + "    Вых:  " + Vyh115 + "\nВсего раб час: " + All115 + 
+		ttip = "Период: 1-15" + "\nПолн: " + Poln115 + "     Сокр: " + Sokr115 + "\nПразд: " + Prazd115 + "    Вых:  " + Vyh115 + "\nВсего раб час: " + All115 + 
 					"\n\nПериод: 15-30" + "\nПолн: " + Poln1530 + "     Сокр: " + Sokr1530 + "\nПразд: " + Prazd1530 + "    Вых:  " + Vyh1530 + "\nВсего раб час: " + All1530;
-		}
 
 		document.getElementById(id_mess).setAttribute(attr_mess, ttip);		
 		returnObject.All115 = All115;
@@ -485,8 +480,9 @@
 		let dvoynaya1530 = parseInt(prazd_vyh1530 * rub_v_сhas * 8 * 2);
 		dvoynaya.value = dvoynaya115 + dvoynaya1530;
 
-		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt(prazd_vyh115 * 8);
-		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt(prazd_vyh1530 * 8);
+		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt(returnDor.Vyh115 * 8) + parseInt(prazd_vyh115 * 8);
+		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt(returnDor.Vyh1530 * 8) + parseInt(prazd_vyh1530 * 8);
+		console.log("returnDor.All115: " + returnDor.All115);
 		console.log("summ115: " + summ115);
 		console.log("summ1530: " + summ1530);
 		let nadbavka115 = summ115 * rub_v_сhas * 0.25;

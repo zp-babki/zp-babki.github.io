@@ -443,14 +443,14 @@
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
 		returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');
 
-		console.log("returnOfis: ");
-		console.log(returnOfis);
+		//console.log("returnOfis: ");
+		//console.log(returnOfis);
 
-		console.log("returnRaz: ");
-		console.log(returnRaz);
+		//console.log("returnRaz: ");
+		//console.log(returnRaz);
 		
-		console.log("returnDor: ");
-		console.log(returnDor);
+		//console.log("returnDor: ");
+		//console.log(returnDor);
 		premia.value          = premia_ar[sel];	
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;		
 		premia_pred.value     = premia_pred_ar[selected];
@@ -490,7 +490,9 @@
 		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
 		
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530) * rub_v_сhas * 8);
-		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * 0.7);
+		//premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * 0.7);
+		premia_tek.value = parseInt(parseInt(okl.value) * 0.7);
+
 		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value); 
 		rk_only.value = parseInt(summaVseh * 0.15);
 		ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		

@@ -490,8 +490,8 @@
 		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
 		
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530) * rub_v_сhas * 8);
-		//premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * 0.7);
-		premia_tek.value = parseInt(parseInt(okl.value) * 0.7);
+		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * 0.7);
+		//premia_tek.value = parseInt(parseInt(okl.value) * 0.7);
 
 		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value); 
 		rk_only.value = parseInt(summaVseh * 0.15);

@@ -491,14 +491,15 @@
 		
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530) * rub_v_сhas * 8);
 		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * 0.7);
-		//premia_tek.value = parseInt(parseInt(okl.value) * 0.7);
 
-		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value); 
+		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
 		rk_only.value = parseInt(summaVseh * 0.15);
 		ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
 		chist_28.value = parseInt(summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value)); 	
 		
 		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87);
+		//oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15);
+
 		oklad13.value = parseInt(parseInt(chist_28.value) - parseInt(oklad28.value) + parseInt(premia_pred.value));
 
 		rvc.value = rub_v_сhas;

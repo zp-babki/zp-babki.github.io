@@ -443,14 +443,6 @@
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
 		returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');
 
-		//console.log("returnOfis: ");
-		//console.log(returnOfis);
-
-		//console.log("returnRaz: ");
-		//console.log(returnRaz);
-		
-		//console.log("returnDor: ");
-		//console.log(returnDor);
 		premia.value          = premia_ar[sel];	
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;		
 		premia_pred.value     = premia_pred_ar[selected];
@@ -468,23 +460,27 @@
 		
 		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
 		okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
+		console.log("returnOfis: ");
 		console.log(returnOfis);
-		console.log(returnRaz);				
-		console.log(returnDor);	
+
+		console.log("returnRaz: ");
+		console.log(returnRaz);
+		
+		console.log("returnDor: ");
+		console.log(returnDor);
 		
 		let pr_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115) * 8;
 		let pr_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530) * 8;
 
 		let prazd_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115 + returnOfis.Prazd115 + returnOfis.Vyh115);
 		let prazd_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530 + returnOfis.Prazd1530 + returnOfis.Vyh1530);
-	    let prazd_vyh = prazd_vyh115 + prazd_vyh1530;
+	    	let prazd_vyh = prazd_vyh115 + prazd_vyh1530;
 		
 		let dvoynaya115 = parseInt(prazd_vyh115 * rub_v_сhas * 8 * 2);
 		let dvoynaya1530 = parseInt(prazd_vyh1530 * rub_v_сhas * 8 * 2);
 		dvoynaya.value = dvoynaya115 + dvoynaya1530;
-		console.log("pr_vyh115 = " + pr_vyh115);
-		console.log("prazd_vyh115 = " + prazd_vyh115);
 		console.log("dvoynaya115 = " + dvoynaya115);
+		console.log("dvoynaya1530 = " + dvoynaya1530);	
 		
 		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt(returnDor.Vyh115 * 8) + parseInt(prazd_vyh115 * 8);
 		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt(returnDor.Vyh1530 * 8) + parseInt(prazd_vyh1530 * 8);
@@ -497,8 +493,6 @@
 		console.log("nadbavka115 = " + nadbavka115);
 		console.log("nadbavka1530 = " + nadbavka1530);		
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530) * rub_v_сhas * 8);
-		let ddd = returnDor.Vyh115 * rub_v_сhas * 8;
-		console.log("returnDor.Vyh115 = " + ddd);			
 		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * 0.7);
 
 		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 

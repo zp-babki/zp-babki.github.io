@@ -205,6 +205,13 @@
 					<input type="number" id="rk_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 					<input type="number" id="ndfl_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	
+
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Общее на руки:</span>
+					</div>		
+					<input type="number" id="chist_bez" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
+				</div>	
 				
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Выплата:</span>
@@ -223,16 +230,13 @@
 						<input type="number" id="oklad13" class="form-control input-sm border-top-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>				
 					</div>			
 				</div>	
-				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" id="chist_28_text" style="width:100%;font-size:14px;font-weight:bold;">Всего за ...:</span>
+						<span class="input-group-text" id="chist_all_text" style="width:100%;font-size:14px;font-weight:bold;">Заработано за ...:</span>
 					</div>		
 					<input hidden type="number" id="chist_13" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
-					<input type="number" id="chist_28" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="chist_all" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
 				</div>					
-				
-				
 				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Буржуям (Профсоюз):</span>
@@ -444,7 +448,7 @@
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;		
 		premia_pred.value     = premia_pred_ar[selected];
 		premia_pred_text.innerHTML = "Премия: " + select_m.options[selected].value;
-		chist_28_text.innerHTML = "Общее за " + select_m.options[sel].value + ":";
+		chist_all_text.innerHTML = "Заработано за " + select_m.options[sel].value + ":";
 		prof.value         = prof_ar[sel];
 		oklad28_text.value = '28 ' + months[sel];
 		oklad13_text.value = '13 ' + months[selected2]; 
@@ -498,9 +502,10 @@
 		ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
 	
 		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87);
-		oklad13.value = parseInt(summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(premia_pred.value) - parseInt(oklad28.value) + parseInt(premia_pred.value));
+		oklad13.value = parseInt(summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value));
 
-		chist_28.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value); 
+		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value); 
+		chist_bez.value = parseInt(oklad28.value) + parseInt(oklad13.value); 
 		
 		rvc.value = rub_v_сhas;
 		day_of.value = returnOfis.All115 + returnOfis.All1530;

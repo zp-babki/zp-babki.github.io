@@ -503,8 +503,8 @@
 		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87);
 		oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
 
-		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_pred.value); 
-		chist_bez.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value); 
+		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value); 
+		chist_bez.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value) - parseInt(premia_pred.value); 
 		
 		rvc.value = rub_v_сhas;
 		day_of.value = returnOfis.All115 + returnOfis.All1530;

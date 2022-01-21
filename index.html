@@ -90,13 +90,13 @@
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия (Коэф Кр.):</span>
 					</div>		
-					<input type="number" id="premia" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+					<input type="number" id="premia" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="">
 				</div>					
 				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Профсоюз %:</span>
 					</div>		
-					<input type="number" id="prof" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+					<input type="number" id="prof" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="">
 				</div>					
 				<div class="input-group" id="ofis_tool" ofis_mess="Полн: -- Сокр: -- Вых: --">
 					<div class="input-group-prepend" style="width:50%;height:38px;height:21px;font-weight:bold;">
@@ -139,7 +139,7 @@
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / час:</span>
 					</div>		
-					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" readonly>
 				</div>			
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Отраб. часов:</span>
@@ -494,7 +494,7 @@
 		console.log("nadbavka115 = " + nadbavka115);
 		console.log("nadbavka1530 = " + nadbavka1530);		
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530) * rub_v_сhas * 8);
-		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * 0.7);
+		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
 
 		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
 		rk_only.value = parseInt(summaVseh * 0.15);

@@ -499,7 +499,7 @@
 		rk_only.value = parseInt(summaVseh * 0.15);
 		ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
 	
-		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87);
+		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87 * 1.15);
 		oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
 
 		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value); 

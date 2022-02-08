@@ -483,8 +483,8 @@
 		console.log("dvoynaya115 = " + dvoynaya115);
 		console.log("dvoynaya1530 = " + dvoynaya1530);	
 		
-		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt(returnDor.Vyh115 * 8) + parseInt(prazd_vyh115 * 8);
-		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt(returnDor.Vyh1530 * 8) + parseInt(prazd_vyh1530 * 8);
+		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt(prazd_vyh115 * 8);
+		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
 		console.log("summ115: " + summ115);
 		console.log("summ1530: " + summ1530);
 		let nadbavka115 = summ115 * rub_v_сhas * 0.25;

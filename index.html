@@ -492,7 +492,7 @@
 		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
 		console.log("nadbavka115 = " + nadbavka115);
 		console.log("nadbavka1530 = " + nadbavka1530);		
-		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
+		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530) * rub_v_сhas * 8);
 		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
 
 		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 

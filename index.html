@@ -110,14 +110,26 @@
 					</div>		
 					<input readonly type="text" id="razyezd" class="form-control input-sm" style="text-align:center;height:38px;height:21px;font-size:14px;background:white;" placeholder="">
 				</div>	
-
 				<div class="input-group" id="dor_tool" dor_mess="Дор: --">
 					<div class="input-group-prepend" style="width:50%;height:38px;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">В дороге:</span>
 					</div>		
 					<input readonly type="text" id="doroga" class="form-control input-sm" style="text-align:center;height:38px;height:21px;font-size:14px;background:white;" placeholder="">
 				</div>
-
+<!-- ==== -->
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночные, ч:</span>
+					</div>		
+					<input type="number" id="night" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+				</div>					
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Вечерние, ч:</span>
+					</div>		
+					<input type="number" id="evening" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+				</div>					
+<!-- ==== -->				
 				
 				<div class="btn-group btn-group-sm" style="width:100%;">
 					<div class="input-group-text justify-content-center" style="background:#007BFF;border-radius:4px 0 0 4px;padding:4px 6px;border:0;">
@@ -184,7 +196,22 @@
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Двойная (x2):</span>
 					</div>		
 					<input type="number" id="dvoynaya" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-				</div>		
+				</div>	
+<!-- ==== -->					
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span id="noch_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночь (x0.4):</span>
+					</div>		
+					<input type="number" id="noch" class="form-control input-sm" style="text-align:center;background:yellow;padding:0;height:21px;font-size:14px;" readonly>
+				</div>	
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span id="vecher_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Вечер (x0.2):</span>
+					</div>		
+					<input type="number" id="vecher" class="form-control input-sm" style="text-align:center;background:yellow;padding:0;height:21px;font-size:14px;" readonly>
+				</div>	
+<!-- ==== -->
+				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span id="premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия: --</span>
@@ -329,6 +356,8 @@
 	let ofis_ar = 0;
 	let razyezd_ar = 0;
 	let doroga_ar = 0;
+	let night_ar = 0;
+	let evening_ar = 0;
 	let premia_ar = 0;
 	let premia_pred_ar = 0;	
 	let prof_ar = 0;	
@@ -341,6 +370,8 @@
 		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
 		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
 		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
+		"night":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],	
+		"evening":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],		
 		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -425,6 +456,9 @@
 		ofis_ar        = json_val.ofis;
 		razyezd_ar     = json_val.razyezd;
 		doroga_ar      = json_val.doroga;
+		night_ar	   = json_val.night;
+		evening_ar	   = json_val.evening;
+	
 		premia_ar      = json_val.premia_ar;
 		premia_pred_ar = json_val.premia_pred_ar;	
 		prof_ar        = json_val.prof_ar;		
@@ -438,6 +472,8 @@
 		ofis.value     = ofis_ar[sel];
 		razyezd.value  = razyezd_ar[sel];
 		doroga.value   = doroga_ar[sel];
+		night.value    = night_ar[sel];
+		evening.value  = evening_ar[sel];
 		
 		returnOfis = calculate('ofis',ofis.value,'ofis_tool', 'ofis_mess');
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
@@ -485,8 +521,8 @@
 		
 		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt(prazd_vyh115 * 8);
 		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
-		console.log("summ115: " + summ115);
-		console.log("summ1530: " + summ1530);
+		//console.log("summ115: " + summ115);
+		//console.log("summ1530: " + summ1530);
 		let nadbavka115 = summ115 * rub_v_сhas * 0.25;
 		let nadbavka1530 = summ1530 * rub_v_сhas * 0.25;
 		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
@@ -494,6 +530,11 @@
 		console.log("nadbavka1530 = " + nadbavka1530);		
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
 		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
+
+		noch.value = parseInt(night.value * rub_v_сhas * 0.4 * 10) / 10;
+		vecher.value = parseInt(evening.value * rub_v_сhas * 0.2 * 10) / 10;
+		console.log("night = " + noch.value);
+		console.log("evenining = " + vecher.value);		
 
 		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
 		rk_only.value = parseInt(summaVseh * 0.15);
@@ -550,7 +591,8 @@
 		json_val.ofis[selIndex] = ofis.value;		
 		json_val.razyezd[selIndex] = razyezd.value;	
 		json_val.doroga[selIndex] = doroga.value;	
-
+		json_val.night[selIndex] = night.value;	
+		json_val.evening[selIndex] = evening.value;
 		json_val.premia_ar[selIndex] = parseInt(premia.value * 100) / 100;	
  		json_val.premia_pred_ar[selIndex] = parseInt(premia_tek.value);			
 		json_val.prof_ar[selIndex] = parseInt(prof.value * 100) / 100;

@@ -133,13 +133,24 @@
 					<div class="input-group-text justify-content-center" style="background:#007BFF;border-radius:4px 0 0 4px;padding:4px 6px;border:0;">
 						<input type="checkbox" id="debug" onclick="debugCheck()">
 					</div>
-					<input id="save" type="submit" class="btn btn-primary" value="Сохранить" onclick="save(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
-					<input hidden id="getDates" type="submit" class="btn btn-primary" value="GET" onclick="getDates();  buttonPressed(this.id);" style="margin-left:1px;width:20%;font-weight:bold;">	
-					<input hidden id="setDates" type="submit" class="btn btn-primary" value="SET" style="margin-left:1px;width:20%;font-weight:bold;">	
-					<input id="getzp" type="submit" class="btn btn-primary" value="Расчет ЗП" onclick="getZp(); save(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
-
-
+					<input id="save" type="submit" class="btn btn-primary" value="Сохранить" onclick="save(); buttonPressed(this.id);" style="margin-left:1px;font-weight:bold;">	
+					<input id="getzp" type="submit" class="btn btn-primary" value="Расчет ЗП" onclick="getZp(); save(); buttonPressed(this.id);" style="margin-left:1px;width:25%;font-weight:bold;">	
 				</div>
+				<div class="btn-group btn-group-sm" style="width:100%;margin-top:1px;height:31px;">
+					<input id="saveToFile" type="submit" class="btn btn-primary" value="Экспорт" onclick="SaveFile(); buttonPressed(this.id);" style="margin-right:1px;width:270px;font-weight:bold;">	
+
+					<label class="custom-file" style="width:271px;border-radius:0 4px 4px 0;height:31px;background:#007BFF;text-align:center;font-weight:bold;color:white;">Импорт
+						<input type="file" accept=".txt" name="fileToLoad" id="fileToLoad" style="display:none;">
+						<div>
+							<span align="center" class="btn" id="butt" style="color:white"></span>
+						</div>
+					</label>
+
+
+					<!-- <input id="fileToLoad" type="file" class="btn btn-primary" value="Импорт" accept="text/plain" style="margin-left:1px;width:50%;font-weight:bold;">	 -->
+
+				</div>			
+				
 				<div id="debugButtons" class="btn-group btn-group-sm" style="width:100%;margin-top:1px;" hidden>
 					<input id="clearlocal" type="submit" class="btn btn-primary" value="CLEAR" onclick="if (confirm('Удалить базу?')){clearlocalData();buttonPressed(this.id);}" style="width:30%;font-weight:bold;">
 					<input id="savelocal" type="submit" class="btn btn-primary" value="DEFAULT" onclick="if (confirm('Сбросить базу по умолчанию?')){savelocalData(); buttonPressed(this.id);}" style="margin-left:1px;width:35%;font-weight:bold;">
@@ -282,115 +293,10 @@
 	var	dor1530_prazd = 0;	
 	
 	const prazdniki = ['2021-11-04', '2021-11-05', '2021-12-31', '2022-01-01', '2022-01-02', '2022-01-03', '2022-01-04', '2022-01-05', 
-			   '2022-01-06', '2022-01-07', '2022-01-08', '2022-02-23', '2022-03-08', '2022-05-01', '2022-05-02', '2022-05-09',
-			   '2022-06-12', '2022-07-09', '2022-10-11', '2022-11-04'];
+			   '2022-01-06', '2022-01-07', '2022-01-08', '2022-02-23', '2022-03-08', '2022-05-01', '2022-05-02', '2022-05-03', '2022-05-04',
+			   '2022-05-09', '2022-05-10', '2022-06-13', '2022-07-11', '2022-10-11', '2022-11-04'];
 	const korotkiy = ['2022-02-22', '2022-03-05', '2022-07-08', '2022-10-10', '2022-11-03'];				   
 
-	function dtPick(sel_m) {
-		$('#ofis').datepick('destroy'); 
-		$('#doroga').datepick('destroy'); 
-		$('#razyezd').datepick('destroy'); 
-		$('#ofis').datepick({ 
-			onClose: function(dates) {returnOfis = calculate('ofis',ofis.value,'ofis_tool', 'ofis_mess');}, 	
-			renderer: 
-				$.extend({}, 
-				$.datepick.defaultRenderer, 
-					{picker: $.datepick.defaultRenderer.picker. 
-						replace(/\{link:clear\}/, '{button:clear}'). 
-						replace(/\{link:close\}/, '{button:close}')						
-					}
-				),
-			defaultDate: sel_m,
-			showOtherMonths: true,						
-			changeMonth: false,					
-			showTrigger: '#calImg',
-			multiSelect: 999					
-		});
-		$('#razyezd').datepick({ 
-			onClose: function(dates) {returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');}, 	
-			renderer: 
-				$.extend({}, 
-				$.datepick.defaultRenderer, 
-					{picker: $.datepick.defaultRenderer.picker. 
-						replace(/\{link:clear\}/, '{button:clear}'). 
-						replace(/\{link:close\}/, '{button:close}')						
-					}
-				),					
-			defaultDate: sel_m,
-			showOtherMonths: true,						
-			changeMonth: false,										
-			showTrigger: '#calImg',
-			multiSelect: 999					
-		});	 
-		$('#doroga').datepick({ 
-			renderer: 
-				$.extend({}, 
-				$.datepick.defaultRenderer, 
-					{picker: $.datepick.defaultRenderer.picker. 
-						replace(/\{link:clear\}/, '{button:clear}'). 
-						replace(/\{link:close\}/, '{button:close}')						
-					}
-				),
-			onClose: function(dates) {returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');},
-			defaultDate: sel_m,
-			showOtherMonths: true,
-			changeMonth: false,										
-			showTrigger: '#calImg',
-			multiSelect: 999					
-		});	
-	}
-	function getDates() {
-	}
-	
-	let json_val = [];
-	let oklad_ar = 0;
-	let calendar = 0;	
-	let ofis_ar = 0;
-	let razyezd_ar = 0;
-	let doroga_ar = 0;
-	let night_ar = 0;
-	let evening_ar = 0;
-	let premia_ar = 0;
-	let premia_pred_ar = 0;	
-	let prof_ar = 0;	
-	let eventType = 0;	
-    let chk = (document.getElementById("debug").checked)?1:0; 	
-/*	
-	let jsonData = {
-		"selIndex": 5,
-	    "oklad": 1000,
-		"calendar":[128, 151, 175, 168, 136, 168, 159, 184, 176, 159, 167, 176],
-		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"night":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],	
-		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
-		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	};
-*/
-	let jsonData = {
-		"selIndex": 5,
-	    "oklad": 1000,
-		"calendar":[128, 151, 175, 168, 136, 168, 159, 184, 176, 159, 167, 176],
-		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
-		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	};
-    const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
-	if (localStorage.getItem('passen') == null) {localStorage.setItem('passen', 0);}
-	let passChecked = (localStorage.getItem('passen') !== null) ? localStorage.getItem('passen') : 0;
-	//console.log("passChecked: " + passChecked);
-	if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 
-					 else {document.getElementById('all').hidden=false;document.getElementById('ps').hidden=true;}		
-	function deleteSessionData() {localStorage.clear();}
-	if (localStorage.getItem('jsonData') !== null) {console.log("Загружен local JSON");json_val = JSON.parse(localStorage.getItem("jsonData"));} 
-											  else {console.log("Загружен default JSON");json_val = JSON.parse(JSON.stringify(jsonData));}
-	loadJson(json_val.selIndex);		
-	
 	function calculate(mesto, daty, id_mess, attr_mess) { 
 		var All115 = 0;
 		var Poln115 = 0;
@@ -450,11 +356,190 @@
 		
 		return returnObject;
 	};
+	
+	function dtPick(sel_m) {
+		$('#ofis').datepick('destroy'); 
+		$('#doroga').datepick('destroy'); 
+		$('#razyezd').datepick('destroy'); 
+		$('#ofis').datepick({ 
+			onClose: function(dates) {returnOfis = calculate('ofis',ofis.value,'ofis_tool', 'ofis_mess');}, 	
+			renderer: 
+				$.extend({}, 
+				$.datepick.defaultRenderer, 
+					{picker: $.datepick.defaultRenderer.picker. 
+						replace(/\{link:clear\}/, '{button:clear}'). 
+						replace(/\{link:close\}/, '{button:close}')						
+					}
+				),
+			defaultDate: sel_m,
+			showOtherMonths: true,						
+			changeMonth: false,					
+			showTrigger: '#calImg',
+			multiSelect: 999					
+		});
+		$('#razyezd').datepick({ 
+			onClose: function(dates) {returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');}, 	
+			renderer: 
+				$.extend({}, 
+				$.datepick.defaultRenderer, 
+					{picker: $.datepick.defaultRenderer.picker. 
+						replace(/\{link:clear\}/, '{button:clear}'). 
+						replace(/\{link:close\}/, '{button:close}')						
+					}
+				),					
+			defaultDate: sel_m,
+			showOtherMonths: true,						
+			changeMonth: false,										
+			showTrigger: '#calImg',
+			multiSelect: 999					
+		});	 
+		$('#doroga').datepick({ 
+			renderer: 
+				$.extend({}, 
+				$.datepick.defaultRenderer, 
+					{picker: $.datepick.defaultRenderer.picker. 
+						replace(/\{link:clear\}/, '{button:clear}'). 
+						replace(/\{link:close\}/, '{button:close}')						
+					}
+				),
+			onClose: function(dates) {returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');},
+			defaultDate: sel_m,
+			showOtherMonths: true,
+			changeMonth: false,										
+			showTrigger: '#calImg',
+			multiSelect: 999					
+		});	
+	}
+	function getDates() {
+	}
+  	
+	let json_val = [];
+	let oklad_ar = 0;
+	let calendar = 0;	
+	let ofis_ar = 0;
+	let razyezd_ar = 0;
+	let doroga_ar = 0;
+	let night_ar = 0;
+	let evening_ar = 0;
+	let premia_ar = 0;
+	let premia_pred_ar = 0;	
+	let prof_ar = 0;	
+	let eventType = 0;	
+    let chk = (document.getElementById("debug").checked)?1:0; 	
+/*	
+	let jsonData = {
+		"selIndex": 5,
+	    "oklad": 1000,
+		"calendar":[128, 151, 175, 168, 136, 168, 159, 184, 176, 159, 167, 176],
+		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
+		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
+		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
+		"night":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],	
+		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	};
+*/
+
+	let jsonData = {
+		"selIndex": 5,
+	    "oklad": 1000,
+		"calendar":[128, 151, 175, 168, 136, 168, 159, 184, 176, 159, 167, 176],
+		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
+		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
+		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
+		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	};
+    const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
+	if (localStorage.getItem('passen') == null) {localStorage.setItem('passen', 0);}
+	function deleteSessionData() {localStorage.clear();}	
+	
+	let passChecked = (localStorage.getItem('passen') !== null) ? localStorage.getItem('passen') : 0;
+	//console.log("passChecked: " + passChecked);
+	if (passChecked == 0) {document.getElementById('all').hidden=true;document.getElementById('ps').hidden=false;} 
+					 else {document.getElementById('all').hidden=false;document.getElementById('ps').hidden=true;}		
+	
+
+	
+	if (localStorage.getItem('jsonData') !== null) {
+		console.log("Загружен local JSON");
+		json_val = JSON.parse(localStorage.getItem("jsonData"));
+	} else {
+		console.log("Загружен default JSON");
+		json_val = JSON.parse(JSON.stringify(jsonData));
+	}
+	console.log(json_val);		
+	//console.log(json_val.selIndex);	
+
+	function getZp() {
+		if (oklad.value === '' && oklad.value.length == 0) oklad.value = 0;
+		if (rab_chas.value === '' && rab_chas.value.length == 0) rab_chas.value = 0;
+		if (prof.value === '' && prof.value.length == 0) prof.value = 0;
+		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
+		
+		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
+		okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
+		//console.log("returnOfis: ");
+		//console.log(returnOfis);
+
+		//console.log("returnRaz: ");
+		//console.log(returnRaz);
+		
+		//console.log("returnDor: ");
+		//console.log(returnDor);
+		
+		let pr_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115) * 8;
+		let pr_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530) * 8;
+
+		let prazd_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115 + returnOfis.Prazd115 + returnOfis.Vyh115);
+		let prazd_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530 + returnOfis.Prazd1530 + returnOfis.Vyh1530);
+	    let prazd_vyh = prazd_vyh115 + prazd_vyh1530;
+		
+		let dvoynaya115 = parseInt(prazd_vyh115 * rub_v_сhas * 8 * 2);
+		let dvoynaya1530 = parseInt(prazd_vyh1530 * rub_v_сhas * 8 * 2);
+		dvoynaya.value = dvoynaya115 + dvoynaya1530;
+		//console.log("dvoynaya115 = " + dvoynaya115);
+		//console.log("dvoynaya1530 = " + dvoynaya1530);	
+		
+		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt(prazd_vyh115 * 8);
+		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
+		//console.log("summ115: " + summ115);
+		//console.log("summ1530: " + summ1530);
+		let nadbavka115 = summ115 * rub_v_сhas * 0.25;
+		let nadbavka1530 = summ1530 * rub_v_сhas * 0.25;
+		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
+		//console.log("nadbavka115 = " + nadbavka115);
+		//console.log("nadbavka1530 = " + nadbavka1530);		
+		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
+		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
+
+		//noch.value = parseInt(night.value * rub_v_сhas * 0.4 * 10) / 10;
+		//console.log("night = " + noch.value);
+
+		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
+		rk_only.value = parseInt(summaVseh * 0.15);
+		ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
+	
+		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87 * 1.15);
+		oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
+
+		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value); 
+		chist_bez.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value) - parseInt(premia_pred.value); 
+		
+		rvc.value = rub_v_сhas;
+		day_of.value = returnOfis.All115 + returnOfis.All1530;
+		day_raz.value = returnRaz.All115 + returnRaz.All1530;
+		day_vyh.value = prazd_vyh * 8;
+		day_dor.value = (returnDor.All115 + returnDor.All1530);
+		day_all.value = parseInt(day_of.value) + parseInt(day_raz.value) + parseInt(day_dor.value);
+	}
 
 	function loadJson(sel) {
 	    var sel_m = new Date ('2022-' + add_zero(sel+1) + '-01');
 		dtPick(sel_m);
-		select_m.selectedIndex = sel;	
+		select_m.selectedIndex = sel	
 		oklad_ar       = json_val.oklad;
 		calendar       = json_val.calendar;	
 		ofis_ar        = json_val.ofis;
@@ -491,69 +576,10 @@
 		oklad28_text.value = '28 ' + months[sel];
 		oklad13_text.value = '13 ' + months[selected2]; 
 		getZp();
-	}	
-	function getZp() {
-		if (oklad.value === '' && oklad.value.length == 0) oklad.value = 0;
-		if (rab_chas.value === '' && rab_chas.value.length == 0) rab_chas.value = 0;
-		if (prof.value === '' && prof.value.length == 0) prof.value = 0;
-		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
-		
-		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
-		okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
-		console.log("returnOfis: ");
-		console.log(returnOfis);
-
-		console.log("returnRaz: ");
-		console.log(returnRaz);
-		
-		console.log("returnDor: ");
-		console.log(returnDor);
-		
-		let pr_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115) * 8;
-		let pr_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530) * 8;
-
-		let prazd_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115 + returnOfis.Prazd115 + returnOfis.Vyh115);
-		let prazd_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530 + returnOfis.Prazd1530 + returnOfis.Vyh1530);
-	    	let prazd_vyh = prazd_vyh115 + prazd_vyh1530;
-		
-		let dvoynaya115 = parseInt(prazd_vyh115 * rub_v_сhas * 8 * 2);
-		let dvoynaya1530 = parseInt(prazd_vyh1530 * rub_v_сhas * 8 * 2);
-		dvoynaya.value = dvoynaya115 + dvoynaya1530;
-		console.log("dvoynaya115 = " + dvoynaya115);
-		console.log("dvoynaya1530 = " + dvoynaya1530);	
-		
-		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt(prazd_vyh115 * 8);
-		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
-		//console.log("summ115: " + summ115);
-		//console.log("summ1530: " + summ1530);
-		let nadbavka115 = summ115 * rub_v_сhas * 0.25;
-		let nadbavka1530 = summ1530 * rub_v_сhas * 0.25;
-		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
-		console.log("nadbavka115 = " + nadbavka115);
-		console.log("nadbavka1530 = " + nadbavka1530);		
-		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
-		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
-
-		//noch.value = parseInt(night.value * rub_v_сhas * 0.4 * 10) / 10;
-		//console.log("night = " + noch.value);
-
-		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
-		rk_only.value = parseInt(summaVseh * 0.15);
-		ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
-	
-		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87 * 1.15);
-		oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
-
-		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value); 
-		chist_bez.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value) - parseInt(premia_pred.value); 
-		
-		rvc.value = rub_v_сhas;
-		day_of.value = returnOfis.All115 + returnOfis.All1530;
-		day_raz.value = returnRaz.All115 + returnRaz.All1530;
-		day_vyh.value = prazd_vyh * 8;
-		day_dor.value = (returnDor.All115 + returnDor.All1530);
-		day_all.value = parseInt(day_of.value) + parseInt(day_raz.value) + parseInt(day_dor.value);
 	}
+	
+	loadJson(json_val.selIndex);		
+	
 	let password = '2021';
 	function getpass() {
 		if (document.getElementById("password").value == password) {
@@ -581,10 +607,12 @@
 	function add_zero(n){return n > 9 ? n: "0" + n; }	
 	function percent(number, perc) {let result = number * perc / 100;return result;}
 	function debugCheck() {document.getElementById("debugButtons").hidden = (document.getElementById('debug').checked) ? false : true;}	
+	
 	function save() {
 		//if (localStorage.getItem('passen') !== null) {localStorage.setItem("passen", 1);}
-		if (localStorage.getItem('jsonData') == null) localStorage.setItem("jsonData", JSON.stringify(jsonData));
-		json_val = JSON.parse(localStorage.getItem ("jsonData"));		
+		//if (localStorage.getItem('jsonData') == null) localStorage.setItem("jsonData", JSON.stringify(jsonData));
+		//json_val = JSON.parse(localStorage.getItem ("jsonData"));		
+		
 		let selIndex = document.getElementById("select_m").options.selectedIndex;	
 		json_val.calendar[selIndex] = parseInt(rab_chas.value);
 		json_val.selIndex = selIndex;	
@@ -599,6 +627,48 @@
 		localStorage.setItem ("jsonData", JSON.stringify(json_val));
 		console.log("Сохранено");
 	}
+
+	function createBlob(data) {
+	  return new Blob([data], { type: "text/plain" });
+	}
+
+	function saveAs(content, fileName) {
+	  const a = document.createElement("a");
+	  const isBlob = content.toString().indexOf("Blob") > -1;
+	  let url = content;
+	  if (isBlob) {
+		url = window.URL.createObjectURL(content);
+	  }
+	  a.href = url;
+	  a.download = fileName;
+	  a.click();
+	  if (isBlob) {
+		window.URL.revokeObjectURL(url);
+	  }
+	}
+
+	function SaveFile() {
+		if (localStorage.getItem('jsonData') == null) localStorage.setItem("jsonData", JSON.stringify(jsonData));
+    	let text_out = JSON.stringify(JSON.parse(localStorage.getItem ("jsonData")));	
+		console.log(text_out);		
+		const file = createBlob(text_out);
+		saveAs(file, "zp-options.txt");
+	}
+	
+	document.getElementById('fileToLoad')
+		.addEventListener('change', function() {
+		  
+		var fr=new FileReader();
+		fr.onload=function(){
+			let selIndex = document.getElementById("select_m").options.selectedIndex;	
+			json_val = JSON.parse(fr.result);
+			//console.log(json_val);
+			//console.log(json_val.selIndex);	
+			loadJson(json_val.selIndex);			
+		}
+		fr.readAsText(this.files[0]);
+	});
+  
 	document.getElementById("password").addEventListener("keyup", function(event) {event.preventDefault();if (event.keyCode === 13) {document.getElementById("enter_pass").click();}});	
 	document.addEventListener('touchstart', handleTouchStart, false);document.addEventListener('touchmove', handleTouchMove, false);document.addEventListener('touchend', handleTouchEnd, false);
 	let xDown = null;let yDown = null;let xDiff = null;let yDiff = null;let timeDown = null;let startEl = null;

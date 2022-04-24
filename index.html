@@ -488,14 +488,14 @@
 		
 		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
 		okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
-		//console.log("returnOfis: ");
-		//console.log(returnOfis);
+		console.log("returnOfis: ");
+		console.log(returnOfis);
 
-		//console.log("returnRaz: ");
-		//console.log(returnRaz);
+		console.log("returnRaz: ");
+		console.log(returnRaz);
 		
-		//console.log("returnDor: ");
-		//console.log(returnDor);
+		console.log("returnDor: ");
+		console.log(returnDor);
 		
 		let pr_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115) * 8;
 		let pr_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530) * 8;
@@ -507,18 +507,18 @@
 		let dvoynaya115 = parseInt(prazd_vyh115 * rub_v_сhas * 8 * 2);
 		let dvoynaya1530 = parseInt(prazd_vyh1530 * rub_v_сhas * 8 * 2);
 		dvoynaya.value = dvoynaya115 + dvoynaya1530;
-		//console.log("dvoynaya115 = " + dvoynaya115);
-		//console.log("dvoynaya1530 = " + dvoynaya1530);	
+		console.log("dvoynaya115 = " + dvoynaya115);
+		console.log("dvoynaya1530 = " + dvoynaya1530);	
 		
 		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt(prazd_vyh115 * 8);
 		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
-		//console.log("summ115: " + summ115);
-		//console.log("summ1530: " + summ1530);
+		console.log("summ115: " + summ115);
+		console.log("summ1530: " + summ1530);
 		let nadbavka115 = summ115 * rub_v_сhas * 0.25;
 		let nadbavka1530 = summ1530 * rub_v_сhas * 0.25;
 		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
-		//console.log("nadbavka115 = " + nadbavka115);
-		//console.log("nadbavka1530 = " + nadbavka1530);		
+		console.log("nadbavka115 = " + nadbavka115);
+		console.log("nadbavka1530 = " + nadbavka1530);		
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
 		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
 

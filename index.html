@@ -128,29 +128,31 @@
 					<input type="number" id="night" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 				</div>									
 <!-- ==== -->				
-				
 				<div class="btn-group btn-group-sm" style="width:100%;">
-					<div class="input-group-text justify-content-center" style="background:#007BFF;border-radius:4px 0 0 4px;padding:4px 6px;border:0;">
-						<input type="checkbox" id="debug" onclick="debugCheck()">
-					</div>
-					<input id="save" type="submit" class="btn btn-primary" value="Сохранить" onclick="save(); buttonPressed(this.id);" style="margin-left:1px;font-weight:bold;">	
-					<input id="getzp" type="submit" class="btn btn-primary" value="Расчет ЗП" onclick="getZp(); save(); buttonPressed(this.id);" style="margin-left:1px;width:25%;font-weight:bold;">	
-				</div>
-				<div class="btn-group btn-group-sm" style="width:100%;margin-top:1px;height:31px;">
-					<input id="saveToFile" type="submit" class="btn btn-primary" value="Экспорт" onclick="SaveFile(); buttonPressed(this.id);" style="margin-right:1px;width:270px;font-weight:bold;">	
-
-					<label class="custom-file" style="width:271px;border-radius:0 4px 4px 0;height:31px;background:#007BFF;text-align:center;font-weight:bold;color:white;">Импорт
-						<input type="file" accept=".txt" name="fileToLoad" id="fileToLoad" style="display:none;">
-						<div>
-							<span align="center" class="btn" id="butt" style="color:white"></span>
+					<div class="btn-group btn-group-sm w-100"> 
+						<div class="input-group-text justify-content-center" style="background:#007BFF;border-radius:4px 0 0 4px;padding:4px 6px;border:0;">
+							<input type="checkbox" id="debug" onclick="debugCheck()">
 						</div>
-					</label>
-
-
-					<!-- <input id="fileToLoad" type="file" class="btn btn-primary" value="Импорт" accept="text/plain" style="margin-left:1px;width:50%;font-weight:bold;">	 -->
-
+						<input id="save" type="submit" class="btn btn-primary" value="Сохранить" onclick="save(); buttonPressed(this.id);" style="margin-left:1px;font-weight:bold;">	
+					</div>
+					<div class="btn-group btn-group-sm w-100" style="margin-left:1px;">					
+						<input id="getzp" type="submit" class="btn btn-primary" value="Расчет ЗП" onclick="getZp(); save(); buttonPressed(this.id);" style="font-weight:bold;">	
+					</div>
+				</div>
+				<div class="btn-group btn-group-sm w-100" style="margin-top:1px;">
+					<div class="btn-group btn-group-sm w-100"> 					
+						<input id="saveToFile" type="submit" class="btn btn-primary" value="Экспорт" onclick="SaveFile(); buttonPressed(this.id);" style="font-weight:bold;">	
+					</div>	
+					<div class="btn-group btn-group-sm w-100" style="margin-left:1px;">							
+					
+						<label class="custom-file" style="width:100%;height:31px;border-radius:0 4px 4px 0;background:#007BFF;text-align:center;font-weight:bold;color:white;">Импорт
+							<input type="file" accept=".txt" name="fileToLoad" id="fileToLoad" style="display:none;">
+							<div>
+								<span align="center" class="btn" id="butt" style="color:white"></span>
+							</div>
+						</label>
+					</div>					
 				</div>			
-				
 				<div id="debugButtons" class="btn-group btn-group-sm" style="width:100%;margin-top:1px;" hidden>
 					<input id="clearlocal" type="submit" class="btn btn-primary" value="CLEAR" onclick="if (confirm('Удалить базу?')){clearlocalData();buttonPressed(this.id);}" style="width:30%;font-weight:bold;">
 					<input id="savelocal" type="submit" class="btn btn-primary" value="DEFAULT" onclick="if (confirm('Сбросить базу по умолчанию?')){savelocalData(); buttonPressed(this.id);}" style="margin-left:1px;width:35%;font-weight:bold;">

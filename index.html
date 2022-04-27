@@ -121,7 +121,7 @@
 					<input readonly type="text" id="doroga" class="form-control input-sm" style="text-align:center;height:38px;height:21px;font-size:14px;background:white;" placeholder="">
 				</div>
 <!-- ==== -->
-				<div class="input-group" hidden>
+				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночные, ч:</span>
 					</div>		
@@ -208,11 +208,11 @@
 					<input type="number" id="dvoynaya" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	
 <!-- ==== -->					
-				<div class="input-group" hidden>
+				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span id="noch_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночь (x0.4):</span>
 					</div>		
-					<input type="number" id="noch" class="form-control input-sm" style="text-align:center;background:yellow;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="noch" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
 				</div>	
 <!-- ==== -->
 				
@@ -434,7 +434,7 @@
 	let prof_ar = 0;	
 	let eventType = 0;	
     let chk = (document.getElementById("debug").checked)?1:0; 	
-/*	
+	
 	let jsonData = {
 		"selIndex": 5,
 	    "oklad": 1000,
@@ -447,8 +447,8 @@
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	};
-*/
 
+/*
 	let jsonData = {
 		"selIndex": 5,
 	    "oklad": 1000,
@@ -460,6 +460,7 @@
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	};
+	*/
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
 	if (localStorage.getItem('passen') == null) {localStorage.setItem('passen', 0);}
 	function deleteSessionData() {localStorage.clear();}	
@@ -523,8 +524,8 @@
 		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
 		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
 
-		//noch.value = parseInt(night.value * rub_v_сhas * 0.4 * 10) / 10;
-		//console.log("night = " + noch.value);
+		noch.value = parseInt(night.value * rub_v_сhas * 0.4 * 10) / 10;
+		console.log("night = " + noch.value);
 
 		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
 		rk_only.value = parseInt(summaVseh * 0.15);
@@ -553,8 +554,12 @@
 		ofis_ar        = json_val.ofis;
 		razyezd_ar     = json_val.razyezd;
 		doroga_ar      = json_val.doroga;
-		night_ar	   = json_val.night;
-		evening_ar	   = json_val.evening;
+		if (json_val.night == undefined) {
+			json_val.night = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		} else {
+			night_ar = json_val.night;
+		}
+		console.log("json_val.night= " + json_val.night);
 	
 		premia_ar      = json_val.premia_ar;
 		premia_pred_ar = json_val.premia_pred_ar;	
@@ -569,8 +574,7 @@
 		ofis.value     = ofis_ar[sel];
 		razyezd.value  = razyezd_ar[sel];
 		doroga.value   = doroga_ar[sel];
-		//night.value    = night_ar[sel];
-		
+		night.value    = night_ar[sel];
 		returnOfis = calculate('ofis',ofis.value,'ofis_tool', 'ofis_mess');
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
 		returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');
@@ -628,7 +632,7 @@
 		json_val.ofis[selIndex] = ofis.value;		
 		json_val.razyezd[selIndex] = razyezd.value;	
 		json_val.doroga[selIndex] = doroga.value;	
-		//json_val.night[selIndex] = night.value;	
+		json_val.night[selIndex] = night.value;	
 		json_val.premia_ar[selIndex] = parseInt(premia.value * 100) / 100;	
  		json_val.premia_pred_ar[selIndex] = parseInt(premia_tek.value);			
 		json_val.prof_ar[selIndex] = parseInt(prof.value * 100) / 100;
@@ -684,5 +688,3 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-
-

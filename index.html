@@ -280,8 +280,8 @@
 				<label class="col-sm-12 col-form-label m-0 p-0">ОКЛАД = РУБ.ЧАС * ФАКТ.ОТРАБ.ЧАСЫ</label>						
 				<label class="col-sm-12 col-form-label m-0 p-0">НАДБАВКА = РУБ.ЧАС * КОМАНДИРОВКА * 0.25</label>				
 				<label class="col-sm-12 col-form-label m-0 p-0">ДВОЙНАЯ = РУБ.ЧАС * КОЛ-ВО.ВЫХ.И.ПРАЗД.ЧАСОВ * 2</label>	
-	<label class="col-sm-12 col-form-label m-0 p-0">НОЧНЫЕ = РУБ.ЧАС * ОТРАБ.НОЧ.ЧАСЫ * 0.4</label>	
-				</div>				
+				<label class="col-sm-12 col-form-label m-0 p-0">НОЧНЫЕ = РУБ.ЧАС * НОЧ.ОТРАБ.ЧАСЫ * 0.4</label>	
+			</div>				
 			<footer class="footer fixed-bottom">
 				<div class="container">
 					<div style="font-weight:bold;font-size:9px;text-align:left;padding-right:3px;">mustafin.ik@mail.ru</div>	
@@ -490,7 +490,11 @@
 		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
 		
 		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
-		okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
+
+		let okl115 = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas);
+		let okl1530 = parseInt((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas);
+		okl.value = okl115 + okl1530;
+		//okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
 		console.log("returnOfis: ");
 		console.log(returnOfis);
 
@@ -517,24 +521,43 @@
 		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
 		console.log("summ115: " + summ115);
 		console.log("summ1530: " + summ1530);
-		let nadbavka115 = summ115 * rub_v_сhas * 0.25;
-		let nadbavka1530 = summ1530 * rub_v_сhas * 0.25;
+//		
+		let nadbavka115 = parseInt(summ115 * rub_v_сhas * 0.25);
+		let nadbavka1530 = parseInt(summ1530 * rub_v_сhas * 0.25);
 		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
 		console.log("nadbavka115 = " + nadbavka115);
 		console.log("nadbavka1530 = " + nadbavka1530);		
-		doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
+
+		let doroga_out115 = parseInt((returnDor.Vyh115 + returnDor.Prazd115) * rub_v_сhas * 8);
+		let doroga_out1530 = parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * rub_v_сhas * 8);
+		doroga_out.value = doroga_out115 + doroga_out1530;
+		
+		//doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
+		
 		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
 
 		noch.value = parseInt(night.value * rub_v_сhas * 0.4 * 10) / 10;
 		console.log("night = " + noch.value);
 
-		let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
-		rk_only.value = parseInt(summaVseh * 0.15);
-		ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
+		//let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
+		//rk_only.value = parseInt(summaVseh * 0.15);
+		//ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
+		//oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87 * 1.15);
+		//oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
 	
-		oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87 * 1.15);
-		oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
-
+		let summaVseh115 = parseInt(okl115) + parseInt(nadbavka115) + parseInt(dvoynaya115) + parseInt(doroga_out115); 
+		let summaVseh1530 = parseInt(okl1530) + parseInt(nadbavka1530) + parseInt(dvoynaya1530) + parseInt(doroga_out1530) + parseInt(premia_pred.value); 
+		//let summaVseh = summaVseh115 + summaVseh1530 + parseInt(premia_pred.value);
+		let rk_only115 = parseInt(summaVseh115 * 0.15);
+		let rk_only1530 = parseInt(summaVseh1530 * 0.15);
+		let ndfl_only115 = parseInt((summaVseh115 + parseInt(rk_only115)) * 0.13);
+		let ndfl_only1530 = parseInt((summaVseh1530 + parseInt(rk_only1530)) * 0.13);
+		rk_only.value = rk_only115 + rk_only1530;
+		ndfl_only.value = ndfl_only115 + ndfl_only1530; 				
+		oklad28.value = summaVseh115 + parseInt(rk_only115);
+		oklad13.value = summaVseh1530 + parseInt(rk_only1530) - parseInt(ndfl_only115) - parseInt(ndfl_only1530);
+		//oklad13.value = summaVseh + parseInt(rk_only1530) - parseInt(ndfl_only1530) - parseInt(summaVseh115);
+//
 		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value); 
 		chist_bez.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value) - parseInt(premia_pred.value); 
 		

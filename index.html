@@ -438,7 +438,8 @@
 	
 	let jsonData = {
 		"selIndex": 5,
-	    "oklad": 1000,
+	    "oklad": 1000,	
+		"okl":[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000],		
 		"calendar":[128, 151, 175, 168, 136, 168, 159, 184, 176, 159, 167, 176],
 		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
 		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
@@ -449,19 +450,6 @@
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	};
 
-/*
-	let jsonData = {
-		"selIndex": 5,
-	    "oklad": 1000,
-		"calendar":[128, 151, 175, 168, 136, 168, 159, 184, 176, 159, 167, 176],
-		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
-		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	};
-	*/
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
 	if (localStorage.getItem('passen') == null) {localStorage.setItem('passen', 0);}
 	function deleteSessionData() {localStorage.clear();}	
@@ -489,11 +477,11 @@
 		if (prof.value === '' && prof.value.length == 0) prof.value = 0;
 		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
 		
-		let rub_v_сhas = (oklad.value / rab_chas.value).toFixed(1);
+		let rub_v_сhas = (oklad.value / rab_chas.value).toFixed(3);
 		console.log(rub_v_сhas);
 		let okl115 = ((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas).toFixed(1);
 		let okl1530 = ((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas).toFixed(1);		
-		okl.value = (parseFloat(okl115) + parseFloat(okl1530)).toFixed(1);
+		okl.value = parseInt(parseFloat(okl115) + parseFloat(okl1530));
 		//okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
 		console.log("returnOfis: ");
 		console.log(returnOfis);
@@ -527,10 +515,6 @@
 		dvoynaya.value = (parseFloat(dvoynaya115) + parseFloat(dvoynaya1530)).toFixed(1);
 		console.log("dvoynaya115 = " + dvoynaya115);
 		console.log("dvoynaya1530 = " + dvoynaya1530);	
-		
-
-//		
-	
 
 		let doroga_out115 = parseFloat((returnDor.Vyh115 + returnDor.Prazd115) * rub_v_сhas * 8).toFixed(1);
 		let doroga_out1530 = parseFloat((returnDor.Vyh1530 + returnDor.Prazd1530) * rub_v_сhas * 8).toFixed(1);
@@ -543,29 +527,27 @@
 		noch.value = parseFloat(night.value * rub_v_сhas * 0.4).toFixed(1);
 		console.log("night = " + noch.value);
 
-		//let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
-		//rk_only.value = parseInt(summaVseh * 0.15);
-		//ndfl_only.value = parseInt((summaVseh + parseInt(rk_only.value)) * 0.13);		
-		//oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87 * 1.15);
-		//oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
-	
 		let summaVseh115 = (parseFloat(okl115) + parseFloat(dvoynaya115) + parseFloat(doroga_out115)).toFixed(1); //+ parseInt(nadbavka115);
 		let summaVseh1530 = (parseFloat(okl1530) + parseFloat(nadbavka1530) + parseFloat(dvoynaya1530) + parseFloat(doroga_out1530) + parseFloat(premia_pred.value) + parseFloat(nadbavka115)).toFixed(1);
 		//let summaVseh = summaVseh115 + summaVseh1530 + parseInt(premia_pred.value);
 		let rk_only115 = parseFloat(summaVseh115 * 0.15).toFixed(1);
 		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(1);
+		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(1);
+		
+		
 		let ndfl_only115 = ((parseFloat(summaVseh115) + parseFloat(rk_only115)) * 0.13).toFixed(1);
 		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * 0.13).toFixed(1);
-		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(1);
-		ndfl_only.value = (parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)).toFixed(1); 				
+		ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
+		
+		
 		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115)).toFixed(1);
-		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only115) - parseFloat(ndfl_only1530)).toFixed(1);
+		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseInt(ndfl_only.value)).toFixed(1);
 		//oklad13.value = summaVseh + parseInt(rk_only1530) - parseInt(ndfl_only1530) - parseInt(summaVseh115);
-//
+
 		chist_all.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value)).toFixed(1); 
 		chist_bez.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value)).toFixed(1); 
 		
-		rvc.value = parseFloat(rub_v_сhas).toFixed(1);
+		rvc.value = parseFloat(rub_v_сhas).toFixed(3);
 		day_of.value = returnOfis.All115 + returnOfis.All1530;
 		day_raz.value = returnRaz.All115 + returnRaz.All1530;
 		day_vyh.value = prazd_vyh * 8;
@@ -577,18 +559,13 @@
 	    var sel_m = new Date ('2022-' + add_zero(sel+1) + '-01');
 		dtPick(sel_m);
 		select_m.selectedIndex = sel	
-		oklad_ar       = json_val.oklad;
 		calendar       = json_val.calendar;	
 		ofis_ar        = json_val.ofis;
 		razyezd_ar     = json_val.razyezd;
 		doroga_ar      = json_val.doroga;
-		if (json_val.night == undefined) {
-			json_val.night = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-		} else {
-			night_ar = json_val.night;
-		}
-		console.log("json_val.night= " + json_val.night);
-	
+		if (json_val.night == undefined) {json_val.night = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar = json_val.night;}
+		if (json_val.okl == undefined) {json_val.okl = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {oklad_ar = json_val.okl;}	
+		
 		premia_ar      = json_val.premia_ar;
 		premia_pred_ar = json_val.premia_pred_ar;	
 		prof_ar        = json_val.prof_ar;		
@@ -598,7 +575,7 @@
 		selected       = (parseInt(selected) < 0) ? 11 : selected;
 		selected2      = (parseInt(selected2) > 11) ? 0 : selected2;
 		rab_chas.value = calendar[sel];
-		oklad.value    = oklad_ar;
+		oklad.value    = oklad_ar[sel];
 		ofis.value     = ofis_ar[sel];
 		razyezd.value  = razyezd_ar[sel];
 		doroga.value   = doroga_ar[sel];
@@ -617,7 +594,6 @@
 		oklad13_text.value = '13 ' + months[selected2]; 
 		getZp();
 	}
-	
 	loadJson(json_val.selIndex);		
 	
 	let password = '2021';
@@ -656,7 +632,7 @@
 		let selIndex = document.getElementById("select_m").options.selectedIndex;	
 		json_val.calendar[selIndex] = parseInt(rab_chas.value);
 		json_val.selIndex = selIndex;	
-		json_val.oklad = parseInt(oklad.value);
+		json_val.okl[selIndex] = parseInt(oklad.value);
 		json_val.ofis[selIndex] = ofis.value;		
 		json_val.razyezd[selIndex] = razyezd.value;	
 		json_val.doroga[selIndex] = doroga.value;	
@@ -716,5 +692,3 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-
-

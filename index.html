@@ -489,11 +489,11 @@
 		if (prof.value === '' && prof.value.length == 0) prof.value = 0;
 		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
 		
-		let rub_v_сhas =  parseInt(oklad.value / rab_chas.value * 1000) / 1000;
-
-		let okl115 = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas);
-		let okl1530 = parseInt((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas);
-		okl.value = okl115 + okl1530;
+		let rub_v_сhas = (oklad.value / rab_chas.value).toFixed(1);
+		console.log(rub_v_сhas);
+		let okl115 = ((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas).toFixed(1);
+		let okl1530 = ((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas).toFixed(1);		
+		okl.value = (parseFloat(okl115) + parseFloat(okl1530)).toFixed(1);
 		//okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
 		console.log("returnOfis: ");
 		console.log(returnOfis);
@@ -510,33 +510,37 @@
 		let prazd_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115 + returnOfis.Prazd115 + returnOfis.Vyh115);
 		let prazd_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530 + returnOfis.Prazd1530 + returnOfis.Vyh1530);
 	    let prazd_vyh = prazd_vyh115 + prazd_vyh1530;
-		
-		let dvoynaya115 = parseInt(prazd_vyh115 * rub_v_сhas * 8 * 2);
-		let dvoynaya1530 = parseInt(prazd_vyh1530 * rub_v_сhas * 8 * 2);
-		dvoynaya.value = dvoynaya115 + dvoynaya1530;
-		console.log("dvoynaya115 = " + dvoynaya115);
-		console.log("dvoynaya1530 = " + dvoynaya1530);	
-		
+
 		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt(prazd_vyh115 * 8);
 		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
 		console.log("summ115: " + summ115);
 		console.log("summ1530: " + summ1530);
-//		
-		let nadbavka115 = parseInt(summ115 * rub_v_сhas * 0.25);
-		let nadbavka1530 = parseInt(summ1530 * rub_v_сhas * 0.25);
-		nadbavka.value = parseInt(nadbavka115 + nadbavka1530);
+		
+		let nadbavka115 = (summ115 * rub_v_сhas * 0.25).toFixed(1);
+		let nadbavka1530 = (summ1530 * rub_v_сhas * 0.25).toFixed(1);
+		nadbavka.value = (parseFloat(nadbavka115) + parseFloat(nadbavka1530)).toFixed(1);
 		console.log("nadbavka115 = " + nadbavka115);
-		console.log("nadbavka1530 = " + nadbavka1530);		
+		console.log("nadbavka1530 = " + nadbavka1530);
+		
+		let dvoynaya115 = (prazd_vyh115 * rub_v_сhas * 8 * 2).toFixed(1);
+		let dvoynaya1530 = (prazd_vyh1530 * rub_v_сhas * 8 * 2).toFixed(1);
+		dvoynaya.value = (parseFloat(dvoynaya115) + parseFloat(dvoynaya1530)).toFixed(1);
+		console.log("dvoynaya115 = " + dvoynaya115);
+		console.log("dvoynaya1530 = " + dvoynaya1530);	
+		
 
-		let doroga_out115 = parseInt((returnDor.Vyh115 + returnDor.Prazd115) * rub_v_сhas * 8);
-		let doroga_out1530 = parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * rub_v_сhas * 8);
-		doroga_out.value = doroga_out115 + doroga_out1530;
+//		
+	
+
+		let doroga_out115 = parseFloat((returnDor.Vyh115 + returnDor.Prazd115) * rub_v_сhas * 8).toFixed(1);
+		let doroga_out1530 = parseFloat((returnDor.Vyh1530 + returnDor.Prazd1530) * rub_v_сhas * 8).toFixed(1);
+		doroga_out.value = (parseFloat(doroga_out115) + parseFloat(doroga_out1530)).toFixed(1);
 		
 		//doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
 		
-		premia_tek.value = parseInt((parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value)/2 + parseInt(doroga_out.value)) * premia.value);
+		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value)) * parseFloat(premia.value)).toFixed(1);
 
-		noch.value = parseInt(night.value * rub_v_сhas * 0.4 * 10) / 10;
+		noch.value = parseFloat(night.value * rub_v_сhas * 0.4).toFixed(1);
 		console.log("night = " + noch.value);
 
 		//let summaVseh = parseInt(okl.value) + parseInt(nadbavka.value) + parseInt(dvoynaya.value) + parseInt(doroga_out.value) + parseInt(premia_pred.value); 
@@ -545,23 +549,23 @@
 		//oklad28.value = parseInt((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas * 1.15 * 0.87 * 1.15);
 		//oklad13.value = summaVseh + parseInt(rk_only.value) - parseInt(ndfl_only.value) - parseInt(oklad28.value);
 	
-		let summaVseh115 = parseInt(okl115) + parseInt(nadbavka115) + parseInt(dvoynaya115) + parseInt(doroga_out115); 
-		let summaVseh1530 = parseInt(okl1530) + parseInt(nadbavka1530) + parseInt(dvoynaya1530) + parseInt(doroga_out1530) + parseInt(premia_pred.value); 
+		let summaVseh115 = (parseFloat(okl115) + parseFloat(dvoynaya115) + parseFloat(doroga_out115)).toFixed(1); //+ parseInt(nadbavka115);
+		let summaVseh1530 = (parseFloat(okl1530) + parseFloat(nadbavka1530) + parseFloat(dvoynaya1530) + parseFloat(doroga_out1530) + parseFloat(premia_pred.value) + parseFloat(nadbavka115)).toFixed(1);
 		//let summaVseh = summaVseh115 + summaVseh1530 + parseInt(premia_pred.value);
-		let rk_only115 = parseInt(summaVseh115 * 0.15);
-		let rk_only1530 = parseInt(summaVseh1530 * 0.15);
-		let ndfl_only115 = parseInt((summaVseh115 + parseInt(rk_only115)) * 0.13);
-		let ndfl_only1530 = parseInt((summaVseh1530 + parseInt(rk_only1530)) * 0.13);
-		rk_only.value = rk_only115 + rk_only1530;
-		ndfl_only.value = ndfl_only115 + ndfl_only1530; 				
-		oklad28.value = summaVseh115 + parseInt(rk_only115);
-		oklad13.value = summaVseh1530 + parseInt(rk_only1530) - parseInt(ndfl_only115) - parseInt(ndfl_only1530);
+		let rk_only115 = parseFloat(summaVseh115 * 0.15).toFixed(1);
+		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(1);
+		let ndfl_only115 = ((parseFloat(summaVseh115) + parseFloat(rk_only115)) * 0.13).toFixed(1);
+		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * 0.13).toFixed(1);
+		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(1);
+		ndfl_only.value = (parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)).toFixed(1); 				
+		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115)).toFixed(1);
+		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only115) - parseFloat(ndfl_only1530)).toFixed(1);
 		//oklad13.value = summaVseh + parseInt(rk_only1530) - parseInt(ndfl_only1530) - parseInt(summaVseh115);
 //
-		chist_all.value = parseInt(oklad28.value) + parseInt(oklad13.value); 
-		chist_bez.value = parseInt(oklad28.value) + parseInt(oklad13.value) + parseInt(premia_tek.value) - parseInt(premia_pred.value); 
+		chist_all.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value)).toFixed(1); 
+		chist_bez.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value)).toFixed(1); 
 		
-		rvc.value = rub_v_сhas;
+		rvc.value = parseFloat(rub_v_сhas).toFixed(1);
 		day_of.value = returnOfis.All115 + returnOfis.All1530;
 		day_raz.value = returnRaz.All115 + returnRaz.All1530;
 		day_vyh.value = prazd_vyh * 8;
@@ -657,9 +661,9 @@
 		json_val.razyezd[selIndex] = razyezd.value;	
 		json_val.doroga[selIndex] = doroga.value;	
 		json_val.night[selIndex] = night.value;	
-		json_val.premia_ar[selIndex] = parseInt(premia.value * 100) / 100;	
- 		json_val.premia_pred_ar[selIndex] = parseInt(premia_tek.value);			
-		json_val.prof_ar[selIndex] = parseInt(prof.value * 100) / 100;
+		json_val.premia_ar[selIndex] = parseFloat(premia.value).toFixed(1);	
+ 		json_val.premia_pred_ar[selIndex] = parseFloat(premia_tek.value).toFixed(1);			
+		json_val.prof_ar[selIndex] = parseFloat(prof.value).toFixed(1);
 		localStorage.setItem ("jsonData", JSON.stringify(json_val));
 		console.log("Сохранено");
 	}
@@ -712,3 +716,5 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
+
+

@@ -157,32 +157,45 @@
 					<input id="savelocal" type="submit" class="btn btn-primary" value="DEFAULT" onclick="if (confirm('Сбросить базу по умолчанию?')){savelocalData(); buttonPressed(this.id);}" style="margin-left:1px;width:35%;font-weight:bold;">
 					<input id="getlocal" type="submit" class="btn btn-primary" value="OPEN" onclick="getlocalData(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
 				</div>	
+
+				
+				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
+					<span class="input-group-text" style="border-radius: 4px 0 0 0; width:100%;font-size:14px;font-weight:bold;height:21px;"></span>
+					<span class="input-group-text" style="border-radius: 0; width:100%;font-size:14px;font-weight:bold;height:21px;">Отраб. дней:</span>
+					<span class="input-group-text" style="border-radius: 0 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:21px;">Отраб. часов:</span>
+				</div>
+				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
+					<div class="input-group">
+						<input type="text" class="form-control input-sm" value="ВСЕГО" style="text-align:center;padding:0;border-radius:0;height:21px;font-size:12px;font-weight:bold;" readonly>
+						<input type="text" class="form-control input-sm" value="ОФ" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>
+						<input type="text" class="form-control input-sm" value="РАЗ" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
+						<input type="text" class="form-control input-sm" value="ВЫХ" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
+						<input type="text" class="form-control input-sm" value="ДОР" style="text-align:center;padding:0;border-radius:0 4px 0 0;height:21px;font-size:12px;font-weight:bold;" readonly>				
+					</div>	
+					<div class="input-group">
+						<input type="number" id="day_all" class="form-control input-sm" style="text-align:center;border-radius:0;background:white;padding:0;height:21px;font-size:12px;" readonly>
+						<input type="number" id="day_of" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:12px;" readonly>
+						<input type="number" id="day_raz" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:12px;" readonly>					
+						<input type="number" id="day_vyh" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:12px;" readonly>					
+						<input type="number" id="day_dor" class="form-control input-sm" style="text-align:center;border-radius:0;background:white;padding:0;height:21px;font-size:12px;" readonly>					
+					</div>	
+					<div class="input-group">
+						<input type="number" id="hour_all" class="form-control input-sm" style="text-align:center;border-radius:0;background:white;padding:0;height:21px;font-size:12px;" readonly>
+						<input type="number" id="hour_of" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:12px;" readonly>
+						<input type="number" id="hour_raz" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:12px;" readonly>					
+						<input type="number" id="hour_vyh" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:12px;" readonly>					
+						<input type="number" id="hour_dor" class="form-control input-sm" style="text-align:center;border-radius:0 0 4px 0;background:white;padding:0;height:21px;font-size:12px;" readonly>					
+					</div>			
+				</div>	
+				
+				
+				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / час:</span>
 					</div>		
 					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" readonly>
-				</div>			
-				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
-					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Отраб. часов:</span>
-				</div>
-				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
-					<div class="input-group">
-						<input type="text" class="form-control input-sm border-left-0 border-bottom-0" value="ВСЕГО" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>
-						<input type="text" class="form-control input-sm border-bottom-0" value="ОФ" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>
-						<input type="text" class="form-control input-sm border-bottom-0" value="РАЗ" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
-						<input type="text" class="form-control input-sm border-bottom-0" value="ВЫХ" style="text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
-						<input type="text" class="form-control input-sm border-bottom-0" value="ДОР" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:12px;font-weight:bold;" readonly>				
-					</div>	
-					<div class="input-group">
-						<input type="number" id="day_all" class="text-center form-control input-sm border-left-0 border-top-0" style="border-radius:0;background:white;padding:0;height:21px;font-size:14px;" readonly>
-						<input type="number" id="day_of" class="text-center form-control input-sm border-top-0" style="background:white;padding:0;height:21px;font-size:14px;" readonly>
-						<input type="number" id="day_raz" class="text-center form-control input-sm border-top-0" style="background:white;padding:0;height:21px;font-size:14px;" readonly>					
-						<input type="number" id="day_vyh" class="text-center form-control input-sm border-top-0" style="background:white;padding:0;height:21px;font-size:14px;" readonly>					
-						<input type="number" id="day_dor" class="text-center form-control input-sm border-top-0" style="border-radius:0 0 4px 0;background:white;padding:0;height:21px;font-size:14px;" readonly>					
-					</div>			
-				</div>	
-
+				</div>					
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Оклад:</span>
@@ -548,11 +561,18 @@
 		chist_bez.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value)).toFixed(1); 
 		
 		rvc.value = parseFloat(rub_v_сhas).toFixed(3);
-		day_of.value = returnOfis.All115 + returnOfis.All1530;
-		day_raz.value = returnRaz.All115 + returnRaz.All1530;
-		day_vyh.value = prazd_vyh * 8;
-		day_dor.value = (returnDor.All115 + returnDor.All1530);
+
+		day_of.value = returnOfis.Poln115 + returnOfis.Poln1530 + returnOfis.Sokr115 + returnOfis.Sokr1530;
+		day_raz.value = returnRaz.Poln115 + returnRaz.Poln1530 + returnRaz.Sokr115 + returnRaz.Sokr1530;
+		day_vyh.value = prazd_vyh;
+		day_dor.value = returnDor.Poln115 + returnDor.Poln1530 + returnDor.Sokr115 + returnDor.Sokr1530;
 		day_all.value = parseInt(day_of.value) + parseInt(day_raz.value) + parseInt(day_dor.value);
+		
+		hour_of.value = returnOfis.All115 + returnOfis.All1530;
+		hour_raz.value = returnRaz.All115 + returnRaz.All1530;
+		hour_vyh.value = prazd_vyh * 8;
+		hour_dor.value = (returnDor.All115 + returnDor.All1530);
+		hour_all.value = parseInt(hour_of.value) + parseInt(hour_raz.value) + parseInt(hour_dor.value);
 	}
 
 	function loadJson(sel) {

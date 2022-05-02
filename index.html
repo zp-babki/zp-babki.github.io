@@ -123,9 +123,11 @@
 <!-- ==== -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночные, ч:</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночные (до/после 15), ч:</span>
 					</div>		
-					<input type="number" id="night" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+					<input type="number" id="night115" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+					<input type="number" id="night1530" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+
 				</div>									
 <!-- ==== -->				
 				<div class="btn-group btn-group-sm" style="width:100%;">
@@ -441,7 +443,9 @@
 	let ofis_ar = 0;
 	let razyezd_ar = 0;
 	let doroga_ar = 0;
-	let night_ar = 0;
+	let night_ar115 = 0;
+	let night_ar1530 = 0;
+	
 	let evening_ar = 0;
 	let premia_ar = 0;
 	let premia_pred_ar = 0;	
@@ -457,7 +461,8 @@
 		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
 		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
 		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
-		"night":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],	
+		"night115":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],	
+		"night1530":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],			
 		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -481,8 +486,7 @@
 		console.log("Загружен default JSON");
 		json_val = JSON.parse(JSON.stringify(jsonData));
 	}
-	console.log(json_val);		
-	//console.log(json_val.selIndex);	
+	//console.log(json_val);		
 
 	function getZp() {
 		if (oklad.value === '' && oklad.value.length == 0) oklad.value = 0;
@@ -491,7 +495,6 @@
 		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
 		
 		let rub_v_сhas = (oklad.value / rab_chas.value).toFixed(3);
-		console.log(rub_v_сhas);
 		let okl115 = ((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas).toFixed(1);
 		let okl1530 = ((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas).toFixed(1);		
 		okl.value = parseInt(parseFloat(okl115) + parseFloat(okl1530));
@@ -536,12 +539,15 @@
 		//doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
 		
 		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value)) * parseFloat(premia.value)).toFixed(1);
-
-		noch.value = parseFloat(night.value * rub_v_сhas * 0.4).toFixed(1);
-		console.log("night = " + noch.value);
-
-		let summaVseh115 = (parseFloat(okl115) + parseFloat(dvoynaya115) + parseFloat(doroga_out115)).toFixed(1); //+ parseInt(nadbavka115);
-		let summaVseh1530 = (parseFloat(okl1530) + parseFloat(nadbavka1530) + parseFloat(dvoynaya1530) + parseFloat(doroga_out1530) + parseFloat(premia_pred.value) + parseFloat(nadbavka115)).toFixed(1);
+        let noch115 =  parseFloat(night115.value * rub_v_сhas * 0.4).toFixed(2);
+        let noch1530 =  parseFloat(night1530.value * rub_v_сhas * 0.4).toFixed(2);
+		
+		noch.value = parseFloat(noch115 + noch1530).toFixed(2);
+		console.log("night115 = " + noch115);
+		console.log("night1530 = " + noch1530);
+		
+		let summaVseh115 = (parseFloat(okl115) + parseFloat(dvoynaya115) + parseFloat(doroga_out115) + parseFloat(noch115)).toFixed(1); //+ parseInt(nadbavka115);
+		let summaVseh1530 = (parseFloat(okl1530) + parseFloat(nadbavka1530) + parseFloat(dvoynaya1530) + parseFloat(doroga_out1530) + parseFloat(noch1530) + parseFloat(premia_pred.value) + parseFloat(nadbavka115)).toFixed(1);
 		//let summaVseh = summaVseh115 + summaVseh1530 + parseInt(premia_pred.value);
 		let rk_only115 = parseFloat(summaVseh115 * 0.15).toFixed(1);
 		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(1);
@@ -583,8 +589,9 @@
 		ofis_ar        = json_val.ofis;
 		razyezd_ar     = json_val.razyezd;
 		doroga_ar      = json_val.doroga;
-		if (json_val.night == undefined) {json_val.night = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar = json_val.night;}
-		if (json_val.okl == undefined) {json_val.okl = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {oklad_ar = json_val.okl;}	
+		if (json_val.night115 == undefined) {json_val.night115 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar115 = json_val.night115;}
+		if (json_val.night1530 == undefined) {json_val.night1530 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar1530 = json_val.night1530;}
+		if (json_val.okl == undefined) {json_val.okl = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];} else {oklad_ar = json_val.okl;}	
 		
 		premia_ar      = json_val.premia_ar;
 		premia_pred_ar = json_val.premia_pred_ar;	
@@ -599,7 +606,8 @@
 		ofis.value     = ofis_ar[sel];
 		razyezd.value  = razyezd_ar[sel];
 		doroga.value   = doroga_ar[sel];
-		night.value    = night_ar[sel];
+		night115.value    = night_ar115[sel];
+		night1530.value    = night_ar1530[sel];
 		returnOfis = calculate('ofis',ofis.value,'ofis_tool', 'ofis_mess');
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
 		returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');
@@ -656,7 +664,8 @@
 		json_val.ofis[selIndex] = ofis.value;		
 		json_val.razyezd[selIndex] = razyezd.value;	
 		json_val.doroga[selIndex] = doroga.value;	
-		json_val.night[selIndex] = night.value;	
+		json_val.night115[selIndex] = night115.value;	
+		json_val.night1530[selIndex] = night1530.value;	
 		json_val.premia_ar[selIndex] = parseFloat(premia.value).toFixed(1);	
  		json_val.premia_pred_ar[selIndex] = parseFloat(premia_tek.value).toFixed(1);			
 		json_val.prof_ar[selIndex] = parseFloat(prof.value).toFixed(1);

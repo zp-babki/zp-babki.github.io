@@ -543,7 +543,7 @@
 	
         let n115 = parseFloat(night115.value * rub_v_сhas * 0.4).toFixed(2);
         let n1530 = parseFloat(night1530.value * rub_v_сhas * 0.4).toFixed(2);
-		noch.value = parseFloat(n115 + n1530).toFixed(2);
+		noch.value = (parseFloat(n115) + parseFloat(n1530)).toFixed(2);
 		console.log("night115 = " + n115);
 		console.log("night1530 = " + n1530);
 		

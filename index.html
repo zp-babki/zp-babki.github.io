@@ -509,15 +509,12 @@
 		console.log("returnDor: ");
 		console.log(returnDor);
 		
-		let pr_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115) * 8;
-		let pr_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530) * 8;
-
 		let prazd_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115 + returnOfis.Prazd115 + returnOfis.Vyh115);
 		let prazd_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530 + returnOfis.Prazd1530 + returnOfis.Vyh1530);
 	    let prazd_vyh = prazd_vyh115 + prazd_vyh1530;
 
-		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt(prazd_vyh115 * 8);
-		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt(prazd_vyh1530 * 8);
+		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt((prazd_vyh115 - returnOfis.Prazd115 - returnOfis.Vyh115) * 8);
+		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt((prazd_vyh1530 - returnOfis.Prazd1530 - returnOfis.Vyh1530) * 8);
 		console.log("summ115: " + summ115);
 		console.log("summ1530: " + summ1530);
 		

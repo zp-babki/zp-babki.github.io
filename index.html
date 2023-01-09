@@ -643,10 +643,10 @@
 	function createpass() {localStorage.setItem('passen', 0);}
 	function buttonPressed(but) {document.getElementById(but).setAttribute("class", "btn btn-success");setTimeout(() => {document.getElementById(but).setAttribute("class", "btn btn-primary");}, 800);}	
 	function clearlocalData() {
-		//localStorage.clear();
-		//console.log("LocalStorage удалено");
-		localStorage.removeItem("calendar");
-		console.log("Норма часы удалены");		
+		localStorage.clear();
+		console.log("LocalStorage удалено");
+		//localStorage.removeItem("calendar");
+		//console.log("Норма часы удалены");		
 	}		
 	function savelocalData() {localStorage.setItem('passen', 0);localStorage.setItem("jsonData", JSON.stringify(jsonData));console.log("LocalStorage сохранено");}	
 	function getlocalData() {let base="";for(let i=0; i<localStorage.length; i++) {let key = localStorage.key(i);base += `${key}: ${localStorage.getItem(key)}`;}console.log(base);console.log("LocalStorage загружено");alert(base);}

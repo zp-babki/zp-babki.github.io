@@ -553,11 +553,11 @@
 		
 		let ndfl_only115 = ((parseFloat(summaVseh115) + parseFloat(rk_only115)) * 0.13).toFixed(1);
 		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * 0.13).toFixed(1);
-		ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
+		//ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
 		
 		
-		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115)).toFixed(1);
-		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseInt(ndfl_only.value)).toFixed(1);
+		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(1);
+		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only1530)).toFixed(1);
 		//oklad13.value = summaVseh + parseInt(rk_only1530) - parseInt(ndfl_only1530) - parseInt(summaVseh115);
 
 		chist_all.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value)).toFixed(1); 

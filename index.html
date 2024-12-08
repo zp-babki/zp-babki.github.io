@@ -44,8 +44,7 @@
 </head>
 <body>
 
-<script>
-</script>	
+
 	<div class="container">
 		<div class="col-md-6 col-lg-4 m-0 p-0 mx-auto">
 			<div id="ps" class="row" hidden>	
@@ -95,7 +94,13 @@
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия (Коэф Кр.):</span>
 					</div>		
 					<input type="number" id="premia" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="">
-				</div>					
+				</div>		
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НДФЛ (%):</span>
+					</div>		
+					<input type="number" id="ndfl_perc" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="13">
+				</div>
 				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Профсоюз %:</span>
@@ -198,6 +203,12 @@
 					</div>		
 					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" readonly>
 				</div>					
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / сутки:</span>
+					</div>		
+					<input type="number" id="rvs" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" readonly>
+				</div>	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Оклад:</span>
@@ -446,19 +457,20 @@
 	let doroga_ar = 0;
 	let night_ar115 = 0;
 	let night_ar1530 = 0;
-	
+	let ndflPercent = 0;
 	let evening_ar = 0;
 	let premia_ar = 0;
 	let premia_pred_ar = 0;	
 	let prof_ar = 0;	
 	let eventType = 0;	
     let chk = (document.getElementById("debug").checked)?1:0; 	
-	
+	let currentYear;
 	let jsonData = {
 		"selIndex": 5,
 	    "oklad": 1000,	
 		"okl":[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000],		
 		"calendar":[136, 143, 175, 151, 160, 159, 168, 184, 168, 167, 167, 168],
+		"ndfl":[13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13],
 		"ofis":["", "", "", "", "", "", "", "", "", "", "", ""],
 		"razyezd":["", "", "", "", "", "", "", "", "", "", "", ""],
 		"doroga":["", "", "", "", "", "", "", "", "", "", "", ""],
@@ -469,6 +481,8 @@
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	};
 
+	currentYear = new Date().getFullYear(); 
+	
     const months = ['янв', 'февр', 'март', 'апр', 'мая', 'июня', 'июля', 'авг', 'сент', 'окт', 'нояб', 'дек'];	
 	if (localStorage.getItem('passen') == null) {localStorage.setItem('passen', 0);}
 	function deleteSessionData() {localStorage.clear();}	
@@ -551,9 +565,9 @@
 		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(1);
 		
 		
-		let ndfl_only115 = ((parseFloat(summaVseh115) + parseFloat(rk_only115)) * 0.13).toFixed(1);
-		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * 0.13).toFixed(1);
-		//ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
+		let ndfl_only115 = ((parseFloat(summaVseh115) + parseFloat(rk_only115)) * ndfl_perc.value / 100).toFixed(1);
+		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * ndfl_perc.value / 100).toFixed(1);
+		ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
 		
 		
 		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(1);
@@ -564,7 +578,8 @@
 		chist_bez.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value)).toFixed(1); 
 		
 		rvc.value = parseFloat(rub_v_сhas).toFixed(3);
-
+		rvs.value = parseFloat(rub_v_сhas * 8).toFixed(1);
+		
 		day_of.value = returnOfis.Poln115 + returnOfis.Poln1530 + returnOfis.Sokr115 + returnOfis.Sokr1530;
 		day_raz.value = returnRaz.Poln115 + returnRaz.Poln1530 + returnRaz.Sokr115 + returnRaz.Sokr1530;
 		day_vyh.value = prazd_vyh;
@@ -579,7 +594,7 @@
 	}
 
 	function loadJson(sel) {
-	    var sel_m = new Date ('2024-' + add_zero(sel+1) + '-01');
+	    var sel_m = new Date (currentYear + '-' + add_zero(sel+1) + '-01');
 		dtPick(sel_m);
 		select_m.selectedIndex = sel	
 		calendar       = json_val.calendar;	
@@ -593,12 +608,14 @@
 		premia_ar      = json_val.premia_ar;
 		premia_pred_ar = json_val.premia_pred_ar;	
 		prof_ar        = json_val.prof_ar;		
+		ndflPercent    = json_val.ndfl;
 	    eventType      = sel;
 		let selected   = sel - 1;
 		let selected2  = sel + 1;
 		selected       = (parseInt(selected) < 0) ? 11 : selected;
 		selected2      = (parseInt(selected2) > 11) ? 0 : selected2;
 		rab_chas.value = calendar[sel];
+		ndfl_perc.value = ndflPercent[sel];
 		oklad.value    = oklad_ar[sel];
 		ofis.value     = ofis_ar[sel];
 		razyezd.value  = razyezd_ar[sel];
@@ -663,6 +680,7 @@
 		json_val.calendar[selIndex] = parseInt(rab_chas.value);
 		json_val.selIndex = selIndex;	
 		json_val.okl[selIndex] = parseInt(oklad.value);
+		json_val.ndfl[selIndex] = parseInt(ndfl_perc.value);
 		json_val.ofis[selIndex] = ofis.value;		
 		json_val.razyezd[selIndex] = razyezd.value;	
 		json_val.doroga[selIndex] = doroga.value;	

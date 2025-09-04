@@ -549,8 +549,6 @@
 		doroga_out.value = (parseFloat(doroga_out115) + parseFloat(doroga_out1530)).toFixed(1);
 		
 		//doroga_out.value = parseInt((returnDor.Vyh115 + returnDor.Vyh1530 + returnDor.Prazd115 + returnDor.Prazd1530) * rub_v_сhas * 8);
-		
-		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value)) * parseFloat(premia.value)).toFixed(1);
 	
         let n115 = parseFloat(night115.value * rub_v_сhas * 0.4).toFixed(2);
         let n1530 = parseFloat(night1530.value * rub_v_сhas * 0.4).toFixed(2);
@@ -560,15 +558,23 @@
 		
 		let summaVseh115 = (parseFloat(okl115) + parseFloat(dvoynaya115) + parseFloat(doroga_out115) + parseFloat(n115)).toFixed(1); //+ parseInt(nadbavka115);
 		let summaVseh1530 = (parseFloat(okl1530) + parseFloat(nadbavka1530) + parseFloat(dvoynaya1530) + parseFloat(doroga_out1530) + parseFloat(n1530) + parseFloat(premia_pred.value) + parseFloat(nadbavka115)).toFixed(1);
+		
+		//let summaVseh1530 = (parseFloat(okl1530) + parseFloat(nadbavka1530) + parseFloat(dvoynaya1530) + parseFloat(doroga_out1530) + parseFloat(n1530)).toFixed(1);
+		//+ parseFloat(premia_pred.value) + parseFloat(nadbavka115)
+		
 		let rk_only115 = parseFloat(summaVseh115 * 0.15).toFixed(1);
 		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(1);
 		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(1);
 		
+		let rk_only115_forPrem = parseFloat((summaVseh115 - parseFloat(dvoynaya115) + parseFloat(dvoynaya115/2)) * 0.15).toFixed(1);
+		let rk_only1530_forPrem = parseFloat((summaVseh1530 - parseFloat(dvoynaya1530) + parseFloat(dvoynaya1530/2))* 0.15).toFixed(1);
+		let rk_only_forPrem = (parseFloat(rk_only115_forPrem) + parseFloat(rk_only1530_forPrem)).toFixed(1);
 		
 		let ndfl_only115 = ((parseFloat(summaVseh115) + parseFloat(rk_only115)) * ndfl_perc.value / 100).toFixed(1);
 		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * ndfl_perc.value / 100).toFixed(1);
 		ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
 		
+		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value) + parseFloat(rk_only_forPrem)) * parseFloat(premia.value) - ndfl_only115 - ndfl_only1530).toFixed(1);
 		
 		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(1);
 		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only1530)).toFixed(1);
@@ -741,3 +747,4 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
+

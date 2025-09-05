@@ -567,6 +567,7 @@
 		
 		let rk_only115 = parseFloat(summaVseh115 * 0.15).toFixed(1);
 		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(1);
+		
 		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(1);
 		
 		let rk_only115_forPrem = (parseFloat(summaVseh115_forPrem) * 0.15).toFixed(1);
@@ -577,7 +578,8 @@
 		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * ndfl_perc.value / 100).toFixed(1);
 		ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
 		
-		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value) + parseFloat(rk_only_forPrem)) * parseFloat(premia.value) - parseFloat(ndfl_only1530)).toFixed(1);
+//		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value) + parseFloat(rk_only_forPrem)) * parseFloat(premia.value) - parseFloat(ndfl_only1530)).toFixed(1);
+		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value) + parseFloat(rk_only.value)) * parseFloat(premia.value) - parseFloat(ndfl_only1530)).toFixed(1);
 		console.log("premia_tek = " + premia_tek.value);	
 		
 		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(1);
@@ -751,6 +753,7 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
+
 
 
 

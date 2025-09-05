@@ -569,8 +569,8 @@
 		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(1);
 		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(1);
 		
-		let rk_only115_forPrem = parseFloat(summaVseh115_forPrem) * 0.15).toFixed(1);
-		let rk_only1530_forPrem = parseFloat(summaVseh1530_forPrem)* 0.15).toFixed(1);
+		let rk_only115_forPrem = (parseFloat(summaVseh115_forPrem) * 0.15).toFixed(1);
+		let rk_only1530_forPrem = (parseFloat(summaVseh1530_forPrem)* 0.15).toFixed(1);
 		let rk_only_forPrem = (parseFloat(rk_only115_forPrem) + parseFloat(rk_only1530_forPrem)).toFixed(1);
 		
 		let ndfl_only115 = ((parseFloat(summaVseh115) + parseFloat(rk_only115)) * ndfl_perc.value / 100).toFixed(1);
@@ -750,5 +750,6 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
+
 
 

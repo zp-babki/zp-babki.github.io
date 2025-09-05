@@ -577,7 +577,7 @@
 		let ndfl_only1530 = ((parseFloat(summaVseh1530) + parseFloat(rk_only1530)) * ndfl_perc.value / 100).toFixed(1);
 		ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
 		
-		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value) + parseFloat(rk_only_forPrem)) * parseFloat(premia.value) - parseFloat(ndfl_only.value)).toFixed(1);
+		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value) + parseFloat(rk_only_forPrem)) * parseFloat(premia.value) - parseFloat(ndfl_only1530)).toFixed(1);
 		
 		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(1);
 		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only1530)).toFixed(1);
@@ -750,6 +750,7 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
+
 
 
 

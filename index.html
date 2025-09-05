@@ -540,7 +540,7 @@
 		
 		let dvoynaya115 = (prazd_vyh115 * rub_v_сhas * 8 * 2).toFixed(1);
 		let dvoynaya1530 = (prazd_vyh1530 * rub_v_сhas * 8 * 2).toFixed(1);
-		dvoynaya.value = (parseFloat(dvoynaya115) + parseFloat(dvoynaya1530)).toFixed(1) + " (" + (parseFloat(dvoynaya115/2) + parseFloat(dvoynaya1530/2)).toFixed(1) + ")";
+		dvoynaya.value = (parseFloat(dvoynaya115) + parseFloat(dvoynaya1530)).toFixed(1) & " (" & (parseFloat(dvoynaya115/2) + parseFloat(dvoynaya1530/2)).toFixed(1) & ")";
 		console.log("dvoynaya115 = " + dvoynaya115);
 		console.log("dvoynaya1530 = " + dvoynaya1530);	
 
@@ -750,6 +750,7 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
+
 
 
 

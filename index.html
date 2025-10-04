@@ -590,7 +590,7 @@
 		console.log("premia_tek = " + premia_tek.value);	
 		
 		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(2);
-		oklad13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only1530)).toFixed(2);
+		oklad13.value = parseFloat(parseFloat(premia_pred.value) + parseFloat(rk_premia_pred.value) + parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value) + parseFloat(doroga_out.value) + parseFloat(rk_only.value) - parseFloat(ndfl_only.value)).toFixed(2);
 
 		chist_all.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value)).toFixed(2); 
 		chist_bez.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value) - parseFloat(rk_premia_pred.value)).toFixed(2); 
@@ -765,6 +765,7 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
+
 
 
 

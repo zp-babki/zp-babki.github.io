@@ -11,7 +11,6 @@
 		[ofis_mess]::after {white-space:pre;content: attr(ofis_mess);width: 110px;font-size: 10px;font-weight: bold;position: absolute; border-radius: 4px;	background: rgba(0,0,0,0.6);color: white;padding: 0.5em;pointer-events: none;opacity: 0;}
 		[raz_mess]::after {white-space:pre;content: attr(raz_mess);width: 110px;font-size: 10px;font-weight: bold;position: absolute; border-radius: 4px;background: rgba(0,0,0,0.6);color: white;padding: 0.5em;pointer-events: none;opacity: 0;}
 		[dor_mess]::after {white-space:pre;content: attr(dor_mess);width: 110px;font-size: 10px;font-weight: bold;position: absolute; border-radius: 4px;background: rgba(0,0,0,0.6);color: white;padding: 0.5em;pointer-events: none;opacity: 0;}
- 
 		.datepick {background-color: #fff;color: #000;border: 1px solid #444;border-radius: 0.25em;-moz-border-radius: 0.25em;-webkit-border-radius: 0.25em;font-family: Arial,Helvetica,Sans-serif;font-size: 90%;}.datepick-rtl {direction: rtl;}.datepick-popup {z-index: 1000;}.datepick-disable {position: absolute;z-index: 100;background-color: white;opacity: 0.5;filter: alpha(opacity=50);}.datepick a {color: #fff;text-decoration: none;}.datepick a.datepick-disabled {color: #888;cursor: auto;}.datepick button {margin: 0.25em;padding: 0.125em 0em;background-color: #fcc;border: none;border-radius: 0.25em;-moz-border-radius: 0.25em;-webkit-border-radius: 0.25em;font-weight: bold;}.datepick-nav, .datepick-ctrl {float: left;width: 100%;background-color: #000;color: #fff;font-size: 90%;font-weight: bold;}.datepick-ctrl {background-color: #600;}.datepick-cmd {width: 30%;}.datepick-cmd:hover {background-color: #777;}.datepick-ctrl .datepick-cmd:hover {background-color: #f08080;}.datepick-cmd-prevJump, .datepick-cmd-nextJump {width: 8%;}a.datepick-cmd {height: 1.5em;}button.datepick-cmd {text-align: center;}.datepick-cmd-prev, .datepick-cmd-prevJump, .datepick-cmd-clear {float: left;padding-left: 2%;}.datepick-cmd-current, .datepick-cmd-today {float: left;width: 35%;text-align: center;}.datepick-cmd-next, .datepick-cmd-nextJump, .datepick-cmd-close {float: right;padding-right: 2%;text-align: right;}.datepick-rtl .datepick-cmd-prev, .datepick-rtl .datepick-cmd-prevJump, .datepick-rtl .datepick-cmd-clear {float: right;padding-left: 0%;padding-right: 2%;text-align: right;}.datepick-rtl .datepick-cmd-current, .datepick-rtl .datepick-cmd-today {float: right;}.datepick-rtl .datepick-cmd-next, .datepick-rtl .datepick-cmd-nextJump, .datepick-rtl .datepick-cmd-close {float: left;padding-left: 2%;padding-right: 0%;text-align: left;}.datepick-month-nav {float: left;background-color: #777;text-align: center;}.datepick-month-nav div {float: left;width: 12.5%;margin: 1%;padding: 1%;}.datepick-month-nav span {color: #888;}.datepick-month-row {clear: left;}.datepick-month {float: left;width: 15em;border: 1px solid #444;text-align: center;}.datepick-month-header, .datepick-month-header select, .datepick-month-header input {height: 1.5em;background-color: #444;color: #fff;font-weight: bold;}.datepick-month-header select, .datepick-month-header input {height: 1.4em;margin: 0em;padding: 0em;border: none;font-size: 100%;}.datepick-month-header input {position: absolute;display: none;}.datepick-month table {width: 100%;border-collapse: collapse;}.datepick-month thead {border-bottom: 1px solid #aaa;}.datepick-month th, .datepick-month td {margin: 0em;padding: 0em;font-weight: normal;text-align: center;}.datepick-month th {border: 1px solid #777;}.datepick-month th, .datepick-month th a {background-color: #777;color: #fff;}.datepick-month td {background-color: #eee;border: 1px solid #aaa;}.datepick-month td.datepick-week {border: 1px solid #777;}.datepick-month td.datepick-week * {background-color: #777;color: #fff;border: none;}.datepick-month a {display: block;width: 100%;padding: 0.125em 0em;background-color: #eee;color: #000;text-decoration: none;}.datepick-month span {display: block;width: 100%;padding: 0.125em 0em;}.datepick-month td span {color: #888;}.datepick-month td .datepick-other-month {background-color: #fff;}.datepick-month td .datepick-weekend {background-color: #ddd;}.datepick-month td .datepick-today {background-color: #f0c0c0;}.datepick-month td .datepick-highlight {background-color: #f08080;}.datepick-month td .datepick-selected {background-color: #777;color: #fff;}.datepick-month th.datepick-week {background-color: #777;color: #fff;}.datepick-status {clear: both;background-color: #ddd;text-align: center;}.datepick-clear-fix {clear: both;}
 	</style>
 	<meta charset="utf-8">
@@ -99,7 +98,7 @@
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НДФЛ (%):</span>
 					</div>		
-					<input type="number" id="ndfl_perc" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="13">
+					<input type="number" id="ndfl_perc" onchange="ndfl_only_text.innerHTML = 'НалогУдДох' + this.value + '%:';" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="13">
 				</div>
 				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
@@ -195,129 +194,155 @@
 					</div>			
 				</div>	
 				
-				
-				
+<!-- == Руб / час: == -->							
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / час:</span>
 					</div>		
-					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" readonly>
-				</div>					
+					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" title="" readonly>
+				</div>		
+<!-- == Руб / сутки: == -->				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / сутки:</span>
 					</div>		
-					<input type="number" id="rvs" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" readonly>
+					<input type="number" id="rvs" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" title="" readonly>
 				</div>	
+				<br style="line-height:30px;">
+<!-- == Оклад: == -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Оклад:</span>
 					</div>		
-					<input type="number" id="okl" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" readonly>
+					<input type="number" id="okl" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" title="" readonly>
 				</div>
-				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Дорога в вых:</span>
-					</div>		
-					<input type="number" id="doroga_out" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-				</div>					
-				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Надбавка (x1.25):</span>
-					</div>		
-					<input type="number" id="nadbavka" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-				</div>	
+<!-- == Двойная (x2): == -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Двойная (x2):</span>
 					</div>		
-					<input type="number" id="dvoynaya" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="text" id="dvoynaya_text" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>
+<!-- == Дорога в вых == -->
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Дорога в вых:</span>
+					</div>		
+					<input type="number" id="doroga_out" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
-<!-- ==== -->					
+<!-- == Ночь (x0.4): == -->					
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span id="noch_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночь (x0.4):</span>
 					</div>		
-					<input type="number" id="noch" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>					
-
+					<input type="number" id="noch" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>					
 				</div>	
-<!-- ==== -->
-				
+<!-- == Надбавка (x1.25): == -->				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span id="premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Прем/РК: --</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Надбавка (x1.25):</span>
 					</div>		
-					<input type="number" id="premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-					<input type="number" id="rk_premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-
-				</div>	
-				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span id="rk_plus_premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Прем + РК: --</span>
-					</div>		
-					<input type="number" id="rk_plus_premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="nadbavka" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>		
-
-<!-- ==== -->
-
-
-				
+<!-- == РК тек): == -->				
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РК тек:</span>
+					</div>		
+					<input type="number" id="rk_tek" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>	
+<!-- == РкПредМес: == -->						
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span id="rk_plus_premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РкПредМес:</span>
+					</div>		
+					<input type="number" id="rk_premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="ПредПремияРК" readonly>
+				</div>	
+<!-- == ПремПредМес: == -->				
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span id="rk_plus_premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">ПремПредМес:</span>
+					</div>		
+					<input type="number" id="premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="ПредПремия" readonly>
+				</div>	
+<!-- == РК+ПремПредМес: == -->				
+				<div hidden class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span id="rk_plus_premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РК+ПремПредМес:</span>
+					</div>		
+					<input type="number" id="rk_plus_premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>		
+<!-- == ВСЕГО НАЧИСЛЕНО: == -->				
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">ВСЕГО НАЧИСЛЕНО:</span>
+					</div>		
+					<input type="number" id="vsego_nachisleno" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>	
+				<br style="line-height:30px;">
+<!-- == НалогУдДох13/15%: == -->	
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span id="ndfl_only_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НалогУдДох:</span>
+					</div>		
+					<input type="number" id="ndfl_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>	
+<!-- == НалогУдРК/СН13%: == -->	
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НалогУдРК/СН13%:</span>
+					</div>		
+					<input type="number" id="rk_all" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>	
+<!-- == Премия: == -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span id="premia_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия: --</span>
 					</div>		
-					<input type="number" id="premia_tek" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="premia_tek" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
-				<div hidden class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РК / НДФЛ:</span>
-					</div>		
-					<input type="number" id="rk_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-					<input type="number" id="ndfl_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-				</div>	
-				
-				
+<!-- == Заработано за ...: == -->								
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" id="chist_all_text" style="width:100%;font-size:14px;font-weight:bold;">Заработано за ...:</span>
 					</div>		
-					<input type="number" id="chist_bez" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="chist_bez" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
-			
+<!-- == Выплата: == -->			
 				
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Выплата:</span>
 				</div>
+<!-- ==== -->					
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<div class="input-group">
-						<input type="text" id="oklad28_text" class="form-control input-sm border-left-0 border-bottom-0" value="28 --" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>
-						<input type="text" id="oklad13_text" class="form-control input-sm border-bottom-0" value="13 --" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" readonly>		
+						<input type="text" id="avans28_text" class="form-control input-sm border-left-0 border-bottom-0" value="28 --" style="border-radius:0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" title="" readonly>
+						<input type="text" id="raschet13_text" class="form-control input-sm border-bottom-0" value="13 --" style="border-radius:0 4px 0 0;text-align:center;padding:0;height:21px;font-size:14px;font-weight:bold;" title="" readonly>		
 					</div>	
 					<div class="input-group" tooltip_mess="Значение без учета 1.25 в праздничные дни" hidden>
-					<input type="number" id="t10" class="form-control input-sm border-left-0 border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>
-					<input type="number" id="t11" class="form-control input-sm border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" readonly>			
+					<input type="number" id="t10" class="form-control input-sm border-left-0 border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>
+					<input type="number" id="t11" class="form-control input-sm border-top-0"  style="border-radius:0;text-align:center;background:#C0C0C0;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>			
 					</div>	
 					<div class="input-group">
-						<input type="number" id="oklad28" class="form-control input-sm border-left-0 border-top-0" style="border-radius:0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
-						<input type="number" id="oklad13" class="form-control input-sm border-top-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>				
+						<input type="number" id="avans28" class="form-control input-sm border-left-0 border-top-0" style="border-radius:0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+						<input type="number" id="raschet13" class="form-control input-sm border-top-0" style="border-radius:0 0 4px 0;text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>				
 					</div>			
 				</div>	
-
+<!-- == Общее на руки: == -->	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Общее на руки:</span>
 					</div>		
-					<input type="number" id="chist_all" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="chist_all" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
-
-
-				
+<!-- == Буржуям (Профсоюз): == -->	
 				<div class="input-group" hidden>
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Буржуям (Профсоюз):</span>
 					</div>		
-					<input type="number" id="profsoyuz" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" readonly>
+					<input type="number" id="profsoyuz" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>
+<!-- ==== -->					
 			</div>
 			<br>
 			<div class="form-group" style="font-size:12px;font-weight:bold;">
@@ -326,11 +351,12 @@
 				<label class="col-sm-12 col-form-label m-0 p-0">НАДБАВКА = РУБ.ЧАС * КОМАНДИРОВКА * 0.25</label>				
 				<label class="col-sm-12 col-form-label m-0 p-0">ДВОЙНАЯ = РУБ.ЧАС * КОЛ-ВО.ВЫХ.И.ПРАЗД.ЧАСОВ * 2</label>	
 				<label class="col-sm-12 col-form-label m-0 p-0">НОЧНЫЕ = РУБ.ЧАС * НОЧ.ОТРАБ.ЧАСЫ * 0.4</label>	
-				<label class="col-sm-12 col-form-label m-0 p-0">ПРЕМИЯ = (ОКЛ+НАДБАВКА+ДВОЙНАЯ/2+ДОР_В_ВЫХ) * 0.7</label>	
+				<label class="col-sm-12 col-form-label m-0 p-0">ПРЕМИЯ = (ОКЛ+НАДБАВКА+ДВОЙНАЯ/2+ДОР_В_ВЫХ+НОЧЬ) * 0.7</label>	
 			</div>				
 			<footer class="footer fixed-bottom">
 				<div class="container">
-					<div style="font-weight:bold;font-size:9px;text-align:left;padding-right:3px;">mustafin.ik@mail.ru               Версия от 04.10.2025</div>	
+					<span style="font-weight:bold;font-size:9px;text-align:left;padding-right:3px;">mustafin.ik@mail.ru</div>	
+					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">Версия от 05.10.2025</div>
 				</div> 
 			</footer> 
 		</div>	
@@ -528,72 +554,99 @@
 		if (prof.value === '' && prof.value.length == 0) prof.value = 0;
 		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
 		
-		let rub_v_сhas = (oklad.value / rab_chas.value).toFixed(3);
-		let okl115 = ((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas).toFixed(2);
-		let okl1530 = ((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas).toFixed(2);
+		let rub_v_сhas = parseFloat(oklad.value / rab_chas.value).toFixed(3);
+		let okl115 = parseFloat((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas).toFixed(2);
+		let okl1530 = parseFloat((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas).toFixed(2);
 		okl.value = parseFloat(parseFloat(okl115) + parseFloat(okl1530)).toFixed(2);
 		
-		//okl.value = parseInt((returnOfis.All115 + returnOfis.All1530 + returnRaz.All115 + returnRaz.All1530 + returnDor.All115 + returnDor.All1530) * rub_v_сhas);
-		console.log("returnOfis: ");
-		console.log(returnOfis);
+		//console.log("returnOfis: ");
+		//console.log(returnOfis);
 
-		console.log("returnRaz: ");
-		console.log(returnRaz);
+		//console.log("returnRaz: ");
+		//console.log(returnRaz);
 		
-		console.log("returnDor: ");
-		console.log(returnDor);
-		
-		let prazd_vyh115 = parseInt(returnRaz.Prazd115 + returnRaz.Vyh115 + returnOfis.Prazd115 + returnOfis.Vyh115);
-		let prazd_vyh1530 = parseInt(returnRaz.Prazd1530 + returnRaz.Vyh1530 + returnOfis.Prazd1530 + returnOfis.Vyh1530);
+		//console.log("returnDor: ");
+		//console.log(returnDor); 
+
+		let prazd_vyh115 = returnRaz.Prazd115 + returnRaz.Vyh115 + returnOfis.Prazd115 + returnOfis.Vyh115;
+		let prazd_vyh1530 = returnRaz.Prazd1530 + returnRaz.Vyh1530 + returnOfis.Prazd1530 + returnOfis.Vyh1530;
 	    let prazd_vyh = prazd_vyh115 + prazd_vyh1530;
-
-		let summ115 = parseInt(returnRaz.All115) + parseInt(returnDor.All115) + parseInt((returnDor.Vyh115 + returnDor.Prazd115) * 8) + parseInt((prazd_vyh115 - returnOfis.Prazd115 - returnOfis.Vyh115) * 8);
-		let summ1530 = parseInt(returnRaz.All1530) + parseInt(returnDor.All1530) + parseInt((returnDor.Vyh1530 + returnDor.Prazd1530) * 8) + parseInt((prazd_vyh1530 - returnOfis.Prazd1530 - returnOfis.Vyh1530) * 8);
 		
-		let nadbavka115 = (summ115 * rub_v_сhas * 0.25).toFixed(2);
-		let nadbavka1530 = (summ1530 * rub_v_сhas * 0.25).toFixed(2);
-		nadbavka.value = (parseFloat(nadbavka115) + parseFloat(nadbavka1530)).toFixed(2);
-		console.log("nadbavka   [115 + 1530] = " + nadbavka115 + " + " + nadbavka1530 + " = " + nadbavka.value);
+//Расчет часов в командировке
+		//			  В разъезде раб дни + дорога в будни + дорога в выходной и праздник * 8 + В разъезде выходной и праздник * 8
+		let Raz_summ115 = returnRaz.All115 + returnDor.All115 + (returnDor.Vyh115 + returnDor.Prazd115) * 8 + (prazd_vyh115 - returnOfis.Prazd115 - returnOfis.Vyh115) * 8;
+		let Raz_summ1530 = returnRaz.All1530 + returnDor.All1530 + (returnDor.Vyh1530 + returnDor.Prazd1530) * 8 + (prazd_vyh1530 - returnOfis.Prazd1530 - returnOfis.Vyh1530) * 8;
 
-		let dvoynaya115 = (prazd_vyh115 * rub_v_сhas * 8 * 2).toFixed(2);
-		let dvoynaya1530 = (prazd_vyh1530 * rub_v_сhas * 8 * 2).toFixed(2);
-		dvoynaya.value = (parseFloat(dvoynaya115) + parseFloat(dvoynaya1530)).toFixed(2);
-		console.log("dvoynaya   [115 + 1530] = " + dvoynaya115 + " + " + dvoynaya1530 + " = " + dvoynaya.value);
+//Расчет двойных
+		let dvoynaya115 = parseFloat(prazd_vyh115 * parseFloat(rub_v_сhas) * 8).toFixed(2);
+		let dvoynaya1530 = parseFloat(prazd_vyh1530 * parseFloat(rub_v_сhas) * 8).toFixed(2);
+		let dvoynaya = parseFloat(parseFloat(dvoynaya115) + parseFloat(dvoynaya1530)).toFixed(2);
+		if (dvoynaya == 0)
+			dvoynaya_text.value = "0,00";
+		else
+			dvoynaya_text.value = dvoynaya + " x 2";
+		console.log("dvoynaya   [115 + 1530] = " + dvoynaya115 * 2 + " + " + dvoynaya1530 * 2 + " = " + dvoynaya * 2);
 
+//Расчет дороги в выходной и праздник
 		let doroga_out115 = parseFloat((returnDor.Vyh115 + returnDor.Prazd115) * rub_v_сhas * 8).toFixed(2);
 		let doroga_out1530 = parseFloat((returnDor.Vyh1530 + returnDor.Prazd1530) * rub_v_сhas * 8).toFixed(2);
 		doroga_out.value = (parseFloat(doroga_out115) + parseFloat(doroga_out1530)).toFixed(2);
 		console.log("doroga_out [115 + 1530] = " + doroga_out115 + " + " + doroga_out1530 + " = " + doroga_out.value);
-		
+
+//Расчет ночных
         let n115 = parseFloat(night115.value * rub_v_сhas * 0.4).toFixed(2);
         let n1530 = parseFloat(night1530.value * rub_v_сhas * 0.4).toFixed(2);
 		noch.value = (parseFloat(n115) + parseFloat(n1530)).toFixed(2);
 		console.log("night      [115 + 1530] = " + n115 + " + " + n1530 + " = " + noch.value);
-		
-		let summaVseh115 = (parseFloat(okl115) + parseFloat(dvoynaya115) + parseFloat(doroga_out115) + parseFloat(n115)).toFixed(2);
-		let summaVseh1530 = (parseFloat(okl1530) + parseFloat(nadbavka1530) + parseFloat(dvoynaya1530) + parseFloat(doroga_out1530) + parseFloat(n1530) + parseFloat(premia_pred.value) + parseFloat(rk_premia_pred.value)+ parseFloat(nadbavka115)).toFixed(2);
-		
+
+//Расчет надбавки		
+		let nadbavka115 = +(Raz_summ115 * rub_v_сhas * 0.25).toFixed(2);
+		let nadbavka1530 = +(Raz_summ1530 * rub_v_сhas * 0.25).toFixed(2);
+		nadbavka.value = +(nadbavka115 + nadbavka1530).toFixed(2);
+		console.log("nadbavka   [115 + 1530] = " + nadbavka115 + " + " + nadbavka1530 + " = " + nadbavka.value);
+
+//Расчет суммы всего дохода	
+		let summaVseh115 = (parseFloat(okl115) + parseFloat(dvoynaya115) * 2 + parseFloat(doroga_out115) + parseFloat(n115)).toFixed(2); //без надбавки
+		let summaVseh1530 = (parseFloat(okl1530) + parseFloat(dvoynaya1530) * 2 + parseFloat(doroga_out1530) + parseFloat(n1530) + parseFloat(nadbavka.value)).toFixed(2); //вся надбавка за 1 и 2 половину месяца
+
+//Расчет РК	
 		let rk_only115 = parseFloat(summaVseh115 * 0.15).toFixed(2);
 		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(2);
-		rk_only.value = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(2);
+		let rk_only = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(2);
+		rk_tek.value = parseFloat(rk_only).toFixed(2);
+		rk_all.value = ((parseFloat(rk_only) + parseFloat(rk_premia_pred.value)) * 0.13).toFixed(0);
 
-		let ndfl_only_rk13_115 = (parseFloat(rk_only115) * 0.13).toFixed(2);		
-		let ndfl_only115 = ((parseFloat(summaVseh115) * ndfl_perc.value / 100) + parseFloat(ndfl_only_rk13_115)).toFixed(2);
-
-		let ndfl_only_rk13_1530 = (parseFloat(rk_only1530) * 0.13).toFixed(2);		
-		let ndfl_only1530 = ((parseFloat(summaVseh1530) * ndfl_perc.value / 100) + parseFloat(ndfl_only_rk13_1530)).toFixed(2);
-
-		ndfl_only.value = Math.ceil(parseFloat(ndfl_only115) + parseFloat(ndfl_only1530)); 				
+//Расчет ВСЕГО НАЧИСЛЕНО 
+        vsego_nachisleno.value = parseFloat(parseFloat(okl.value)+ parseFloat(dvoynaya) * 2 + parseFloat(doroga_out.value) + parseFloat(noch.value) + parseFloat(nadbavka.value) + parseFloat(rk_plus_premia_pred.value) + parseFloat(rk_only)).toFixed(2);
 		
-		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value)/2 + parseFloat(doroga_out.value)) * parseFloat(premia.value)).toFixed(2);
+		//console.log(okl.value);
+		//console.log(dvoynaya);
+		//console.log(doroga_out.value);
+		//console.log(noch.value);
+		//console.log(nadbavka.value);
+		//console.log(rk_plus_premia_pred.value);
+		//console.log(rk_only);
+
+//Расчет НДФЛ с РК
+		let ndfl_only_rk13_115 = (parseFloat(rk_only115) * 0.13).toFixed(2);		
+		let ndfl_only_rk13_1530 = (parseFloat(rk_only1530) * 0.13).toFixed(2);		
+		
+//Расчет НДФЛ без РК
+		let ndfl_only115 = parseFloat(parseFloat(summaVseh115) * ndfl_perc.value / 100).toFixed(2);
+		let ndfl_only1530 = parseFloat(parseFloat(summaVseh1530) * ndfl_perc.value / 100).toFixed(2);
+		ndfl_only.value = parseFloat((parseFloat(vsego_nachisleno.value) - parseFloat(rk_premia_pred.value) - parseFloat(rk_only)) * ndfl_perc.value / 100).toFixed(2); 			
+
+//Расчет текущей премии		
+		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya) + parseFloat(doroga_out.value) + parseFloat(noch.value)) * parseFloat(premia.value)).toFixed(2);
 		
 		console.log("premia_tek = " + premia_tek.value);	
-		
-		oklad28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(2);
-		oklad13.value = parseFloat(parseFloat(premia_pred.value) + parseFloat(rk_premia_pred.value) + parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya.value) + parseFloat(doroga_out.value) + parseFloat(rk_only.value) - parseFloat(ndfl_only.value)).toFixed(2);
 
-		chist_all.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value)).toFixed(2); 
-		chist_bez.value = (parseFloat(oklad28.value) + parseFloat(oklad13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value) - parseFloat(rk_premia_pred.value)).toFixed(2); 
+//Расчет выплат		
+		avans28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(2);
+		raschet13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only1530)).toFixed(2);
+
+		chist_all.value = (parseFloat(avans28.value) + parseFloat(raschet13.value)).toFixed(2); 
+		chist_bez.value = (parseFloat(avans28.value) + parseFloat(raschet13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value) - parseFloat(rk_premia_pred.value)).toFixed(2); 
 		
 		rvc.value = parseFloat(rub_v_сhas).toFixed(3);
 		rvs.value = parseFloat(rub_v_сhas * 8).toFixed(2);
@@ -649,15 +702,17 @@
 		premia_pred.value     = premia_pred_ar[selected];
 		rk_premia_pred.value     = (parseFloat(premia_pred.value) * 0.15).toFixed(2);		
 
-		premia_pred_text.innerHTML = "Прем/РК: " + select_m.options[selected].value;
+		//premia_pred_text.innerHTML = "Прем/РК: " + select_m.options[selected].value;
 
 		rk_plus_premia_pred.value = (parseFloat(premia_pred.value) + parseFloat(rk_premia_pred.value)).toFixed(2);	
-		rk_plus_premia_pred_text.innerHTML = "Прем + РК: " + select_m.options[selected].value;
+		rk_plus_premia_pred.title = "Премия+РК = " + premia_pred.value + "+" + rk_premia_pred.value + " = " + rk_plus_premia_pred.value;
+		//rk_plus_premia_pred_text.innerHTML = "Прем + РК: " + select_m.options[selected].value;
+		ndfl_only_text.innerHTML = "НалогУдДох" + ndfl_perc.value + "%:";
 		
 		chist_all_text.innerHTML = "Заработано за " + select_m.options[sel].value + ":";
 		prof.value         = prof_ar[sel];
-		oklad28_text.value = '28 ' + months[sel];
-		oklad13_text.value = '13 ' + months[selected2]; 
+		avans28_text.value = '28 ' + months[sel];
+		raschet13_text.value = '13 ' + months[selected2]; 
 		getZp();
 	}
 	loadJson(json_val.selIndex);		
@@ -765,8 +820,6 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-
-
 
 
 

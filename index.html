@@ -75,65 +75,79 @@
 						<option id="m12" value="Декабрь 2025">Декабрь 2025</option>									
 					</select>
 				</div>
-				
+<!-- == Оклад: == -->				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Оклад:</span>
 					</div>		
 					<input type="number" id="oklad" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1000" value="1000" placeholder="">
-				</div>	
+				</div>
+<!-- == Норма раб. часов: == -->				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Норма раб. часов:</span>
 					</div>		
 					<input type="number" id="rab_chas" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="168" placeholder="">
-				</div>	
+				</div>
+<!-- == Премия (Коэф Кр.): == -->				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия (Коэф Кр.):</span>
 					</div>		
 					<input type="number" id="premia" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="">
-				</div>		
+				</div>
+<!-- == НДФЛ (%): == -->				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НДФЛ (%):</span>
 					</div>		
-					<input type="number" id="ndfl_perc" onchange="ndfl_only_text.innerHTML = 'НалогУдДох' + this.value + '%:';" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="13">
+					<input type="number" id="ndfl_perc" onchange="ndfl_tek15_text.innerHTML = 'НалогУдДох' + this.value + '%:';" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="13">
 				</div>
-				<div class="input-group" hidden>
+<!-- == Профсоюз %: == -->
+				<div hidden class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Профсоюз %:</span>
 					</div>		
 					<input type="number" id="prof" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="">
-				</div>					
+				</div>
+<!-- == В офисе: == -->				
 				<div class="input-group" id="ofis_tool" ofis_mess="Полн: -- Сокр: -- Вых: --">
 					<div class="input-group-prepend" style="width:50%;height:38px;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">В офисе:</span>
 					</div>		
 					<input readonly type="text" id="ofis" class="form-control input-sm" style="text-align:center;height:38px;height:21px;font-size:14px;background:white;" placeholder="">
 				</div>	
+<!-- == В разъезде: == -->
 				<div class="input-group"  id="raz_tool" raz_mess="Полн: -- Сокр: -- Вых: --">
 					<div class="input-group-prepend" style="width:50%;height:38px;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">В разъезде:</span>
 					</div>		
 					<input readonly type="text" id="razyezd" class="form-control input-sm" style="text-align:center;height:38px;height:21px;font-size:14px;background:white;" placeholder="">
-				</div>	
+				</div>
+<!-- == В дороге: == -->				
 				<div class="input-group" id="dor_tool" dor_mess="Дор: --">
 					<div class="input-group-prepend" style="width:50%;height:38px;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">В дороге:</span>
 					</div>		
 					<input readonly type="text" id="doroga" class="form-control input-sm" style="text-align:center;height:38px;height:21px;font-size:14px;background:white;" placeholder="">
 				</div>
-<!-- ==== -->
+<!-- == Ночные (до/после 15), ч: == -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночные (до/после 15), ч:</span>
 					</div>		
 					<input type="number" id="night115" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 					<input type="number" id="night1530" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
-
 				</div>									
-<!-- ==== -->				
+<!-- == Доплата / Удержание: == -->
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Доплата / Удержание:</span>
+					</div>		
+					<input type="number" id="doplata" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+					<input type="number" id="uderjanie" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+				</div>	
+<!-- == КНОПКИ == -->				
 				<div class="btn-group btn-group-sm" style="width:100%;">
 					<div class="btn-group btn-group-sm w-100"> 
 						<div class="input-group-text justify-content-center" style="background:#007BFF;border-radius:4px 0 0 4px;padding:4px 6px;border:0;">
@@ -196,14 +210,14 @@
 				
 <!-- == Руб / час: == -->							
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / час:</span>
 					</div>		
 					<input type="number" id="rvc" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" title="" readonly>
 				</div>		
 <!-- == Руб / сутки: == -->				
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Руб / сутки:</span>
 					</div>		
 					<input type="number" id="rvs" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" title="" readonly>
@@ -211,70 +225,70 @@
 				<br style="line-height:30px;">
 <!-- == Оклад: == -->
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Оклад:</span>
 					</div>		
 					<input type="number" id="okl" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" step="any" title="" readonly>
 				</div>
 <!-- == Двойная (x2): == -->
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Двойная (x2):</span>
 					</div>		
 					<input type="text" id="dvoynaya_text" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>
 <!-- == Дорога в вых == -->
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Дорога в вых:</span>
 					</div>		
 					<input type="number" id="doroga_out" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
 <!-- == Ночь (x0.4): == -->					
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span id="noch_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Ночь (x0.4):</span>
 					</div>		
 					<input type="number" id="noch" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>					
 				</div>	
 <!-- == Надбавка (x1.25): == -->				
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Надбавка (x1.25):</span>
 					</div>		
 					<input type="number" id="nadbavka" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>		
 <!-- == РК тек): == -->				
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РК тек:</span>
 					</div>		
 					<input type="number" id="rk_tek" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
 <!-- == РкПредМес: == -->						
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span id="rk_plus_premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РкПредМес:</span>
 					</div>		
 					<input type="number" id="rk_premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="ПредПремияРК" readonly>
 				</div>	
 <!-- == ПремПредМес: == -->				
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span id="rk_plus_premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">ПремПредМес:</span>
 					</div>		
 					<input type="number" id="premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="ПредПремия" readonly>
 				</div>	
 <!-- == РК+ПремПредМес: == -->				
 				<div hidden class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span id="rk_plus_premia_pred_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РК+ПремПредМес:</span>
 					</div>		
 					<input type="number" id="rk_plus_premia_pred" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>		
 <!-- == ВСЕГО НАЧИСЛЕНО: == -->				
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">ВСЕГО НАЧИСЛЕНО:</span>
 					</div>		
 					<input type="number" id="vsego_nachisleno" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
@@ -282,34 +296,43 @@
 				<br style="line-height:30px;">
 <!-- == НалогУдДох13/15%: == -->	
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span id="ndfl_only_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НалогУдДох:</span>
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
+						<span id="ndfl_tek15_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НалогУдДох:</span>
 					</div>		
-					<input type="number" id="ndfl_only" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+					<input type="number" id="ndfl_tek15" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
 <!-- == НалогУдРК/СН13%: == -->	
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">НалогУдРК/СН13%:</span>
 					</div>		
-					<input type="number" id="rk_all" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+					<input type="number" id="ndfl_rk" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
+				<br style="line-height:30px;">
 <!-- == Премия: == -->
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span id="premia_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия: --</span>
 					</div>		
 					<input type="number" id="premia_tek" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
+<!-- == РК премии: == -->
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
+						<span id="rk_premia_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">РК премии: --</span>
+					</div>		
+					<input type="number" id="rk_premia_tek" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>	
+				<br style="line-height:30px;">
 <!-- == Заработано за ...: == -->								
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" id="chist_all_text" style="width:100%;font-size:14px;font-weight:bold;">Заработано за ...:</span>
 					</div>		
 					<input type="number" id="chist_bez" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
+				<br style="line-height:30px;">
 <!-- == Выплата: == -->			
-				
 				<div class="col-6 col-sm-6 col-md-6 col-xl-6 p-0">
 					<span class="input-group-text" style="border-radius: 4px 0 0 4px; width:100%;font-size:14px;font-weight:bold;height:42px;">Выплата:</span>
 				</div>
@@ -330,14 +353,14 @@
 				</div>	
 <!-- == Общее на руки: == -->	
 				<div class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Общее на руки:</span>
 					</div>		
 					<input type="number" id="chist_all" class="form-control input-sm" style="text-align:center;background:#7FFFD4;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
 <!-- == Буржуям (Профсоюз): == -->	
 				<div class="input-group" hidden>
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+					<div class="input-group-prepend" style="width:60%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Буржуям (Профсоюз):</span>
 					</div>		
 					<input type="number" id="profsoyuz" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
@@ -502,6 +525,8 @@
 	let doroga_ar = 0;
 	let night_ar115 = 0;
 	let night_ar1530 = 0;
+	let	doplata_arr = 0;
+	let	uderjanie_arr = 0;
 	let ndflPercent = 0;
 	let evening_ar = 0;
 	let premia_ar = 0;
@@ -523,7 +548,9 @@
 		"night1530":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],			
 		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"doplata":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"uderjanie":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]		
 	};
 
 	currentYear = new Date().getFullYear(); 
@@ -614,10 +641,11 @@
 		let rk_only1530 = parseFloat(summaVseh1530 * 0.15).toFixed(2);
 		let rk_only = (parseFloat(rk_only115) + parseFloat(rk_only1530)).toFixed(2);
 		rk_tek.value = parseFloat(rk_only).toFixed(2);
-		rk_all.value = ((parseFloat(rk_only) + parseFloat(rk_premia_pred.value)) * 0.13).toFixed(0);
 
 //Расчет ВСЕГО НАЧИСЛЕНО 
-        vsego_nachisleno.value = parseFloat(parseFloat(okl.value)+ parseFloat(dvoynaya) * 2 + parseFloat(doroga_out.value) + parseFloat(noch.value) + parseFloat(nadbavka.value) + parseFloat(rk_plus_premia_pred.value) + parseFloat(rk_only)).toFixed(2);
+        vsego_nachisleno.value = parseFloat(parseFloat(okl.value)+ parseFloat(dvoynaya) * 2 + parseFloat(doroga_out.value) + 
+								 parseFloat(noch.value) + parseFloat(nadbavka.value) + parseFloat(rk_plus_premia_pred.value) + 
+								 parseFloat(rk_only) + parseFloat(doplata.value)).toFixed(2);
 		
 		//console.log(okl.value);
 		//console.log(dvoynaya);
@@ -628,25 +656,31 @@
 		//console.log(rk_only);
 
 //Расчет НДФЛ с РК
-		let ndfl_only_rk13_115 = (parseFloat(rk_only115) * 0.13).toFixed(2);		
-		let ndfl_only_rk13_1530 = (parseFloat(rk_only1530) * 0.13).toFixed(2);		
-		
+		let ndfl_rk_115 = (parseFloat(rk_only115) * 0.13).toFixed(0); 
+		let ndfl_rk_1530 = (parseFloat(rk_only1530) * 0.13).toFixed(0); 	
+		ndfl_rk.value = ((parseFloat(rk_only) + parseFloat(rk_premia_pred.value)) * 0.13).toFixed(0);		
 //Расчет НДФЛ без РК
-		let ndfl_only115 = parseFloat(parseFloat(summaVseh115) * ndfl_perc.value / 100).toFixed(2);
-		let ndfl_only1530 = parseFloat(parseFloat(summaVseh1530) * ndfl_perc.value / 100).toFixed(2);
-		ndfl_only.value = parseFloat((parseFloat(vsego_nachisleno.value) - parseFloat(rk_premia_pred.value) - parseFloat(rk_only)) * ndfl_perc.value / 100).toFixed(2); 			
+		let ndfl_tek15_115 = parseFloat(parseFloat(summaVseh115) * ndfl_perc.value / 100).toFixed(2);
+		let ndfl_tek15_1530 = parseFloat(parseFloat(summaVseh1530) * ndfl_perc.value / 100).toFixed(2);
+		ndfl_tek15.value = Math.floor((parseFloat(vsego_nachisleno.value) - parseFloat(rk_premia_pred.value) - parseFloat(rk_only)) * ndfl_perc.value / 100); // Округление в меньшую сторону			
 
 //Расчет текущей премии		
 		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya) + parseFloat(doroga_out.value) + parseFloat(noch.value)) * parseFloat(premia.value)).toFixed(2);
+		rk_premia_tek.value = parseFloat(premia_tek.value * 0.15).toFixed(2);	
 		
 		console.log("premia_tek = " + premia_tek.value);	
-
+		console.log("rk_premia_tek = " + rk_premia_tek.value);
 //Расчет выплат		
-		avans28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_only115)).toFixed(2);
-		raschet13.value = parseFloat(parseFloat(summaVseh1530) + parseFloat(rk_only1530) - parseFloat(ndfl_only1530)).toFixed(2);
+		avans28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_tek15_115) - parseFloat(ndfl_rk_115)).toFixed(2);
+		
+		
+		
+		raschet13.value = (parseFloat(vsego_nachisleno.value) - parseFloat(ndfl_tek15.value) - parseFloat(ndfl_rk.value) - parseFloat(uderjanie.value) - parseFloat(avans28.value)).toFixed(2);
 
 		chist_all.value = (parseFloat(avans28.value) + parseFloat(raschet13.value)).toFixed(2); 
-		chist_bez.value = (parseFloat(avans28.value) + parseFloat(raschet13.value) + parseFloat(premia_tek.value) - parseFloat(premia_pred.value) - parseFloat(rk_premia_pred.value)).toFixed(2); 
+		chist_bez.value = (parseFloat(vsego_nachisleno.value) - parseFloat(rk_plus_premia_pred.value) - parseFloat(ndfl_rk.value) - 
+						  parseFloat(ndfl_tek15.value) + parseFloat(premia_tek.value) + parseFloat(rk_premia_tek.value)).toFixed(2);
+		
 		
 		rvc.value = parseFloat(rub_v_сhas).toFixed(3);
 		rvs.value = parseFloat(rub_v_сhas * 8).toFixed(2);
@@ -674,6 +708,8 @@
 		doroga_ar      = json_val.doroga;
 		if (json_val.night115 == undefined) {json_val.night115 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar115 = json_val.night115;}
 		if (json_val.night1530 == undefined) {json_val.night1530 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar1530 = json_val.night1530;}
+		if (json_val.doplata == undefined) {json_val.doplata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {doplata_arr = json_val.doplata;}
+		if (json_val.uderjanie == undefined) {json_val.uderjanie = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {uderjanie_arr = json_val.uderjanie;}		
 		if (json_val.okl == undefined) {json_val.okl = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];} else {oklad_ar = json_val.okl;}	
 		
 		premia_ar      = json_val.premia_ar;
@@ -696,9 +732,13 @@
 		returnOfis = calculate('ofis',ofis.value,'ofis_tool', 'ofis_mess');
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
 		returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');
-
+		
+		doplata.value = doplata_arr[sel];
+		uderjanie.value = uderjanie_arr[sel];
+		
 		premia.value          = premia_ar[sel];	
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;		
+		rk_premia_text.innerHTML = "РК премии: " + select_m.options[sel].value;	
 		premia_pred.value     = premia_pred_ar[selected];
 		rk_premia_pred.value     = (parseFloat(premia_pred.value) * 0.15).toFixed(2);		
 
@@ -707,7 +747,7 @@
 		rk_plus_premia_pred.value = (parseFloat(premia_pred.value) + parseFloat(rk_premia_pred.value)).toFixed(2);	
 		rk_plus_premia_pred.title = "Премия+РК = " + premia_pred.value + "+" + rk_premia_pred.value + " = " + rk_plus_premia_pred.value;
 		//rk_plus_premia_pred_text.innerHTML = "Прем + РК: " + select_m.options[selected].value;
-		ndfl_only_text.innerHTML = "НалогУдДох" + ndfl_perc.value + "%:";
+		ndfl_tek15_text.innerHTML = "НалогУдДох" + ndfl_perc.value + "%:";
 		
 		chist_all_text.innerHTML = "Заработано за " + select_m.options[sel].value + ":";
 		prof.value         = prof_ar[sel];
@@ -765,6 +805,8 @@
 		json_val.doroga[selIndex] = doroga.value;	
 		json_val.night115[selIndex] = night115.value;	
 		json_val.night1530[selIndex] = night1530.value;	
+		json_val.doplata[selIndex] = doplata.value;	
+		json_val.uderjanie[selIndex] = uderjanie.value;
 		json_val.premia_ar[selIndex] = parseFloat(premia.value).toFixed(1);	
  		json_val.premia_pred_ar[selIndex] = parseFloat(premia_tek.value).toFixed(1);			
 		json_val.prof_ar[selIndex] = parseFloat(prof.value).toFixed(1);
@@ -820,7 +862,6 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-
 
 
 

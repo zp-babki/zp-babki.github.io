@@ -341,7 +341,7 @@
 <!-- == Доход (руб/сутки): == -->	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span id="chist_bez_rub_v_sutki_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Доход (руб/сутки):</span>
+						<span id="chist_bez_rub_v_sutki_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Доход (р/сут.):</span>
 					</div>		
 					<input type="number" id="chist_bez_rub_v_sutki" class="form-control input-sm" style="text-align:center;background:white;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
@@ -375,7 +375,7 @@
 <!-- == Общее (руб/сутки): == -->	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span id="chist_all_rub_v_sutki_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Общее (руб/сутки):</span>
+						<span id="chist_all_rub_v_sutki_text" class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Общее (р/сут.):</span>
 					</div>		
 					<input type="number" id="chist_all_rub_v_sutki" class="form-control input-sm" style="text-align:center;background:white;color:black;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
@@ -760,8 +760,8 @@
 		day_summa = Math.ceil(rab_chas.value / 8);		
 		//day_summa = getLastDayOfMonth(currentYear, select_m.selectedIndex);
 		if (day_summa !== 0) {
-			chist_all_rub_v_sutki_text.innerHTML = "Общее (руб/сутки): (" + day_summa + " дн.)";
-			chist_bez_rub_v_sutki_text.innerHTML = "Доход (руб/сутки): (" + day_summa + " дн.)";
+			chist_all_rub_v_sutki_text.innerHTML = "Общее (р/сут.): (" + day_summa + " дн.)";
+			chist_bez_rub_v_sutki_text.innerHTML = "Доход (р/сут.): (" + day_summa + " дн.)";
 			
 			chist_all_rub_v_sutki.value = (parseFloat(chist_all.value) / day_summa).toFixed(2);  		
 			chist_bez_rub_v_sutki.value = (parseFloat(chist_bez.value) / day_summa).toFixed(2);  		

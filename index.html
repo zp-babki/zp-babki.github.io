@@ -127,7 +127,7 @@
 <!-- == В дороге: == -->				
 				<div class="input-group" id="dor_tool" dor_mess="Дор: --">
 					<div class="input-group-prepend" style="width:50%;height:38px;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">В дороге:</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Одинарная / В дороге:</span>
 					</div>		
 					<input readonly type="text" id="doroga" class="form-control input-sm" style="text-align:center;height:38px;height:21px;font-size:14px;background:white;" placeholder="">
 				</div>
@@ -400,7 +400,7 @@
 			<footer class="footer fixed-bottom">
 				<div class="container">
 					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">mustafin.ik@mail.ru</div>	
-					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">Версия от 31.10.2025</div>
+					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">Версия от 11.11.2025</div>
 				</div> 
 			</footer> 
 		</div>	
@@ -430,6 +430,7 @@
 		var Prazd115 = 0;
 		var Vyh115 = 0;
 		var Okl115 = 0;
+		//var AllDays115 = 0;
 		
 		var All1530 = 0;
 		var Poln1530 = 0;
@@ -437,6 +438,8 @@
 		var Prazd1530 = 0;
 		var Vyh1530 = 0;
 		var Okl1530 = 0;
+		//var AllDays1530 = 0;
+		
 		var ttip = '';
 		var returnObject = {};
 		if (daty != "") {
@@ -474,10 +477,31 @@
 						}
 					}
 				} else {
-					if (dates[i].getDay() > 0 && dates[i].getDay() < 6) Okl1530++;				
-					if (dates[i].getDay() == 0 || dates[i].getDay() == 6) Vyh1530++;
-					for (let j = 0; j < prazdniki.length; j++) if (den == prazdniki[j] && dates[i].getDay() > 0 && dates[i].getDay() < 6) Prazd1530++;
-					for (let j = 0; j < korotkiy.length; j++) if (den == korotkiy[j]) Sokr1530++;			
+					// Если день приходится на 1 - 5
+					if (dates[i].getDay() > 0 && dates[i].getDay() < 6) {
+						Okl1530++;				
+					}
+					// Если день приходится на 6 - 7
+					if (dates[i].getDay() == 0 || dates[i].getDay() == 6) {
+						for (let j = 0; j < rabochiy.length; j++) {
+							if (den == rabochiy[j]) {
+								Okl1530++;
+							} else {
+								Vyh1530++;						
+							}
+						}
+					}
+					// Если день приходится на праздник и на 1 - 5
+					for (let j = 0; j < prazdniki.length; j++) {
+						if (den == prazdniki[j] && dates[i].getDay() > 0 && dates[i].getDay() < 6) {
+							Prazd1530++;
+						}
+					}
+					for (let j = 0; j < korotkiy.length; j++) {
+						if (den == korotkiy[j]) {
+							Sokr1530++;			
+						}
+					}	
 				}				
 			}
 
@@ -485,6 +509,9 @@
 			Poln1530 = Okl1530 - Prazd1530 - Sokr1530;
 			All115 = Poln115 * 8 + Sokr115 * 7;	
 			All1530 = Poln1530 * 8 + Sokr1530 * 7;
+			
+			//AllDays115 = Okl1530 + Sokr115 + Prazd115 + Sokr115;
+			//AllDays1530 = Okl1530 + Sokr1530 + Prazd1530 + Sokr1530;			
 			$('#' + mesto).datepick('setDate', dates);
 		} 
 		ttip = "Период: 1-15" + "\nПолн: " + Poln115 + "     Сокр: " + Sokr115 + "\nПразд: " + Prazd115 + "    Вых:  " + Vyh115 + "\nВсего раб час: " + All115 + 
@@ -496,12 +523,14 @@
 		returnObject.Sokr115 = Sokr115;		
 		returnObject.Prazd115 = Prazd115;		
 		returnObject.Vyh115 = Vyh115;	
+		//returnObject.AllDays115 = AllDays115;
 		
 		returnObject.All1530 = All1530;
 		returnObject.Poln1530 = Poln1530;
 		returnObject.Sokr1530 = Sokr1530;		
 		returnObject.Prazd1530 = Prazd1530;
 		returnObject.Vyh1530 = Vyh1530;	
+		//returnObject.AllDays1530 = AllDays1530;
 		
 		return returnObject;
 	};
@@ -563,7 +592,7 @@
 	  let date = new Date(year, month + 1, 0);
 	  return date.getDate();
 	}
-  	
+  	let day_summa = 0;
 	let json_val = [];
 	let oklad_ar = 0;
 	let calendar = 0;	
@@ -722,18 +751,18 @@
 //Расчет выплат		
 		avans28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_tek15_115) - parseFloat(ndfl_rk_115)).toFixed(2);
 		
-		
-		
 		raschet13.value = (parseFloat(vsego_nachisleno.value) - parseFloat(ndfl_tek15.value) - parseFloat(ndfl_rk.value) - parseFloat(uderjanie.value) - parseFloat(avans28.value)).toFixed(2);
 
 		chist_all.value = (parseFloat(avans28.value) + parseFloat(raschet13.value)).toFixed(2); 
 		chist_bez.value = (parseFloat(vsego_nachisleno.value) - parseFloat(rk_plus_premia_pred.value) - parseFloat(ndfl_rk.value) - 
 						  parseFloat(ndfl_tek15.value) + parseFloat(premia_tek.value) + parseFloat(rk_premia_tek.value)).toFixed(2);
-
-		let last_day = getLastDayOfMonth(currentYear, select_m.selectedIndex);
-		chist_all_rub_v_sutki.value = (parseFloat(chist_all.value) / last_day).toFixed(2);  		
-		chist_bez_rub_v_sutki.value = (parseFloat(chist_bez.value) / last_day).toFixed(2);  		
 		
+		day_summa = Math.ceil(rab_chas.value / 8);		
+		//day_summa = getLastDayOfMonth(currentYear, select_m.selectedIndex);
+		if (day_summa !== 0) {
+			chist_all_rub_v_sutki.value = (parseFloat(chist_all.value) / day_summa).toFixed(2);  		
+			chist_bez_rub_v_sutki.value = (parseFloat(chist_bez.value) / day_summa).toFixed(2);  		
+		}
 		rvc.value = parseFloat(rub_v_сhas).toFixed(3);
 		rvs.value = parseFloat(rub_v_сhas * 8).toFixed(2);
 		
@@ -784,7 +813,7 @@
 		returnOfis = calculate('ofis',ofis.value,'ofis_tool', 'ofis_mess');
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
 		returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');
-		
+
 		doplata.value = doplata_arr[sel];
 		uderjanie.value = uderjanie_arr[sel];
 		
@@ -914,4 +943,3 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-

@@ -176,6 +176,8 @@
 					<input id="clearlocal" type="submit" class="btn btn-primary" value="CLEAR" onclick="if (confirm('Удалить базу?')){clearlocalData();buttonPressed(this.id);}" style="width:30%;font-weight:bold;">
 					<input id="savelocal" type="submit" class="btn btn-primary" value="DEFAULT" onclick="if (confirm('Сбросить базу по умолчанию?')){savelocalData(); buttonPressed(this.id);}" style="margin-left:1px;width:35%;font-weight:bold;">
 					<input id="getlocal" type="submit" class="btn btn-primary" value="OPEN" onclick="getlocalData(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
+					<input id="getPrazd" type="submit" class="btn btn-primary" value="PRAZD" onclick="getPrazdData(); buttonPressed(this.id);" style="margin-left:1px;width:35%;font-weight:bold;">	
+
 				</div>	
 
 				
@@ -399,6 +401,7 @@
 			</div>				
 			<footer class="footer fixed-bottom">
 				<div class="container">
+					<div id="errorMessage" style="color:white;background:red;font-weight:bold;font-size:14px;text-align:center;"></div>	
 					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">mustafin.ik@mail.ru</div>	
 					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">Версия от 03.03.2026</div>
 				</div> 
@@ -421,7 +424,12 @@
 			   '2026-02-23', '2026-03-08', '2026-03-09', '2026-03-20', '2026-05-01', '2026-05-09', '2026-05-11', '2026-05-27',
 			   '2026-06-12', '2026-10-11', '2026-10-12', '2026-11-04'];
 	const korotkiy = ['2026-03-19', '2026-04-30', '2026-05-08', '2026-05-26', '2026-06-11', '2026-11-03'];				   
-	const rabochiy = ['2026-11-01'];		
+	const rabochiy = ['2026-11-01'];	
+
+	function ShowErrorMessage(mes) {
+		setTimeout(() => errorMessage.innerHTML = "", 2000);
+		errorMessage.innerHTML = mes;		
+	}	
 	
 	function calculate(mesto, daty, id_mess, attr_mess) { 
 		var All115 = 0;
@@ -662,6 +670,10 @@
 		let okl1530 = parseFloat((returnOfis.All1530 + returnRaz.All1530 + returnDor.All1530) * rub_v_сhas).toFixed(2);
 		okl.value = parseFloat(parseFloat(okl115) + parseFloat(okl1530)).toFixed(2);
 		
+		let checkOklad = Math.abs(oklad.value - okl.value);
+		if (checkOklad > 5) {
+			ShowErrorMessage("Не верный расчет оклада. Проверьте данные.");
+		}		
 		//console.log("returnOfis: ");
 		//console.log(returnOfis);
 
@@ -870,6 +882,12 @@
 	}		
 	function savelocalData() {localStorage.setItem('passen', 0);localStorage.setItem("jsonData", JSON.stringify(jsonData));console.log("LocalStorage сохранено");}	
 	function getlocalData() {let base="";for(let i=0; i<localStorage.length; i++) {let key = localStorage.key(i);base += `${key}: ${localStorage.getItem(key)}`;}console.log(base);console.log("LocalStorage загружено");alert(base);}
+	function getPrazdData() {
+	//let str = prazdniki.join(',');
+		//alert(str);
+		alert("Праздники: " + rabochiy.join(', ') + " \n\nКороткий : " + korotkiy.join(', ') + " \n\nРабочий : " + prazdniki.join(', '));
+
+	}
 	function add_zero(n){return n > 9 ? n: "0" + n; }	
 	function percent(number, perc) {let result = number * perc / 100;return result;}
 	function debugCheck() {document.getElementById("debugButtons").hidden = (document.getElementById('debug').checked) ? false : true;}	
@@ -946,8 +964,6 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-
-
 
 
 

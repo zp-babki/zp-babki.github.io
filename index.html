@@ -147,6 +147,13 @@
 					<input type="number" id="doplata" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 					<input type="number" id="uderjanie" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 				</div>	
+<!-- == Налоговый вычет: == -->
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Налоговый вычет:</span>
+					</div>		
+					<input type="number" id="nalogVych" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+				</div>	
 <!-- == КНОПКИ == -->				
 				<div class="btn-group btn-group-sm" style="width:100%;">
 					<div class="btn-group btn-group-sm w-100"> 
@@ -310,6 +317,13 @@
 					</div>		
 					<input type="number" id="ndfl_rk" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
 				</div>	
+<!-- == УдержаниеПодотчет: == -->	
+				<div class="input-group">
+					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">УдержаниеПодотчет:</span>
+					</div>		
+					<input type="number" id="uderjanie2" class="form-control input-sm" style="text-align:center;background:white;padding:0;height:21px;font-size:14px;" title="" readonly>
+				</div>	
 <!-- == ВСЕГО УДЕРЖАНО: == -->	
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
@@ -403,7 +417,7 @@
 				<div class="container">
 					<div id="errorMessage" style="color:white;background:red;font-weight:bold;font-size:14px;text-align:center;"></div>	
 					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">mustafin.ik@mail.ru</div>	
-					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">Версия от 03.03.2026</div>
+					<div style="font-weight:bold;font-size:9px;text-align:right;padding-right:3px;">Версия от 05.03.2026</div>
 				</div> 
 			</footer> 
 		</div>	
@@ -610,6 +624,7 @@
 	let night_ar115 = 0;
 	let night_ar1530 = 0;
 	let	doplata_arr = 0;
+	let	nalogVych_arr = 0;
 	let	uderjanie_arr = 0;
 	let ndflPercent = 0;
 	let evening_ar = 0;
@@ -634,6 +649,7 @@
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"doplata":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		"nalogVych":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"uderjanie":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]		
 	};
 
@@ -746,13 +762,13 @@
 //Расчет НДФЛ с РК
 		let ndfl_rk_115 = (parseFloat(rk_only115) * 0.13).toFixed(0); 
 		let ndfl_rk_1530 = (parseFloat(rk_only1530) * 0.13).toFixed(0); 	
-		ndfl_rk.value = ((parseFloat(rk_only) + parseFloat(rk_premia_pred.value)) * 0.13).toFixed(0);		
+		ndfl_rk.value = Math.ceil((parseFloat(rk_only) + parseFloat(rk_premia_pred.value)) * 0.13).toFixed(0);		
 //Расчет НДФЛ без РК
 		let ndfl_tek15_115 = parseFloat(parseFloat(summaVseh115) * ndfl_perc.value / 100).toFixed(2);
 		let ndfl_tek15_1530 = parseFloat(parseFloat(summaVseh1530) * ndfl_perc.value / 100).toFixed(2);
-		ndfl_tek15.value = Math.floor((parseFloat(vsego_nachisleno.value) - parseFloat(rk_premia_pred.value) - parseFloat(rk_only)) * ndfl_perc.value / 100); // Округление в меньшую сторону			
+		ndfl_tek15.value = Math.ceil((parseFloat(vsego_nachisleno.value) - parseFloat(rk_premia_pred.value) - parseFloat(rk_only) - parseFloat(nalogVych.value)) * ndfl_perc.value / 100); // Округление в меньшую сторону			
 //Расчет НДФЛ ВСЕГО УДЕРЖАНО
-		ndfl_all.value = (parseFloat(ndfl_rk.value) + parseFloat(ndfl_tek15.value)).toFixed(2);
+		ndfl_all.value = (parseFloat(ndfl_rk.value) + parseFloat(ndfl_tek15.value) + parseFloat(uderjanie2.value)).toFixed(2);
 
 //Расчет текущей премии		
 		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya) + parseFloat(doroga_out.value) + parseFloat(noch.value)) * parseFloat(premia.value)).toFixed(2);
@@ -804,8 +820,11 @@
 		doroga_ar      = json_val.doroga;
 		if (json_val.night115 == undefined) {json_val.night115 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar115 = json_val.night115;}
 		if (json_val.night1530 == undefined) {json_val.night1530 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar1530 = json_val.night1530;}
+
 		if (json_val.doplata == undefined) {json_val.doplata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {doplata_arr = json_val.doplata;}
 		if (json_val.uderjanie == undefined) {json_val.uderjanie = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {uderjanie_arr = json_val.uderjanie;}		
+		if (json_val.nalogVych == undefined) {json_val.nalogVych = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {nalogVych_arr = json_val.nalogVych;}	
+
 		if (json_val.okl == undefined) {json_val.okl = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];} else {oklad_ar = json_val.okl;}	
 		
 		premia_ar      = json_val.premia_ar;
@@ -831,6 +850,8 @@
 
 		doplata.value = doplata_arr[sel];
 		uderjanie.value = uderjanie_arr[sel];
+		uderjanie2.value = uderjanie.value;
+		nalogVych.value = nalogVych_arr[sel];
 		
 		premia.value          = premia_ar[sel];	
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;		
@@ -905,6 +926,7 @@
 		json_val.night115[selIndex] = night115.value;	
 		json_val.night1530[selIndex] = night1530.value;	
 		json_val.doplata[selIndex] = doplata.value;	
+		json_val.nalogVych[selIndex] = nalogVych.value;
 		json_val.uderjanie[selIndex] = uderjanie.value;
 		json_val.premia_ar[selIndex] = parseFloat(premia.value).toFixed(1);	
  		json_val.premia_pred_ar[selIndex] = parseFloat(premia_tek.value).toFixed(1);			
@@ -961,8 +983,6 @@
 	function handleTouchMove(e) {if (!xDown || !yDown) return;let xUp = e.touches[0].clientX;let yUp = e.touches[0].clientY;xDiff = xDown - xUp;yDiff = yDown - yUp;}
 </script>
 </html>
-
-
 
 
 

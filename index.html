@@ -92,7 +92,7 @@
 <!-- == Премия (Коэф Кр.): == -->				
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия (Коэф Кр.):</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Премия (Коэф Крив.):</span>
 					</div>		
 					<input type="number" id="premia" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="any" value="0" placeholder="">
 				</div>
@@ -142,25 +142,18 @@
 <!-- == Удержание: == -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Удержание (с аванса/расчета):</span>
+						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Удержание (с ав/рсч):</span>
 					</div>		
 					<input type="number" id="uderjanieAvans" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 					<input type="number" id="uderjanieRaschet" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 
-				</div>	
-<!-- == Доплата: == -->
-				<div hidden class="input-group">
-					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
-						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Доплата (отдельно):</span>
-					</div>		
-					<input type="number" id="doplata" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 				</div>	
 <!-- == Налоговый вычет: == -->
 				<div class="input-group">
 					<div class="input-group-prepend" style="width:50%;padding:0;height:21px;font-weight:bold;">
 						<span class="input-group-text" style="width:100%;font-size:14px;font-weight:bold;">Вычет на детей:</span>
 					</div>		
-					<input type="number" id="nalogVych" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
+					<input type="number" id="VychNalog" class="form-control input-sm" style="text-align:center;padding:0;height:21px;font-size:14px;" step="1" value="0" placeholder="">
 				</div>	
 <!-- == КНОПКИ == -->				
 				<div class="btn-group btn-group-sm" style="width:100%;">
@@ -631,8 +624,7 @@
 	let doroga_ar = 0;
 	let night_ar115 = 0;
 	let night_ar1530 = 0;
-	let	doplata_arr = 0;
-	let	nalogVych_arr = 0;
+	let	VychNalog_arr = 0;
 	let	uderjanieAvans_arr = 0;
 	let	uderjanieRaschet_arr = 0;
 	let ndflPercent = 0;
@@ -657,10 +649,9 @@
 		"premia_ar":[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 		"premia_pred_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"prof_ar":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		"doplata":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"uderjanieAvans":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		"uderjanieRaschet":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		"nalogVych":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]		
+		"VychNalog":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]		
 	};
 
 	currentYear = new Date().getFullYear(); 
@@ -692,8 +683,6 @@
 		if (premia.value === '' && premia.value.length == 0) premia.value = 0;
 		if (uderjanieAvans.value === '' && uderjanieAvans.value.length == 0) uderjanieAvans.value = 0;
 		if (uderjanieRaschet.value === '' && uderjanieRaschet.value.length == 0) uderjanieRaschet.value = 0;
-		if (doplata.value === '' && doplata.value.length == 0) doplata.value = 0;
-
 		
 		let rub_v_сhas = parseFloat(oklad.value / rab_chas.value).toFixed(3);
 		let okl115 = parseFloat((returnOfis.All115 + returnRaz.All115 + returnDor.All115) * rub_v_сhas).toFixed(2);
@@ -766,9 +755,13 @@
 		rk_plus_premia_pred.value = (parseFloat(premia_pred.value) + parseFloat(rk_premia_pred.value)).toFixed(2);	
 		rk_plus_premia_pred.title = "Премия+РК = " + premia_pred.value + "+" + rk_premia_pred.value + " = " + rk_plus_premia_pred.value;
 		
-        vsego_nachisleno.value = parseFloat(parseFloat(okl.value)+ parseFloat(dvoynaya) * 2 + parseFloat(doroga_out.value) + 
-								 parseFloat(noch.value) + parseFloat(nadbavka.value) + parseFloat(rk_plus_premia_pred.value) + 
-								 parseFloat(rk_only) + parseFloat(doplata.value)).toFixed(2);
+        vsego_nachisleno.value = (parseFloat(okl.value) 
+							    + parseFloat(dvoynaya) * 2 
+							    + parseFloat(doroga_out.value) 
+							    + parseFloat(noch.value) 
+							    + parseFloat(nadbavka.value) 
+							    + parseFloat(rk_plus_premia_pred.value) 
+							    + parseFloat(rk_only)).toFixed(2);
 		
 		//console.log(okl.value);
 		//console.log(dvoynaya);
@@ -782,27 +775,48 @@
 		let ndfl_rk_115 = (parseFloat(rk_only115) * 0.13).toFixed(0); 
 		let ndfl_rk_1530 = (parseFloat(rk_only1530) * 0.13).toFixed(0); 	
 		ndfl_rk.value = Math.ceil((parseFloat(rk_only) + parseFloat(rk_premia_pred.value)) * 0.13).toFixed(0);		
+//Расчет Вычета на детей
+		let ndfl_deti = (parseFloat(VychNalog.value) * 0.13).toFixed(0);
 //Расчет НДФЛ без РК
 		let ndfl_tek15_115 = parseFloat(parseFloat(summaVseh115) * ndfl_perc.value / 100).toFixed(2);
 		let ndfl_tek15_1530 = parseFloat(parseFloat(summaVseh1530) * ndfl_perc.value / 100).toFixed(2);
-		ndfl_tek15.value = Math.ceil((parseFloat(vsego_nachisleno.value) - parseFloat(rk_premia_pred.value) - parseFloat(rk_only) - parseFloat(nalogVych.value)) * ndfl_perc.value / 100); // Округление в меньшую сторону			
+		ndfl_tek15.value = Math.ceil((parseFloat(vsego_nachisleno.value) - parseFloat(rk_premia_pred.value) - parseFloat(rk_only) - parseFloat(VychNalog.value)) * ndfl_perc.value / 100); // Округление в меньшую сторону			
 //Расчет ВСЕГО УДЕРЖАНО
 		ndfl_all.value = (parseFloat(ndfl_rk.value) + parseFloat(ndfl_tek15.value) + parseFloat(uderjanie_all.value)).toFixed(2);
 
 //Расчет текущей премии		
-		premia_tek.value = ((parseFloat(okl.value) + parseFloat(nadbavka.value) + parseFloat(dvoynaya) + parseFloat(doroga_out.value) + parseFloat(noch.value)) * parseFloat(premia.value)).toFixed(2);
+		premia_tek.value = ((parseFloat(okl.value) 
+						   + parseFloat(nadbavka.value) 
+						   + parseFloat(dvoynaya) 
+						   + parseFloat(doroga_out.value) 
+						   + parseFloat(noch.value)) 
+						   * parseFloat(premia.value)).toFixed(2);
+		
 		rk_premia_tek.value = parseFloat(premia_tek.value * 0.15).toFixed(2);	
 		
 		console.log("premia_tek = " + premia_tek.value);	
 		console.log("rk_premia_tek = " + rk_premia_tek.value);
 //Расчет выплат		
-		avans28.value = parseFloat(parseFloat(summaVseh115) + parseFloat(rk_only115) - parseFloat(ndfl_tek15_115) - parseFloat(ndfl_rk_115)- parseFloat(uderjanieAvans.value)).toFixed(2);
+		avans28.value = (parseFloat(summaVseh115) 
+					   + parseFloat(rk_only115) 
+					   + parseFloat(ndfl_deti)
+					   - parseFloat(ndfl_tek15_115) 
+					   - parseFloat(ndfl_rk_115) 
+					   - parseFloat(uderjanieAvans.value)).toFixed(2);
 		
-		raschet13.value = (parseFloat(vsego_nachisleno.value) - parseFloat(ndfl_tek15.value) - parseFloat(ndfl_rk.value) - parseFloat(avans28.value)).toFixed(2);
+		raschet13.value = (parseFloat(vsego_nachisleno.value) 
+						 - parseFloat(ndfl_all.value) 
+						 - parseFloat(avans28.value)).toFixed(2);
 
-		chist_all.value = (parseFloat(avans28.value) + parseFloat(raschet13.value)).toFixed(2); 
-		chist_bez.value = (parseFloat(vsego_nachisleno.value) - parseFloat(rk_plus_premia_pred.value) - parseFloat(ndfl_rk.value) - 
-						  parseFloat(ndfl_tek15.value) + parseFloat(premia_tek.value) + parseFloat(rk_premia_tek.value)).toFixed(2);
+		chist_all.value = (parseFloat(avans28.value) 
+						 + parseFloat(raschet13.value)).toFixed(2); 
+						 
+		chist_bez.value = (parseFloat(vsego_nachisleno.value) 
+						 - parseFloat(rk_plus_premia_pred.value) 
+						 - parseFloat(ndfl_rk.value) 
+						 - parseFloat(ndfl_tek15.value) 
+						 + parseFloat(premia_tek.value) 
+						 + parseFloat(rk_premia_tek.value)).toFixed(2);
 		
 		day_summa = Math.ceil(rab_chas.value / 8);		
 		//day_summa = getLastDayOfMonth(currentYear, select_m.selectedIndex);
@@ -840,10 +854,9 @@
 		if (json_val.night115 == undefined) {json_val.night115 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar115 = json_val.night115;}
 		if (json_val.night1530 == undefined) {json_val.night1530 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {night_ar1530 = json_val.night1530;}
 
-		if (json_val.doplata == undefined) {json_val.doplata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {doplata_arr = json_val.doplata;}
 		if (json_val.uderjanieAvans == undefined) {json_val.uderjanieAvans = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {uderjanieAvans_arr = json_val.uderjanieAvans;}		
 		if (json_val.uderjanieRaschet == undefined) {json_val.uderjanieRaschet = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {uderjanieRaschet_arr = json_val.uderjanieRaschet;}
-		if (json_val.nalogVych == undefined) {json_val.nalogVych = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {nalogVych_arr = json_val.nalogVych;}	
+		if (json_val.VychNalog == undefined) {json_val.VychNalog = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];} else {VychNalog_arr = json_val.VychNalog;}	
 
 		if (json_val.okl == undefined) {json_val.okl = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];} else {oklad_ar = json_val.okl;}	
 		
@@ -868,11 +881,10 @@
 		returnRaz = calculate('razyezd',razyezd.value,'raz_tool', 'raz_mess');
 		returnDor = calculate('doroga',doroga.value,'dor_tool', 'dor_mess');
 
-		doplata.value = doplata_arr[sel];
 		uderjanieAvans.value = uderjanieAvans_arr[sel];
 		uderjanieRaschet.value = uderjanieRaschet_arr[sel];
 		uderjanie_all.value = parseFloat(parseFloat(uderjanieAvans.value) + parseFloat(uderjanieRaschet.value)).toFixed(2);
-		nalogVych.value = nalogVych_arr[sel];
+		VychNalog.value = VychNalog_arr[sel];
 		
 		premia.value = premia_ar[sel];	
 		premia_text.innerHTML = "Премия: " + select_m.options[sel].value;		
@@ -946,10 +958,9 @@
 		json_val.doroga[selIndex] = doroga.value;	
 		json_val.night115[selIndex] = night115.value;	
 		json_val.night1530[selIndex] = night1530.value;	
-		json_val.nalogVych[selIndex] = nalogVych.value;
+		json_val.VychNalog[selIndex] = VychNalog.value;
 		json_val.uderjanieAvans[selIndex] = uderjanieAvans.value;
 		json_val.uderjanieRaschet[selIndex] = uderjanieRaschet.value;
-		json_val.doplata[selIndex] = doplata.value;	
 		json_val.premia_ar[selIndex] = parseFloat(premia.value).toFixed(1);	
  		json_val.premia_pred_ar[selIndex] = parseFloat(premia_tek.value).toFixed(1);			
 		json_val.prof_ar[selIndex] = parseFloat(prof.value).toFixed(1);
